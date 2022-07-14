@@ -1,5 +1,5 @@
 # Web 3 Edi - Blockchain Repo
-This is the Web 3 Edi 2022 Alpha Blockchain Repository. Web 3 Edi is built to work purely on EVM, with a focus on the Arbitrum Network as the project uses [Livepeer](https://livepeer.org) for video transcoding. The project uses [Livepeer Studio] to run broadcast and playback with the EVM providing destination Stage targeting e.g. an Educator can broadcast either to the whole Web 3 Edi campus or only to their respective School. 
+This is the Web 3 Edi 2022 Alpha Blockchain Repository. Web 3 Edi is built to work purely on EVM, with a focus on the Arbitrum Network as the project uses [Livepeer](https://livepeer.org) for video transcoding. The project uses [Livepeer Studio](https://livepeer.studio) to run broadcast and playback with the EVM providing destination Stage targeting e.g. an Educator can broadcast either to the whole Web 3 Edi campus or only to their respective School. 
 
 This repository contains the Key smart contracts used within the Web 3 Edi platform. 
 The smartcontracts are deployed on the Web 3 Edi Testnet and can be found at the following addresses: 
