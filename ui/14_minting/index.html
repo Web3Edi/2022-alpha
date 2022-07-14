@@ -6,9 +6,9 @@
 	<title>Web 3 Edi - Access NFT Minting</title>
 
 	<!-- Site favicon -->
-	<link rel="apple-touch-icon" sizes="180x180" href="../vendors/images/apple-touch-icon.png">
-	<link rel="icon" type="image/png" sizes="32x32" href="../vendors/images/favicon-32x32.png">
-	<link rel="icon" type="image/png" sizes="16x16" href="../vendors/images/favicon-16x16.png">
+	<link rel="apple-touch-icon" sizes="180x180" href="../00_service_assets/main/images/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="../00_service_assets/main/images/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="../00_service_assets/main/images/favicon-16x16.png">
 
 	<!-- Mobile Specific Metas -->
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -16,9 +16,9 @@
 	<!-- Google Font -->
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 	<!-- CSS -->
-	<link rel="stylesheet" type="text/css" href="../vendors/styles/core.css">
-	<link rel="stylesheet" type="text/css" href="../vendors/styles/icon-font.min.css">
-	<link rel="stylesheet" type="text/css" href="../vendors/styles/style.css">
+	<link rel="stylesheet" type="text/css" href="../00_service_assets/main/styles/core.css">
+	<link rel="stylesheet" type="text/css" href="../00_service_assets/main/styles/icon-font.min.css">
+	<link rel="stylesheet" type="text/css" href="../00_service_assets/main/styles/style.css">
 
 	<!-- Global site tag (gtag.js) - Google Analytics -->
 	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-119386393-1"></script>
@@ -33,7 +33,7 @@
 <body>
 	<div class="pre-loader">
 		<div class="pre-loader-box">
-			<div class="loader-logo"><img src="../vendors/images/deskapp-logo.svg" alt=""></div>
+			<div class="loader-logo"><img src="../00_service_assets/main/images/deskapp-logo.svg" alt=""></div>
 			<div class='loader-progress' id="progress_div">
 				<div class='bar' id='bar1'></div>
 			</div>
@@ -97,8 +97,8 @@
 	<div class="left-side-bar">
 		<div class="brand-logo">
 			<a href="../01_campus/index.html">
-				<img src="../vendors/images/deskapp-logo.svg" alt="" class="dark-logo">
-				<img src="../vendors/images/deskapp-logo-white.svg" alt="" class="light-logo">
+				<img src="../00_service_assets/main/images/deskapp-logo.svg" alt="" class="dark-logo">
+				<img src="../00_service_assets/main/images/deskapp-logo-white.svg" alt="" class="light-logo">
 			</a>
 			<div class="close-sidebar" data-toggle="left-sidebar-close">
 				<i class="ion-close-round"></i>
@@ -135,7 +135,7 @@
 					<div class="row">
 						<div class="col-md-12 col-sm-12">
 							<div class="title">
-								<h4>Mint Your Web 3 Edi - NFTs</h4>
+								<h4>Mint Your Web 3 Edi - Access NFTs</h4>
 							</div>			
 						</div>
 					</div>
@@ -147,123 +147,63 @@
 						<div class="col-md-4 mb-30">
 							<div class="card-box pricing-card mt-30 mb-30">
 								<div class="pricing-icon">
-									<img src="vendors/images/icon-Cash.png" alt="">
+									<img src="../00_service_assets/main/images/candidate.png" alt="">
 								</div>
 								<div class="price-title">
 									Candidate
 								</div>
 								<div class="pricing-price">
-									<b>Ξ</b>0.0045
+									<b>Ξ</b><span id="candidate_mint_price_display"></span>
 								</div>
 								<div class="text">
-									$5.00
+									<b>$<span id="candidate_mint_price_display_converted"></span></b>
 								</div>
 								<div class="cta">
-									<a href="#" class="btn btn-primary btn-rounded btn-lg">Mint Now</a>
+									<a id="candidate" href="#" class="btn btn-primary btn-rounded btn-lg">Mint Now</a>
 								</div>
 							</div>
 						</div>
 						<div class="col-md-4 mb-30">
 							<div class="card-box pricing-card mt-30 mb-30">
 								<div class="pricing-icon">
-									<img src="vendors/images/icon-debit.png" alt="">
+									<img src="../00_service_assets/main/images/student.png" alt="">
 								</div>
 								<div class="price-title">
 									Student
 								</div>
 								<div class="pricing-price">
-									<b>Ξ</b>0.1137
+									<b>Ξ</b><span id="student_mint_price_display"></span>
 								</div>
 								<div class="text">
-									$125.00
-
+									<b>$<span id="student_mint_price_display_converted"></span></b>
 								</div>
 								<div class="cta">
-									<a href="#" class="btn btn-primary btn-rounded btn-lg">Mint Now</a>
+									<a id="student" href="#" class="btn btn-primary btn-rounded btn-lg">Mint Now</a>
 								</div>
 							</div>
 						</div>
 						<div class="col-md-4 mb-30">
 							<div class="card-box pricing-card mt-30 mb-30">
 								<div class="pricing-icon">
-									<img src="vendors/images/icon-online-wallet.png" alt="">
+									<img src="../00_service_assets/main/images/educator.png" alt="">
 								</div>
 								<div class="price-title">
 									Educator
 								</div>
 								<div class="pricing-price">
-									<b>Ξ</b>0.223
+									<b>Ξ</b><span id="educator_mint_price_display"></span>
 								</div>						
 								<div class="text">								
-									$245.00
+									<b>$<span id="educator_mint_price_display_converted"></span></b>
 								</div>
 								<div class="cta">
-									<a href="#" class="btn btn-primary btn-rounded btn-lg">Mint Now</a>
+									<a id="educator" href="#" class="btn btn-primary btn-rounded btn-lg">Mint Now</a>
 								</div>
 							</div>
 						</div>
 					</div>
 
-					<div class="row">
-						<div class="col-md-4 mb-30">
-							<div class="card-box pricing-card mt-30 mb-30">
-								<div class="pricing-icon">
-									<img src="vendors/images/icon-Cash.png" alt="">
-								</div>
-								<div class="price-title">
-									Artist
-								</div>
-								<div class="pricing-price">
-									<b>Ξ</b>1.00
-								</div>
-								<div class="text">
-									$1100.00
-								</div>
-								<div class="cta">
-									<a href="#" class="btn btn-primary btn-rounded btn-lg">Mint Now</a>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-4 mb-30">
-							<div class="card-box pricing-card mt-30 mb-30">
-								<div class="pricing-icon">
-									<img src="vendors/images/icon-debit.png" alt="">
-								</div>
-								<div class="price-title">
-									Entertainer
-								</div>
-								<div class="pricing-price">
-									<b>Ξ</b>2.5
-								</div>
-								<div class="text">
-									$2750.00
-
-								</div>
-								<div class="cta">
-									<a href="#" class="btn btn-primary btn-rounded btn-lg">Mint Now</a>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-4 mb-30">
-							<div class="card-box pricing-card mt-30 mb-30">
-								<div class="pricing-icon">
-									<img src="vendors/images/icon-online-wallet.png" alt="">
-								</div>
-								<div class="price-title">
-									Speaker
-								</div>
-								<div class="pricing-price">
-									<b>Ξ</b>2.75
-								</div>						
-								<div class="text">								
-									$3025.00
-								</div>
-								<div class="cta">
-									<a href="#" class="btn btn-primary btn-rounded btn-lg">Mint Now</a>
-								</div>
-							</div>
-						</div>
-					</div>				
+									
 				</div>
 				<div class="footer-wrap pd-20 mb-20 card-box">
 					&copy; Web 3 Edi 2022 
@@ -272,9 +212,58 @@
 		</div>
 	</div>
 	<!-- js -->
-	<script src="../vendors/scripts/core.js"></script>
-	<script src="../vendors/scripts/script.min.js"></script>
-	<script src="../vendors/scripts/process.js"></script>
-	<script src="../vendors/scripts/layout-settings.js"></script>
+	<script src="../00_service_assets/main/scripts/core.js"></script>
+	<script src="../00_service_assets/main/scripts/script.min.js"></script>
+	<script src="../00_service_assets/main/scripts/process.js"></script>
+	<script src="../00_service_assets/main/scripts/layout-settings.js"></script>
+	<script> 
+		const candidateMintPrice = 0.0045;
+		const studentMintPrice = 0.1137;
+		const educatorMintPrice = 0.223;
+
+		const candidateMintPriceDisplay = ge("candidate_mint_price_display");
+		candidateMintPriceDisplay.innerHTML = candidateMintPrice;
+
+		const studentMintPriceDisplay = ge("student_mint_price_display");
+		studentMintPriceDisplay.innerHTML = studentMintPrice;
+		
+		const educatorMintPriceDisplay = ge("educator_mint_price_display");
+		educatorMintPriceDisplay.innerHTML = educatorMintPrice;
+
+		const candidateMintPriceDisplayConverted = ge("candidate_mint_price_display_converted");
+		const studentMintPriceDisplayConverted = ge("student_mint_price_display_converted");
+		const educatorMintPriceDisplayConverted = ge("educator_mint_price_display_converted");
+
+		convertAndDisplay(candidateMintPrice, candidateMintPriceDisplayConverted);
+		convertAndDisplay(studentMintPrice, studentMintPriceDisplayConverted);
+		convertAndDisplay(educatorMintPrice, educatorMintPriceDisplayConverted);
+
+		function convertAndDisplay( price , node ) {
+			var url = "https://api.covalenthq.com/v1/pricing/tickers/?tickers=ETH&quote-currency=USD&format=JSON&key=ckey_151fa607b6ec439a9c761b55a21";
+            fetch(url).then(function(response) {
+                    respData = response.json();
+                    console.log("response data :- ");
+                    console.log(respData);
+                    return respData
+                })
+                .then(function(data) {
+					console.log(data);
+					node.innerHTML = Math.round(price * data.data.items[0].quote_rate); 
+				})
+				.catch(function(err){
+					console.log(err);
+				})                    
+		}
+
+		function ge(id){ 
+			return document.getElementById(id);
+		}
+
+	</script>
+	<!-- Web 3 ABI-->
+	<script src="../00_service_assets/abi/open_register/i_open_register_abi.js"></script>       
+
+	<!-- Web 3 Edi -->
+	<script src="../00_service_assets/main/js/web_3_edi.js"></script>
 </body>
 </html>
