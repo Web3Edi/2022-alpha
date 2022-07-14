@@ -11,7 +11,7 @@ const web3 = new Web3(window.ethereum);
 
 console.log("web 3 " + web3.currentProvider);
 
-const openRegisterAddress = ""; // register address arbitrum test
+const openRegisterAddress = "0x05489F551AF62BA9Ba5A0978e9D780d87f803c5b"; // register address arbitrum test
 const openRegistryContract = new web3.eth.Contract(iOpenRegisterAbi, openRegisterAddress);
 
 var w3eAccessManagerAddress; 
