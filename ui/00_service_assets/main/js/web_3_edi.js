@@ -94,7 +94,7 @@ const onClickConnect = async() => {
 
 
 async function configureCoreContracts()  { 
-
+/** 
     openRegistryContract.methods.getAddress("RESERVED_WEB_3_EDI_ACCESS_MANAGER").call({ from: account })
     .then(function(response) {
         console.log(response);
@@ -104,15 +104,15 @@ async function configureCoreContracts()  {
     .catch(function(err) {
         console.log(err);
     });
-
+*/
     configurePageContracts();
 }
 
 
 function loadWait() { 
-    console.log("load count :: " + loadCount);
+    
     setTimeout(loadPageData, 3000);
-    console.log("loadCount :: " + loadCount);
+    
   
 }   
 

@@ -6,6 +6,7 @@ pragma solidity ^0.8.15;
 import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/6ab8d6a67e3281ab062bdbe4df32b95c6409ee6d/contracts/utils/Strings.sol";
 
 import "https://github.com/Block-Star-Logic/open-version/blob/e161e8a2133fbeae14c45f1c3985c0a60f9a0e54/blockchain_ethereum/solidity/V1/interfaces/IOpenVersion.sol";
+
 import "https://github.com/Block-Star-Logic/open-libraries/blob/703b21257790c56a61cd0f3d9de3187a9012e2b3/blockchain_ethereum/solidity/V1/libraries/LOpenUtilities.sol";
 
 import "https://github.com/Block-Star-Logic/open-register/blob/7b680903d8bb0443b9626a137e30a4d6bb1f6e43/blockchain_ethereum/solidity/V1/interfaces/IOpenRegister.sol";
@@ -14,6 +15,7 @@ import "../../interfaces/broadcast/IBroadcastScheduler.sol";
 
 /**
  * @dev implementation of the {IBroadcastScheduler} interface
+ *
  */
 
 contract BroadcastScheduler is IBroadcastScheduler, IOpenVersion { 
@@ -22,8 +24,8 @@ contract BroadcastScheduler is IBroadcastScheduler, IOpenVersion {
     using LOpenUtilities for string; 
     using Strings for uint256; 
 
-    string name = "WEB_3_EDI_BROADCAST_SCHEDULER_STAGE_"; 
-    uint256 version = 1; 
+    string name = "WEB_3_EDI_BROADCAST_SCHEDULER_STAGE_"; // not RESERVEDD AS schedulers are non-core with dynamic naming
+    uint256 version = 2; 
 
     string stage; 
     IOpenRegister register; 
@@ -74,11 +76,11 @@ contract BroadcastScheduler is IBroadcastScheduler, IOpenVersion {
     function requestBroadcast(uint256 _startTime, uint256 _endTime, string memory _playbackId, address _eventContract) external returns (string memory _broadcastId){
        
         uint256 now_ = block.timestamp; 
-
+        uint256 maxWindow = limitsByName[MAX_BOOKING_WINDOW];
         require(((_endTime - _startTime) <= limitsByName[MAX_BOOKING_DURATION]), " duration ");
         require(_startTime > now_, "can not start before now ");
         require(_endTime > _startTime, "can not start before ended ");        
-        require(_endTime < limitsByName[MAX_BOOKING_WINDOW], " can only book 24 hours into the future ");
+        require(_endTime < now_+maxWindow, string("can only book ").append(maxWindow.toString()).append(" seconds into the future "));
         
         uint256 insertIndex_ = 0; 
         

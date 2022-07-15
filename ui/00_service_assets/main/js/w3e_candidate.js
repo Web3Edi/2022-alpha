@@ -1,15 +1,15 @@
-const videoEl = document.querySelector("#campus-player");
+const videoEl = document.querySelector("#candidate-player");
 
-var iW3ECampusContract;
-var w3eCampusAddress; 
+var iW3ECandidateContract;
+var w3eCandidateAddress; 
 
 var playbackId; 
-var happeningNowEventContractAddress; 
-var iW3EHappeningNowEventContract; 
+var candidateEventContractAddress; 
+var iW3ECandidateEventContract; 
 
-const happeningNowEventTitleDisplay = ge("happening_now_event_title_display"); 
-const happeningNowEventHostDisplay = ge("happening_now_event_host_display"); 
-const happeningNowEventLinkDisplay = ge("happening_now_event_link_display"); 
+const candidateEventTitleDisplay = ge("candidate_event_title_display"); 
+const candidateEventHostDisplay = ge("candidate_event_host_display"); 
+const candidateEventLinkDisplay = ge("candidate_event_link_display"); 
 
 function startPlayer(playbackId){
 
@@ -33,11 +33,11 @@ async function configurePageContracts() {
     console.log("registry contract");
     console.log(openRegistryContract);
 
-    openRegistryContract.methods.getAddress("RESERVED_WEB_3_EDI_CAMPUS").call({ from: account })
+    openRegistryContract.methods.getAddress("WEB_3_EDI_CANDIDATE").call({ from: account })
         .then(function(response) {
             console.log(response);
-            w3eCampusAddress = response;
-            iW3ECampusContract = getContract(iW3ECampusAbi, w3eCampusAddress);
+            w3eCandidateAddress = response;
+            iW3ECandidateContract = getContract(iW3ECandidateAbi, w3eCandidateAddress);
         })
         .catch(function(err) {
             console.log(err);
@@ -46,12 +46,12 @@ async function configurePageContracts() {
 
 async function loadPageData() { 
 
-    iW3ECampusContract.methods.getHappeningNow().call({from : account})
+    iW3ECandidateContract.methods.getHappeningNow().call({from : account})
     .then(function(response){
         console.log(response);
-        playbackId = response._streamId; 
-        happeningNowEventContractAddress = response._eventContract; 
-        if(happeningNowEventContractAddress === '0x0000000000000000000000000000000000000000'){
+        playbackId = response._playbackId; 
+        candidateEventContractAddress = response._eventContract; 
+        if(candidateEventContractAddress === '0x0000000000000000000000000000000000000000'){
             // get stock reel; 
             var srcNode = ce("source");
             srcNode.setAttribute("src","../21_media/filler.mp4");
@@ -60,22 +60,22 @@ async function loadPageData() {
         }
         else { 
 
-            happeningNowEventLinkDisplay.innerHTML = "<a href='../16_event/event_detail?address="+happeningNowEventContractAddress+"'>Event Details</a>"; 
+            candidateEventLinkDisplay.innerHTML = "<a href='../16_event/event_detail?address="+candidateEventContractAddress+"'>Event Details</a>"; 
 
             
-            happeningNowEventContract = getContract(iW3EEventAbi, happeningNowEventContractAddress);
-            happeningNowEventContract.methods.getTitle().call({from : account})
+            iW3ECandidateEventContract = getContract(iW3EEventAbi, candidateEventContractAddress);
+            iW3ECandidateEventContract.methods.getTitle().call({from : account})
             .then(function(response){
                 console.log(response);
-                happeningNowEventTitleDisplay.innerHTML = response; 
+                candidateEventTitleDisplay.innerHTML = response; 
             })
             .catch(function(err) {
                 console.log(err);
             });
-            happeningNowEventContract.methods.getFeatureSTR("EVENT_HOST").call({from : account})
+            iW3ECandidateEventContract.methods.getFeatureSTR("EVENT_HOST").call({from : account})
             .then(function(response){
                 console.log(response);
-                happeningNowEventHostDisplay.innerHTML = response; 
+                candidateEventHostDisplay.innerHTML = response; 
             })
             .catch(function(err) {
                 console.log(err);
