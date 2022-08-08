@@ -21,6 +21,14 @@
     <link rel="stylesheet" type="text/css" href="../00_service_assets/main/styles/icon-font.min.css">
     <link rel="stylesheet" type="text/css" href="../00_service_assets/main/styles/style.css">
 
+    <!-- Web 3 -->
+    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+    <script src="https://unpkg.com/ipfs-http-client-lite/dist/index.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://cdn.ethers.io/lib/ethers-5.0.umd.min.js" type="text/javascript"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/ethjs@0.3.4/dist/ethjs.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
+
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-119386393-1"></script>
@@ -50,51 +58,66 @@
         </div>
     </div>
 
-    <div class="header">
-        <div class="header-left">
-            <div class="menu-icon dw dw-menu"></div>
-            <div class="search-toggle-icon dw dw-search2" data-toggle="header_search"></div>
-            <div class="header-search">
-                <form>
-                    <div class="form-group mb-0">
-                        <i class="dw dw-search2 search-icon"></i>
-                        <input type="text" class="form-control search-input" placeholder="Search Here">
-                        <div class="dropdown">
-                            <a class="dropdown-toggle no-arrow" href="#" role="button" data-toggle="dropdown">
-                                <i class="ion-arrow-down-c"></i>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-right">
-                                <div class="form-group row">
-                                    <label class="col-sm-12 col-md-2 col-form-label">From</label>
-                                    <div class="col-sm-12 col-md-10">
-                                        <input class="form-control form-control-sm form-control-line" type="text">
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-sm-12 col-md-2 col-form-label">To</label>
-                                    <div class="col-sm-12 col-md-10">
-                                        <input class="form-control form-control-sm form-control-line" type="text">
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-sm-12 col-md-2 col-form-label">Subject</label>
-                                    <div class="col-sm-12 col-md-10">
-                                        <input class="form-control form-control-sm form-control-line" type="text">
-                                    </div>
-                                </div>
-                                <div class="text-right">
-                                    <button class="btn btn-primary">Search</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-        <div class="header-right">
-            <button class="btn-primary">Connect Web 3</button>
-        </div>
-    </div>
+	<!-- NEW HEADER -->
+	<div class="header">
+		<div class="header-left">
+			<div class="menu-icon dw dw-menu"></div>
+			<div class="search-toggle-icon dw dw-search2" data-toggle="header_search"></div>
+			<div class="header-search">
+				<form>
+					<div class="form-group mb-0">
+						<i class="dw dw-search2 search-icon"></i>
+						<input type="text" class="form-control search-input" placeholder="Search Here">
+						<div class="dropdown">
+							<a class="dropdown-toggle no-arrow" href="#" role="button" data-toggle="dropdown">
+								<i class="ion-arrow-down-c"></i>
+							</a>
+							<div class="dropdown-menu dropdown-menu-right">
+								<div class="form-group row">
+									<label class="col-sm-12 col-md-2 col-form-label">From</label>
+									<div class="col-sm-12 col-md-10">
+										<input class="form-control form-control-sm form-control-line" type="text">
+									</div>
+								</div>
+								<div class="form-group row">
+									<label class="col-sm-12 col-md-2 col-form-label">To</label>
+									<div class="col-sm-12 col-md-10">
+										<input class="form-control form-control-sm form-control-line" type="text">
+									</div>
+								</div>
+								<div class="form-group row">
+									<label class="col-sm-12 col-md-2 col-form-label">Subject</label>
+									<div class="col-sm-12 col-md-10">
+										<input class="form-control form-control-sm form-control-line" type="text">
+									</div>
+								</div>
+								<div class="text-right">
+									<button class="btn btn-primary">Search</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+		<div class="header-right">
+		
+			<div class="user-info-dropdown">
+				<div class="dropdown">
+					<a class="dropdown-toggle" href="#" role="button" >
+						<span id="show_wallet" class="user-name"></span>
+						<span id="connect_web_3" class="user-name">Connect Web 3</span>
+						<span class="user-icon">
+							<img src="../00_service_assets/main/images/android-icon-192x192.png" alt="">
+						</span>
+						
+					</a>
+					
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- END NEW HEADER -->
 
     <div class="left-side-bar">
         <div class="brand-logo">
@@ -172,203 +195,241 @@
                 <div class="pd-20 card-box mb-30">
                     <div class="clearfix">
                         <div class="pull-left">
+                            <h4 class="text-blue h4">Livepeer Streaming Details</h4>                            
+                        </div>                
+                    </div>
+                    <form>
+                        <div class="form-group row">
+                            <label class="col-sm-6 col-md-2 col-form-label">Stream Key</label>
+                            <div class="col-sm-6 col-md-10">
+                                <span id="stream_key_display"></span>
+                            </div>
+                            <label class="col-sm-6 col-md-2 col-form-label">Playback Id</label>
+                            <div class="col-sm-6 col-md-10">
+                                <span id="playback_id_display"></span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-12 col-md-2 col-form-label"></label>
+                            <div class="col-sm-12 col-md-10">
+                                <span id="stream_details_button_display"></span>                                
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="pd-20 card-box mb-30">
+                    <div class="clearfix">
+                        <div class="pull-left">
                             <h4 class="text-blue h4">Create Your Event</h4>
-                            
+                            <span id="create_event_display"></span>
+                        </div>                
+                    </div>
+                    <form>
+                        <div class="form-group row">
+                            <label class="col-sm-12 col-md-2 col-form-label">Title</label>
+                            <div class="col-sm-12 col-md-10">
+                                <input class="form-control" id="event_title_field" type="text" placeholder=" enter event title ...">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-12 col-md-2 col-form-label"></label>
+                            <div class="col-sm-12 col-md-10">
+                                <a href="#" id="create_event_button" class="btn btn-primary">Create</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="pd-20 card-box mb-30">
+                    <div class="clearfix">
+                        <div class="pull-left">
+                            <h4 class="text-blue h4">Select Event to Edit</h4>                            
                         </div>
                     
                     </div>
                     <form>
                         <div class="form-group row">
-                            <label class="col-sm-12 col-md-2 col-form-label">Text</label>
+                            <label class="col-sm-12 col-md-2 col-form-label">Draft Events</label>
                             <div class="col-sm-12 col-md-10">
-                                <input class="form-control" type="text" placeholder="Johnny Brown">
+                                <select id="draft_events_select" class="form-control">                           
+                                </select>
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-sm-12 col-md-2 col-form-label">Search</label>
+                            <label class="col-sm-12 col-md-2 col-form-label"></label>
                             <div class="col-sm-12 col-md-10">
-                                <input class="form-control" placeholder="Search Here" type="search">
+                                <a href="#" id="edit_event_button" class="btn btn-primary">Edit</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Edit fields -->
+                <div class="pd-20 card-box mb-30">
+                    <div class="clearfix">
+                        <div class="pull-left">
+                            <h4 class="text-blue h4">Editing Event</h4>
+                            <span id="editing_event_display"></span>
+                        </div>
+                    
+                    </div>
+                    <form>
+                        <div class="form-group row">
+                            <label class="col-sm-12 col-md-2 col-form-label">Title</label>
+                            <div class="col-sm-12 col-md-10">
+                                <input class="form-control" id="event_title_edit_field" type="text" >
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-sm-12 col-md-2 col-form-label">Email</label>
+                            <label class="col-sm-12 col-md-2 col-form-label">Headline</label>
                             <div class="col-sm-12 col-md-10">
-                                <input class="form-control" value="bootstrap@example.com" type="email">
+                                <input class="form-control" id="event_headline_field" type="text" placeholder=" enter event headline ...">
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-sm-12 col-md-2 col-form-label">URL</label>
+                            <label class="col-sm-12 col-md-2 col-form-label">Summary</label>
                             <div class="col-sm-12 col-md-10">
-                                <input class="form-control" value="https://getbootstrap.com" type="url">
+                                <textarea class="form-control" id="event_summary_field" placeholder="enter summary " ></textarea>
+
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-sm-12 col-md-2 col-form-label">Telephone</label>
+                            <label class="col-sm-12 col-md-2 col-form-label">Detail</label>
                             <div class="col-sm-12 col-md-10">
-                                <input class="form-control" value="1-(111)-111-1111" type="tel">
+                                <textarea class="form-control" id="event_detail_field" placeholder="enter detail " ></textarea>
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-sm-12 col-md-2 col-form-label">Password</label>
+                            <label class="col-sm-12 col-md-2 col-form-label">Categories</label>
                             <div class="col-sm-12 col-md-10">
-                                <input class="form-control" value="password" type="password">
+                                <input class="form-control" id="event_categories_field" type="text" placeholder=" enter event Categories ...">
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-sm-12 col-md-2 col-form-label">Number</label>
+                            <label class="col-sm-12 col-md-2 col-form-label">Promo Image</label>
                             <div class="col-sm-12 col-md-10">
-                                <input class="form-control" value="100" type="number">
+                                <span id="event_promo_image_upload_display"></span>
+                                <input class="form-control" id="event_promo_image_upload" type="file" >
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="example-datetime-local-input" class="col-sm-12 col-md-2 col-form-label">Date and time</label>
+                            <label class="col-sm-12 col-md-2 col-form-label">Preview Video</label>
                             <div class="col-sm-12 col-md-10">
-                                <input class="form-control datetimepicker" placeholder="Choose Date anf time" type="text">
+                                <span id="event_preview_video_upload_display"></span>
+                                <input class="form-control" id="event_preview_video_upload" type="file" >
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-sm-12 col-md-2 col-form-label">Date</label>
+                            <label class="col-sm-12 col-md-2 col-form-label">Start Time</label>
                             <div class="col-sm-12 col-md-10">
-                                <input class="form-control date-picker" placeholder="Select Date" type="text">
+                                <input class="form-control datetimepicker" id="start_time_field" type="text">
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-sm-12 col-md-2 col-form-label">Month</label>
+                            <label class="col-sm-12 col-md-2 col-form-label">End Time</label>
                             <div class="col-sm-12 col-md-10">
-                                <input class="form-control month-picker" placeholder="Select Month" type="text">
+                                <input class="form-control datetimepicker" id="end_time_field" type="text">
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-sm-12 col-md-2 col-form-label">Time</label>
+                            <label class="col-sm-12 col-md-2 col-form-label">Spaces</label>
                             <div class="col-sm-12 col-md-10">
-                                <input class="form-control time-picker" placeholder="Select time" type="text">
+                                <input class="form-control" type="number" id="space_count_field">
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-sm-12 col-md-2 col-form-label">Select</label>
+                            <label class="col-sm-12 col-md-2 col-form-label">Event Stream Key</label>
                             <div class="col-sm-12 col-md-10">
-                                <select class="custom-select col-12">
+                                <span id="event_stream_key_display"></span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-12 col-md-2 col-form-label">Event Playback Id</label>
+                            <div class="col-sm-12 col-md-10">
+                                <span id="event_playback_id_display"></span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-12 col-md-2 col-form-label">Award Contract</label>
+                            <div class="col-sm-12 col-md-10">
+                                <input class="form-control" id="event_award_contract_field" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-12 col-md-2 col-form-label">Host</label>
+                            <div class="col-sm-12 col-md-10">
+                                <input class="form-control" id="event_host_field" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-12 col-md-2 col-form-label">Guests</label>
+                            <div class="col-sm-12 col-md-10">
+                                <input class="form-control" id="event_guests_field" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-12 col-md-2 col-form-label">Web 3 Edi Stage</label>
+                            <div class="col-sm-12 col-md-10">
+                                <select class="custom-select col-12" id="event_stage_select">
 									<option selected="">Choose...</option>
-									<option value="1">One</option>
-									<option value="2">Two</option>
-									<option value="3">Three</option>
+									<option value="CAMPUS">Campus</option>
+									<option value="CANDIDATE">Candidate</option>
 								</select>
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-sm-12 col-md-2 col-form-label">Color</label>
+                            <label class="col-sm-12 col-md-2 col-form-label">Recorded</label>
                             <div class="col-sm-12 col-md-10">
-                                <input class="form-control" value="#563d7c" type="color">
+                                <select class="custom-select col-12" id="event_recorded_field">
+									<option selected="">Choose...</option>
+									<option value="YES">Yes</option>
+									<option value="NO">No</option>
+								</select>
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-sm-12 col-md-2 col-form-label">Input Range</label>
+                            <label class="col-sm-12 col-md-2 col-form-label">Promotion Destinations</label>
+                            <div class="custom-control custom-checkbox mb-5">
+                                <input type="checkbox" class="custom-control-input" id="promotion_campus" value="CAMPUS">
+                                <label class="custom-control-label" for="promotion_campus">Campus</label>
+                            </div>
+                            <div class="custom-control custom-checkbox mb-5">
+                                <input type="checkbox" class="custom-control-input" id="promotion_candidate" value="CANDIDATE">
+                                <label class="custom-control-label" for="promotion_candidate">Candidate</label>
+                            </div>
+                            <div class="custom-control custom-checkbox mb-5">
+                                <input type="checkbox" class="custom-control-input" id="promotion_student" disabled value="STUDENT">
+                                <label class="custom-control-label" for="promotion_student">Student</label>
+                            </div>
+                            <div class="custom-control custom-checkbox mb-5">
+                                <input type="checkbox" class="custom-control-input" id="promotion_school" disabled value="SCHOOL">
+                                <label class="custom-control-label" for="promotion_school">School</label>
+                            </div>
+                            <div class="custom-control custom-checkbox mb-5">
+                                <input type="checkbox" class="custom-control-input" id="promotion_communities" disabled value="COMMUNITIES">
+                                <label class="custom-control-label" for="promotion_communities">Communities</label>
+                            </div>
+                            <div class="custom-control custom-checkbox mb-5">
+                                <input type="checkbox" class="custom-control-input" id="promotion_courtyard" disabled value="COURTYARD">
+                                <label class="custom-control-label" for="promotion_courtyard">Courtyard</label>
+                            </div>
+                            <div class="custom-control custom-checkbox mb-5">
+                                <input type="checkbox" class="custom-control-input" id="promotion_galleries" disabled value="GALLERIES">
+                                <label class="custom-control-label" for="promotion_galleries">Galleries</label>
+                            </div>
+                            <div class="custom-control custom-checkbox mb-5">
+                                <input type="checkbox" class="custom-control-input" id="promotion_market_place" disabled value="MARKET_PLACE">
+                                <label class="custom-control-label" for="promotion_market_place">Market Place</label>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <span id="post_save_display"></span> 
+                            <label class="col-sm-12 col-md-2 col-form-label"></label>
                             <div class="col-sm-12 col-md-10">
-                                <input class="form-control" value="50" type="range">
+                                <a href="#" id="save_event_button" class="btn btn-primary">Save</a> &nbsp; <a href="#" id="post_event_button" class="btn btn-danger">Post</a>
                             </div>
                         </div>
                     </form>
-                    <div class="collapse collapse-box" id="basic-form1">
-                        <div class="code-box">
-                            <div class="clearfix">
-                                <a href="javascript:;" class="btn btn-primary btn-sm code-copy pull-left" data-clipboard-target="#copy-pre"><i class="fa fa-clipboard"></i> Copy Code</a>
-                                <a href="#basic-form1" class="btn btn-primary btn-sm pull-right" rel="content-y" data-toggle="collapse" role="button"><i class="fa fa-eye-slash"></i> Hide Code</a>
-                            </div>
-                            <pre><code class="xml copy-pre" id="copy-pre">
-<form>
-	<div class="form-group row">
-		<label class="col-sm-12 col-md-2 col-form-label">Text</label>
-		<div class="col-sm-12 col-md-10">
-			<input class="form-control" type="text" placeholder="Johnny Brown">
-		</div>
-	</div>
-	<div class="form-group row">
-		<label class="col-sm-12 col-md-2 col-form-label">Search</label>
-		<div class="col-sm-12 col-md-10">
-			<input class="form-control" placeholder="Search Here" type="search">
-		</div>
-	</div>
-	<div class="form-group row">
-		<label class="col-sm-12 col-md-2 col-form-label">Email</label>
-		<div class="col-sm-12 col-md-10">
-			<input class="form-control" value="bootstrap@example.com" type="email">
-		</div>
-	</div>
-	<div class="form-group row">
-		<label class="col-sm-12 col-md-2 col-form-label">URL</label>
-		<div class="col-sm-12 col-md-10">
-			<input class="form-control" value="https://getbootstrap.com" type="url">
-		</div>
-	</div>
-	<div class="form-group row">
-		<label class="col-sm-12 col-md-2 col-form-label">Telephone</label>
-		<div class="col-sm-12 col-md-10">
-			<input class="form-control" value="1-(111)-111-1111" type="tel">
-		</div>
-	</div>
-	<div class="form-group row">
-		<label class="col-sm-12 col-md-2 col-form-label">Password</label>
-		<div class="col-sm-12 col-md-10">
-			<input class="form-control" value="password" type="password">
-		</div>
-	</div>
-	<div class="form-group row">
-		<label class="col-sm-12 col-md-2 col-form-label">Number</label>
-		<div class="col-sm-12 col-md-10">
-			<input class="form-control" value="100" type="number">
-		</div>
-	</div>
-	<div class="form-group row">
-		<label for="example-datetime-local-input" class="col-sm-12 col-md-2 col-form-label">Date and time</label>
-		<div class="col-sm-12 col-md-10">
-			<input class="form-control datetimepicker" placeholder="Choose Date anf time" type="text">
-		</div>
-	</div>
-	<div class="form-group row">
-		<label class="col-sm-12 col-md-2 col-form-label">Date</label>
-		<div class="col-sm-12 col-md-10">
-			<input class="form-control date-picker" placeholder="Select Date" type="text">
-		</div>
-	</div>
-	<div class="form-group row">
-		<label class="col-sm-12 col-md-2 col-form-label">Month</label>
-		<div class="col-sm-12 col-md-10">
-			<input class="form-control month-picker" placeholder="Select Month" type="text">
-		</div>
-	</div>
-	<div class="form-group row">
-		<label class="col-sm-12 col-md-2 col-form-label">Time</label>
-		<div class="col-sm-12 col-md-10">
-			<input class="form-control time-picker" placeholder="Select time" type="text">
-		</div>
-	</div>
-	<div class="form-group row">
-		<label class="col-sm-12 col-md-2 col-form-label">Select</label>
-		<div class="col-sm-12 col-md-10">
-			<select class="custom-select col-12">
-				<option selected="">Choose...</option>
-				<option value="1">One</option>
-				<option value="2">Two</option>
-				<option value="3">Three</option>
-			</select>
-		</div>
-	</div>
-	<div class="form-group row">
-		<label class="col-sm-12 col-md-2 col-form-label">Color</label>
-		<div class="col-sm-12 col-md-10">
-			<input class="form-control" value="#563d7c" type="color">
-		</div>
-	</div>
-	<div class="form-group row">
-		<label class="col-sm-12 col-md-2 col-form-label">Input Range</label>
-		<div class="col-sm-12 col-md-10">
-			<input class="form-control" value="50" type="range">
-		</div>
-	</div>
-</form>
-							</code></pre>
-                        </div>
-                    </div>
+              
                 </div>
                 <!-- Default Basic Forms End -->
 
@@ -386,8 +447,825 @@
     	<!-- Web 3 ABI-->
 	<script src="../00_service_assets/abi/open_register/i_open_register_abi.js"></script>       
 
+    <script src="../00_service_assets/abi/event/i_event_abi.js"></script>       
+    <script src="../00_service_assets/abi/event/i_write_event_abi.js"></script>       
+    <script src="../00_service_assets/abi/event/i_event_manager_abi.js"></script>
+    <script src="../00_service_assets/abi/broadcast/i_broadcast_scheduler_abi.js"></script>
+    <script src="../00_service_assets/abi/broadcast/i_broadcast_stream_manager_abi.js"></script>
+
     <!-- Web 3 Edi -->
     <script src="../00_service_assets/main/js/web_3_edi.js"></script>
+    <script> 
+        // ipfs connect 
+        const ipfs = window.IpfsHttpClientLite('https://ipfs.infura.io:5001')
+        const buffer = window.IpfsHttpClientLite.Buffer;
+        console.log("got ipfs: " + ipfs);
+
+        const ipfsRoot = "https://ipfs.io/ipfs/";
+        const networkURL = "https://rinkeby-explorer.arbitrum.io/block/";
+    
+        // streaming 
+        const streamKeyDisplay          = ge("stream_key_display"); 
+        const playbackIdDisplay         = ge("playback_id_display");
+        const streamDetailsButtonDisplay = ge("stream_details_button_display");
+
+        // create
+        const eventTitleField           = ge("event_title_field");        
+        const createEventDisplay        = ge("create_event_display");
+        const createEventButton         = ge("create_event_button");
+        createEventButton.addEventListener('click', createEvent);
+
+        // select edit
+        const draftEventSelect         = ge("draft_events_select");        
+        const editingEventDisplay       = ge("editing_event_display");
+        const editEventButton           = ge("edit_event_button");
+        editEventButton.addEventListener('click', edit);
+
+        // edit 
+        const eventEditTitleField       = ge("event_title_edit_field");
+        const eventHeadlineField        = ge("event_headline_field");
+        const eventRecordedField        = ge("event_recorded_field");
+        const eventHostField            = ge("event_host_field");
+        const eventStageSelect          = ge("event_stage_select");
+
+        const eventSummaryField         = ge("event_summary_field");
+        const eventDetailField          = ge("event_detail_field");
+       
+        const eventPromoImageUploadDisplay = ge("event_promo_image_upload_display");
+        const eventPromoImageUpload     = ge("event_promo_image_upload");
+
+        const eventPreviewVideoUploadDisplay = ge("event_preview_video_upload_display");
+        const eventPreviewVideoUpload   = ge("event_preview_video_upload");
+
+        const eventStartTimeField       = ge("start_time_field");
+        const eventEndTimeField         = ge("end_time_field");
+        const spacesField               = ge("space_count_field");
+
+        const eventStreamKeyDisplay     = ge("event_stream_key_display");
+        const eventPlaybackIdDisplay    = ge("event_playback_id_display");
+
+        const awardContractField        = ge("event_award_contract_field");
+
+        const eventCategoriesField      = ge("event_categories_field");
+        const eventGuestsField          = ge("event_guests_field");
+
+        const postSaveDisplay           = ge("post_save_display");
+
+        const saveEventButton           = ge("save_event_button");
+        saveEventButton.addEventListener('click', save);
+
+        const postEventButton           = ge("post_event_button");    
+        postEventButton.addEventListener('click', postEvent);    
+
+        var components      = [  
+                                editingEventDisplay, eventEditTitleField, 
+                                eventHeadlineField, eventRecordedField, 
+                                eventHostField, eventSummaryField, 
+                                eventDetailField, eventPromoImageUpload, 
+                                eventPreviewVideoUpload, eventStartTimeField,
+                                eventStreamKeyDisplay, eventPlaybackIdDisplay, 
+                                eventEndTimeField, spacesField, 
+                                eventCategoriesField, eventGuestsField
+                             ];
+
+        var txtFieldNames    = [    
+                                    "TITLE_KEY",
+                                    "HEADLINE_KEY",
+                                    "HOST_KEY", 
+                                    "DELIVERY_STAGE_KEY",
+                                    "SUMMARY_IPFS_KEY",
+                                    "DETAILS_IPFS_KEY",
+                                    "PROMO_IMAGE_IPFS_KEY",
+                                    "PREVIEW_VIDEO_IPFS_KEY",                           
+                                    "RECORDED_KEY"                               
+                                ];
+
+        var numericFieldNames = [
+                                    "START_TIME_KEY",
+                                    "END_TIME_KEY",
+                                    "SPACES_KEY"
+                                ];
+
+
+    
+        var streamingManagerContract; 
+
+        var streamKey; 
+        var playbackId; 
+
+        var eventAddress; 
+        var eventContract; 
+        var eventManagerContract;
+
+        var mediaAssetsAvailable; 
+        var promoImageIpfsHash; 
+        var previewVideoIpfsHash; 
+
+        var promoImageHash   = null; 
+        var previewVideoHash = null;         
+        var summaryHash      = null; 
+        var detailHash       = null;        
+
+        async function configurePageContracts() { 
+            openRegistryContract.methods.getAddress("RESERVED_WEB_3_EDI_EVENT_MANAGER_CORE").call({
+                from: account
+            })
+            .then(function(response) {
+                console.log(response);
+                eventManagerContract = getContract(iW3EEventManagerAbi, response);
+            })
+            .catch(function(err) {
+                console.log(err);
+            });
+            openRegistryContract.methods.getAddress("RESERVED_WEB_3_EDI_STREAMING_MANAGER_CORE").call({
+                from: account
+            })
+            .then(function(response) {
+                console.log(response);
+                streamingManagerContract = getContract(iW3EBroadcastStreamManagerAbi, response);
+            })
+            .catch(function(err) {
+                console.log(err);
+            });
+        }
+
+        async function loadPageData() { 
+            loadStreamDetails();
+            getDraftEvents();            
+            eventAddress = getParam(); 
+            console.log(eventAddress);
+            if(eventAddress != 0x0000000000000000000000000000000000000000 && eventAddress != null){
+                loadEventToEdit(eventAddress);
+            }
+        }
+        
+        function getParam(){            
+            var query = window.location.search; 
+            var urlParams = new URLSearchParams(query);            
+            return urlParams.get('address');
+        }
+
+        async function loadStreamDetails()  { 
+
+            streamingManagerContract.methods.hasStreamDetails().call({from : account})
+            .then(function(response){
+                console.log(response);
+                streamKeyDisplay.innerHTML = ""; 
+                if(response === false) {
+                    // display get streaming details button 
+                    streamKeyDisplay.innerHTML = "No stream details"; 
+                    playbackIdDisplay.innerHTML = "No stream details";                     
+                    getStreamDetailsButton(); 
+                    setDisableAllButtons(true); 
+                }
+                else { 
+                    streamingManagerContract.methods.getStreamDetails().call({from : account})
+                    .then(function(response){
+                        console.log(response);
+                        streamKey = response.streamKey;
+                        playbackId = response.playbackId;
+                        streamKeyDisplay.innerHTML = streamKey;
+                        playbackIdDisplay.innerHTML = playbackId;
+                        setDisableAllButtons(false); 
+                    })
+                    .catch(function(err){
+                        console.log(err);
+                    })
+                }
+            })
+            .catch(function(err){
+                console.log(err);
+            })
+        }
+
+        function setDisableAllButtons(d) {   
+            if(d == false) {
+                createEventButton.removeAttribute("disabled");
+                editEventButton.removeAttribute("disabled");
+                saveEventButton.removeAttribute("disabled");
+                postEventButton.removeAttribute("disabled");
+            } 
+            else {          
+                createEventButton.setAttribute("disabled", d);
+                editEventButton.setAttribute("disabled", d);
+                saveEventButton.setAttribute("disabled", d);
+                postEventButton.setAttribute("disabled", d);
+            }
+        }
+
+   
+        function getStreamDetailsButton()  { 
+            streamDetailsButtonDisplay.innerHTML = ""; 
+            // <a href="#" id="get_streaming_details_button" class="btn btn-primary">Get Streaming Details</a>
+            var a = ce("a");
+            a.setAttribute("href", "#");
+            a.setAttribute("class", "btn btn-primary");
+            a.append(text("Get Streaming Details"));
+            streamDetailsButtonDisplay.append(a);
+            a.addEventListener('click', getStreamingDetails);
+        }
+
+        async function getStreamingDetails() {
+            // go to livepeer api 
+            var testToken = "8f736c54-6ca2-4f05-8476-99e786f427fc"; 
+            let lpsrequest = new XMLHttpRequest(); 
+            lpsrequest.open("POST","https://livepeer.studio/api/stream" );
+            lpsrequest.setRequestHeader("Accept", "application/json");
+            lpsrequest.setRequestHeader("Content-Type","application/json");
+            lpsrequest.setRequestHeader("Authorization", "Bearer "+testToken+"");
+            console.log(lpsrequest);
+            lpsrequest.onreadystatechange = function () {
+            if (lpsrequest.readyState === 4) {
+                console.log(lpsrequest.status);
+                var txt = lpsrequest.responseText;
+                console.log(txt);
+
+                var livepeer = JSON.parse(txt);
+
+                streamKey = livepeer.streamKey; 
+                playbackId = livepeer.playbackId; 
+                postStreamingToEvm(streamKey, playbackId);
+            }};
+            
+            let data = {};
+            data.name = account +"_"+Date.now()+ "_stream"; 
+
+            let o = {};
+            o.name = "720p"; 
+            o.bitrate = 2000000;
+            o.fps = 30; 
+            o.width = 1280;
+            o.height = 720; 
+
+            let p = {};
+            p.name = "480p"; 
+            p.bitrate = 1000000; 
+            p.fps = 30; 
+            p.width = 854; 
+            p.height = 480; 
+        
+            let q = {};
+            q.name = "360p"; 
+            q.bitrate = 500000; 
+            q.fps = 30; 
+            q.width = 640; 
+            q.height = 360; 
+
+            data.profiles = [o, p, q ];
+            var s = JSON.stringify(data);
+            console.log(s);
+            lpsrequest.send(s);
+        }
+
+        async function postStreamingToEvm (sk, pid) {
+            console.log("sk: " + sk + " pid " + pid);
+            // post to evm 
+            streamingManagerContract.methods.postStreamDetails(sk, pid).send({ from : account})
+            .then(function(response){
+                console.log(response);
+                streamKeyDisplay.innerHTML = sk; 
+                playbackIdDisplay.innerHTML = pid; 
+                streamDetailsButtonDisplay.innerHTML = ""; 
+            })
+            .catch(function(err){
+                console.log(err)
+            })
+        }
+
+        // creat event
+        async function createEvent() {
+            eventManagerContract.methods.createEvent(eventTitleField.value, streamKey, playbackId ).send({from : account}) 
+            .then(function(response){
+                console.log(response);
+                createEventDisplay.innerHTML = ""; 
+                var blockNumber = response.blockNumber;                 
+                createEventDisplay.innerHTML = getBlockLink(blockNumber) + " Event Created."; 
+                refresh(); 
+            })
+            .catch(function(err){
+                console.log(err);
+            })
+        }
+
+        async function refresh() { 
+            getDraftEvents();
+        }
+
+        function getBlockLink(blockNumber) {
+            var url = networkURL + blockNumber +"/transactions";            
+            return "<a href='"+url+"' target='_blank'>"+blockNumber+"</a>";
+        }
+
+
+        async function buildEventSelect(draftEventAddresses) {
+            draftEventSelect.innerHTML = ""; 
+            if(draftEventAddresses.length > 0) {            
+                for(var x = 0; x < draftEventAddresses.length; x++) {
+                    var draftEventAddress = draftEventAddresses[x];
+                    var option = ce("option");
+                    option.setAttribute("value", draftEventAddress);
+                    var span = ce("span");
+                    option.append(span);
+                    option.append(text( " :: " +draftEventAddress ));                
+                    getTitle(span, draftEventAddress);
+                    draftEventSelect.append(option);                    
+                }
+                editEventButton.disabled = false; 
+                editEventButton.setAttribute("class", "btn btn-primary");
+            }
+            else { 
+                noDraftsFound();
+            }
+
+        }
+        function noDraftsFound() { 
+            var option = ce("option");
+                option.setAttribute("default", "true");
+                option.append(text("No Draft Events Found"));
+                draftEventSelect.append(option);
+                draftEventSelect.disabled = true; 
+                editEventButton.setAttribute("class", "btn btn-light");
+                editEventButton.disabled = true; 
+        }
+
+        async function getTitle(span, eAddress) {
+            eContract = getContract(iW3EEventAbi, eAddress);
+            eContract.methods.getTitle().call({from : account})
+            .then(function(response){
+                console.log(response);
+                span.append(text(response));
+            })
+            .catch(function(err){
+                console.log(err);
+            })
+        }
+
+        // main event
+        async function loadEventToEdit(eAddress) {
+            console.log(eventStartTimeField.value);
+            
+            eventAddress = eAddress; 
+            eventContract = getContract(iW3EWriteEventAbi, eAddress);
+
+            eContract = eventContract; 
+
+            editingEventDisplay.innerHTML = "EDITING EVENT :: " + eAddress; 
+            eContract.methods.getTitle().call({from : account})
+            .then(function(response){
+                console.log(response);
+                eventEditTitleField.value = response; 
+            })
+            .catch(function(err){
+                console.log(response);
+            })
+
+            eContract.methods.getAward().call({from : account})
+            .then(function(response){
+                console.log(response);
+                awardContractField.value = response; 
+            })
+            .catch(function(err){
+                console.log(response);
+            })
+
+            setIPFSDisplayValueLink(eContract, eventPromoImageUploadDisplay, "PROMO_IMAGE_IPFS_KEY");
+            setIPFSDisplayValueLink(eContract, eventPreviewVideoUploadDisplay, "PREVIEW_VIDEO_IPFS_KEY");
+
+            setIPFSTextDisplayValue(eContract, eventSummaryField, "SUMMARY_IPFS_KEY");                                    
+            setIPFSTextDisplayValue(eContract, eventDetailField, "DETAILS_IPFS_KEY");
+
+            setTextDisplayValue(eContract, eventHeadlineField, "HEADLINE_KEY");
+            setTextDisplayValue(eContract, eventHostField, "HOST_KEY");
+            setTextDisplayValue(eContract, eventStageSelect, "DELIVERY_STAGE_KEY");
+
+            appendTextDisplayValue(eContract, eventStreamKeyDisplay, "STREAM_KEY_KEY");
+            appendTextDisplayValue(eContract, eventPlaybackIdDisplay, "PLAYBACK_ID_KEY");
+
+            setNumericDisplayValue(eContract, spacesField,"SPACES_KEY" );
+            setTimeDisplayValue(eContract, eventStartTimeField, "START_TIME_KEY");
+            setTimeDisplayValue(eContract, eventEndTimeField, "END_TIME_KEY");
+
+            setArrayDisplayValues(eContract, eventCategoriesField, "CATEGORIES_KEY");
+            setArrayDisplayValues(eContract, eventGuestsField, "GUESTS_KEY");
+            
+            eContract.methods.getFeatureSTRARRAY("PROMOTION_DESTINATIONS_KEY").call({from : account})
+            .then(function(response){
+                console.log(response);
+                var destinations = response; 
+                for(var x = 0;x < destinations.length; x++) {
+                    var destination = destinations[x];
+                    if(destination === "CAMPUS") {                    
+                        ge("promotion_campus").checked = true;
+                    }
+                    if(destination === "CANDIDATE") {                    
+                        ge("promotion_candidate").checked = true;
+                    }
+                    if(destination === "STUDENT") { 
+                        ge("promotion_student").checked = true; 
+                    }
+                    if(destination === "SCHOOL") { 
+                        ge("promotion_school").checked = true;
+                    }
+                    if(destination === "COMMUNITIES") { 
+                        ge("promotion_communities").checked = true;
+                    }
+                    if(destination === "COURTYARD") { 
+                        ge("promotion_courtyard").checked = true;
+                    }
+                    if(destination === "GALLERIES") { 
+                        ge("promotion_galleries").checked = true;
+                    }
+                    if(destination === "MARKET_PLACE") { 
+                        ge("promotion_market_place").checked = true; 
+                    }
+                }
+            })
+            .catch(function(err){
+                console.log(response);
+            })
+        }
+
+        async function setIPFSTextDisplayValue(eContract, display, key) {
+            console.log(key);
+            eContract.methods.getFeatureSTR(key).call({from : account})
+            .then(function(response){
+                 console.log(response);
+                 var ipfsHash = response; 
+                 var url = ipfsRoot+ipfsHash;
+                 console.log(url);
+                 fetch(url)
+                 .then(function(response){
+                    console.log(response);
+                    return response.text(); 
+                 })
+                 .then(function(txt){
+                    console.log(txt);
+                    display.append(text(txt));
+                 })
+                 .catch(function(err){
+                    console.log(err);
+                 })
+            })
+            .catch(function(err){
+                console.log(err);
+            })
+        }
+
+        async function setIPFSDisplayValueLink(eContract, display, key ) {
+            console.log(key);
+            eContract.methods.getFeatureSTR(key).call({from : account})
+            .then(function(response){
+                console.log(response);
+                var mediaHash = response; 
+                console.log("link");
+                
+                    var a = ce("a");
+                    a.setAttribute("href", ipfsRoot+mediaHash);
+                    a.setAttribute("target", "_blank");
+                    a.append(text(mediaHash));
+                    display.append(a); 
+                if(mediaHash != null ){
+                    mediaAssetsAvailable = true; 
+                }
+                if(key === "PROMO_IMAGE_IPFS_KEY"){
+                    promoImageHash = mediaHash; 
+                }
+                if(key === "PREVIEW_VIDEO_IPFS_KEY"){
+                    previewVideoHash = mediaHash;
+                }
+            })
+            .catch(function(err){
+                console.log(err);
+            })
+        }
+
+        function getPromotionDestinations() { 
+            
+            var destinations = []; 
+            pushIfChecked(destinations, ge("promotion_campus"));
+            pushIfChecked(destinations, ge("promotion_candidate"));
+            pushIfChecked(destinations, ge("promotion_student"));
+            pushIfChecked(destinations, ge("promotion_school"));
+            pushIfChecked(destinations, ge("promotion_communities"));
+            pushIfChecked(destinations, ge("promotion_courtyard"));
+            pushIfChecked(destinations, ge("promotion_galleries"));
+            pushIfChecked(destinations, ge("promotion_market_place"));
+            return destinations; 
+        }
+
+        function pushIfChecked(d, f) {
+            if(f.checked == true) {
+               d.push(f.value);
+            }
+        }
+
+        async function appendTextDisplayValue(eContract, component, fieldName){
+            eContract.methods.getFeatureSTR(fieldName).call({from : account})
+            .then(function(response){
+                console.log(response);
+                component.append(text(response)); 
+            })
+            .catch(function(err){
+                console.log(err);
+            })
+        }
+
+        async function setTextDisplayValue(eContract, component, fieldName){
+            eContract.methods.getFeatureSTR(fieldName).call({from : account})
+            .then(function(response){
+                console.log(response);
+                component.value = response; 
+            })
+            .catch(function(err){
+                console.log(err);
+            })
+        }
+
+        async function setNumericDisplayValue(eContract, component, fieldName){
+            eContract.methods.getFeatureUINT(fieldName).call({from : account})
+            .then(function(response){
+                console.log(response);
+                component.value = response; 
+            })
+            .catch(function(err){
+                console.log(err);
+            })
+        }
+        
+        async function setTimeDisplayValue(eContract, component, fieldName){
+            eContract.methods.getFeatureUINT(fieldName).call({from : account})
+            .then(function(response){
+                console.log(response);
+                component.value = new Date(response * 1000); 
+            })
+            .catch(function(err){
+                console.log(err);
+            })
+        }
+
+        async function setArrayDisplayValues(eContract, component, fieldName) {
+            eContract.methods.getFeatureSTRARRAY(fieldName).call({from : account})
+            .then(function(response){
+                console.log(response);
+                component.value =  concatArray(response);
+            })
+            .catch(function(err){
+                console.log(err);
+            })
+        }
+
+        function concatArray(strs) {
+            var result = ""; 
+            for(var x = 0; x < strs.length; x++) {
+                result = result.concat(",", strs[x]);                
+            }
+            result = result.substring(1,result.length);
+            console.log("concat :: ");
+            return result; 
+        }
+
+        async function getDraftEvents() { 
+            eventManagerContract.methods.getEvents("DRAFT").call({
+			    from: account
+            })
+            .then(function(response) {
+                console.log(response);
+                buildEventSelect(response);
+            })            
+            .catch(function(err) {
+                console.log(err);
+                noDraftsFound(); 
+
+            })
+        }
+
+        async function edit() {
+            eventAddress = draftEventSelect.value;             
+            loadEventToEdit(eventAddress);
+        }
+
+        async function save() {             
+            postSummary();             
+        }
+
+        async function postSummary() { 
+            postToIPFS(eventSummaryField.value)
+            .then(function(response){
+                console.log(response);                
+                // summary store
+                summaryHash = response;  
+                postDetail();               
+            })
+            .catch(function(err) {
+                console.log(err);
+            })
+        }
+
+        async function postDetail() { 
+             // detail store
+             detailHash = response;   
+             postToIPFS(eventDetailField.value)
+            .then(function(response){
+                console.log(response);
+                postPromoImage();
+            })
+            .catch(function(err){
+                console.log(err);
+            })                                       
+        }
+
+        async function postPromoImage() { 
+            if(eventPromoImageUpload.files[0] != null) {
+                postToFileIPFS(eventPromoImageUpload.files[0])
+                .then(function(response){                                    
+                    // promo image store
+                    promoImageHash = response;
+                    postPreviewVideo();
+                })                    
+                .catch(function(err){
+                    console.log(err);
+                })
+            }
+            else { 
+                postPreviewVideo(); 
+            }
+        }
+
+        async function postPreviewVideo() { 
+            if(eventPreviewVideoUpload.files[0] != null){
+                postToFileIPFS(eventPreviewVideoUpload.files[0])
+                .then(function(response){
+                    console.log(response);
+            
+                    // preview video store
+                    previewVideoHash = response; 
+                    saveToEvm(summaryHash, detailHash, promoImageHash, previewVideoHash);
+                })
+                .catch(function(err){
+                    console.log(err);
+                }) 
+            }
+            else { 
+                saveToEvm(summaryHash, detailHash, promoImageHash, previewVideoHash);
+            }
+        }
+
+
+        async function saveToEvm(summaryHash, detailHash, promoImageHash, previewVideoHash) {
+            var txtFieldValues     =  [
+                                        eventEditTitleField.value, 
+                                        eventHeadlineField.value, 
+                                        eventHostField.value, 
+                                        eventStageSelect.value,
+                                        summaryHash, 
+                                        detailHash, 
+                                        promoImageHash, 
+                                        previewVideoHash, 
+                                        eventRecordedField.value                                      
+                                      ];
+                                      console.log(eventStartTimeField.value);
+                                      console.log(Date.parse(eventStartTimeField.value));
+            var numericFieldValues  = [
+                                        (Date.parse(eventStartTimeField.value) / 1000), 
+                                        (Date.parse(eventEndTimeField.value) / 1000),
+                                        spacesField.value
+                                      ];
+
+            
+
+            var eventWriteContract = getContract(iW3EWriteEventAbi,eventAddress);
+            console.log(eventWriteContract);
+            console.log(txtFieldNames);            
+            console.log(txtFieldValues);
+
+            console.log(" ");
+            console.log(numericFieldNames);
+            console.log(numericFieldValues);
+        
+            console.log( getArray(eventCategoriesField.value));
+            console.log(getArray(eventGuestsField.value));
+            console.log(getPromotionDestinations()); 
+
+            console.log(" ");
+            console.log(awardContractField.value);
+
+
+            
+            
+            eventWriteContract.methods.populate(txtFieldNames, txtFieldValues, 
+                                                numericFieldNames, numericFieldValues,   
+                                                getArray(eventCategoriesField.value), 
+                                                getArray(eventGuestsField.value),
+                                                getPromotionDestinations() , 
+                                                awardContractField.value +"").send({from : account})
+            .then(function(response){
+                console.log(response);
+                var blockNumber = response.blockNumber; 
+                postSaveDisplay.innerHTML = getBlockLink(blockNumber) + " Event Saved. "; 
+                setIPFSDisplayValueLink(eventWriteContract, eventPromoImageUploadDisplay, "PROMO_IMAGE_IPFS_KEY");
+                setIPFSDisplayValueLink(eventWriteContract, eventPreviewVideoUploadDisplay, "PREVIEW_VIDEO_IPFS_KEY");
+                // display transaction 
+            })
+            .catch(function(err){
+                console.log(err);
+            })
+        }
+
+        async function fetchFromIPFS(cid, messageSpan) {
+            url = "https://ipfs.io/ipfs/" + cid;
+            console.log(" url: " + url);
+            let response = await fetch(url)
+                .then(function(response) {
+                    return response.text();
+                })
+                .then(function(text) {
+                    messageSpan.innerHTML = text;
+                });
+        }
+
+        async function postToFileIPFS(file) {
+            var postHash; 
+            await ipfs.add(file)
+                    .then(function(response) {
+                        console.log(response);
+                        postHash = response[0].hash;
+                        return postHash; 
+                    })
+                    .catch(function(err){
+                        console.log(err);
+                    })
+            return postHash; 
+        }
+
+        async function postToIPFS(data) {
+            var postHash; 
+            await ipfs.add(data)
+                    .then(function(response) {
+                        console.log(response);
+                        postHash = response[0].hash;
+                        return postHash; 
+                    })
+                    .catch(function(err){
+                        console.log(err);
+                    })
+            return postHash; 
+        }
+
+        function getArray(values) {
+            return values.split(",");
+        }
+
+        async function postEvent() { 
+            save()
+            .then(function(response){
+                console.log(response);
+                console.log(eventAddress);
+                console.log(eventContract);
+                eventContract.methods.execute("POST").send({ from : account})
+                .then(function(response){
+                    console.log(response);
+                    // display transaction 
+                    var blockNumber = response.blockNumber;
+                    postSaveDisplay.innerHTML = getBlockLink(blockNumber) + " Event Posted. ";                                             
+                    clearFields(); 
+                })
+                .catch(function(err){
+                    console.log(err);
+                })
+            })
+            .catch(function(err){
+                console.log(err);
+            })
+        }
+
+        function clearFields() { 
+            for(var x = 0; x < components.length; x++) {
+                var component = components[x];
+                component.innerHTML = ""; 
+            }
+        }
+
+        function getTime(numeric) {
+            var d = new Date(numeric*1000);
+            return formatDate(d);
+        }
+        function formatDate(date) {
+            return date.toLocaleString('en-UK', { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', hour12: false, minute: '2-digit', second: '2-digit' })
+        }
+        function ge(id) {
+            return document.getElementById(id);
+        }
+
+        function text(txt) {
+            return document.createTextNode(txt);
+        }
+
+        function ce(name) {
+            return document.createElement(name);
+        }
+    
+    </script>
 </body>
 
 </html>
+

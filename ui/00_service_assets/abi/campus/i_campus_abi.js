@@ -24,7 +24,7 @@ const iW3ECampusAbi = [
 		"outputs": [
 			{
 				"internalType": "string",
-				"name": "_streamId",
+				"name": "_playbackId",
 				"type": "string"
 			},
 			{

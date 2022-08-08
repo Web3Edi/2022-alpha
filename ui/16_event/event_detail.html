@@ -21,6 +21,11 @@
     <link rel="stylesheet" type="text/css" href="../00_service_assets/main/styles/icon-font.min.css">
     <link rel="stylesheet" type="text/css" href="../00_service_assets/main/styles/style.css">
 
+    <!-- Web 3 -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://cdn.ethers.io/lib/ethers-5.0.umd.min.js" type="text/javascript"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/ethjs@0.3.4/dist/ethjs.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-119386393-1"></script>
@@ -50,49 +55,66 @@
         </div>
     </div>
 
-    <div class="header">
-        <div class="header-left">
-            <div class="menu-icon dw dw-menu"></div>
-            <div class="search-toggle-icon dw dw-search2" data-toggle="header_search"></div>
-            <div class="header-search">
-                <form>
-                    <div class="form-group mb-0">
-                        <i class="dw dw-search2 search-icon"></i>
-                        <input type="text" class="form-control search-input" placeholder="Search Here">
-                        <div class="dropdown">
-                            <a class="dropdown-toggle no-arrow" href="#" role="button" data-toggle="dropdown">
-                                <i class="ion-arrow-down-c"></i>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-right">
-                                <div class="form-group row">
-                                    <label class="col-sm-12 col-md-2 col-form-label">From</label>
-                                    <div class="col-sm-12 col-md-10">
-                                        <input class="form-control form-control-sm form-control-line" type="text">
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-sm-12 col-md-2 col-form-label">To</label>
-                                    <div class="col-sm-12 col-md-10">
-                                        <input class="form-control form-control-sm form-control-line" type="text">
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-sm-12 col-md-2 col-form-label">Subject</label>
-                                    <div class="col-sm-12 col-md-10">
-                                        <input class="form-control form-control-sm form-control-line" type="text">
-                                    </div>
-                                </div>
-                                <div class="text-right">
-                                    <button class="btn btn-primary">Search</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-
-    </div>
+	<!-- NEW HEADER -->
+	<div class="header">
+		<div class="header-left">
+			<div class="menu-icon dw dw-menu"></div>
+			<div class="search-toggle-icon dw dw-search2" data-toggle="header_search"></div>
+			<div class="header-search">
+				<form>
+					<div class="form-group mb-0">
+						<i class="dw dw-search2 search-icon"></i>
+						<input type="text" class="form-control search-input" placeholder="Search Here">
+						<div class="dropdown">
+							<a class="dropdown-toggle no-arrow" href="#" role="button" data-toggle="dropdown">
+								<i class="ion-arrow-down-c"></i>
+							</a>
+							<div class="dropdown-menu dropdown-menu-right">
+								<div class="form-group row">
+									<label class="col-sm-12 col-md-2 col-form-label">From</label>
+									<div class="col-sm-12 col-md-10">
+										<input class="form-control form-control-sm form-control-line" type="text">
+									</div>
+								</div>
+								<div class="form-group row">
+									<label class="col-sm-12 col-md-2 col-form-label">To</label>
+									<div class="col-sm-12 col-md-10">
+										<input class="form-control form-control-sm form-control-line" type="text">
+									</div>
+								</div>
+								<div class="form-group row">
+									<label class="col-sm-12 col-md-2 col-form-label">Subject</label>
+									<div class="col-sm-12 col-md-10">
+										<input class="form-control form-control-sm form-control-line" type="text">
+									</div>
+								</div>
+								<div class="text-right">
+									<button class="btn btn-primary">Search</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+		<div class="header-right">
+		
+			<div class="user-info-dropdown">
+				<div class="dropdown">
+					<a class="dropdown-toggle" href="#" role="button" >
+						<span id="show_wallet" class="user-name"></span>
+						<span id="connect_web_3" class="user-name">Connect Web 3</span>
+						<span class="user-icon">
+							<img src="../00_service_assets/main/images/android-icon-192x192.png" alt="">
+						</span>
+						
+					</a>
+					
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- END NEW HEADER -->
 
     <div class="left-side-bar">
 		<div class="brand-logo">
@@ -157,7 +179,7 @@
                     <div class="row">
                         <div class="col-md-12 col-sm-12">
                             <div class="title">
-                                <h4>About this Event</h4>
+                                <h4><span id="event_title_display"></h4>
                             </div>
 
                         </div>
@@ -168,93 +190,67 @@
                         <div class="row">
                             <div class="col-md-8 col-sm-12">
                                 <div class="blog-detail card-box overflow-hidden mb-30">
-                                    <div class="blog-img">
-                                        <img src="../00_service_assets/main/images/img2.jpg" alt="">
+                                    <div class="blog-img" id="event_promo_image_display">
+                                    
                                     </div>
-                                    <div class="blog-caption">
-                                        <h4 class="mb-10">Lorem ipsum dolor sit amet, consectetur adipisicing elit</h4>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
-                                            ea commodo</p>
-                                        <h5 class="mb-10">Lorem ipsum dolor sit amet, consectetur.</h5>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
-                                            ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-                                            mollit anim id est laborum.</p>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
-                                            ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-                                            mollit anim id est laborum.</p>
-                                        <h5 class="mb-10">Unordered List</h5>
-                                        <ul>
-                                            <li>Duis aute irure dolor in reprehenderit in voluptate.</li>
-                                            <li>Sunt in culpa qui officia deserunt mollit anim id est laborum.</li>
-                                            <li>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</li>
-                                            <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</li>
-                                            <li>Duis aute irure dolor in reprehenderit in voluptate.</li>
-                                            <li>Sunt in culpa qui officia deserunt mollit anim id est laborum.</li>
-                                            <li>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</li>
-                                            <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</li>
-                                        </ul>
-                                        <h5 class="mb-10">Ordered List</h5>
-                                        <ol>
-                                            <li>Duis aute irure dolor in reprehenderit in voluptate.</li>
-                                            <li>Sunt in culpa qui officia deserunt mollit anim id est laborum.</li>
-                                            <li>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</li>
-                                            <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</li>
-                                            <li>Duis aute irure dolor in reprehenderit in voluptate.</li>
-                                            <li>Sunt in culpa qui officia deserunt mollit anim id est laborum.</li>
-                                            <li>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</li>
-                                            <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</li>
-                                        </ol>
+                                    <div class="blog-caption" id="event_summary_display">
+                                     
+                                    </div>
+                                </div>
+                                <div class="blog-detail card-box overflow-hidden mb-30">
+                                    
+                                    <div class="blog-caption" id="event_detail_display">
+                                     
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-4 col-sm-12">
                                 <div class="card-box mb-30">
-                                    <h5 class="pd-20 h5 mb-0">Categories</h5>
-                                    <div class="list-group">
-                                        <a href="#" class="list-group-item d-flex align-items-center justify-content-between">HTML <span class="badge badge-primary badge-pill">7</span></a>
-                                        <a href="#" class="list-group-item d-flex align-items-center justify-content-between">Css <span class="badge badge-primary badge-pill">10</span></a>
-                                        <a href="#" class="list-group-item d-flex align-items-center justify-content-between active">Bootstrap <span class="badge badge-primary badge-pill">8</span></a>
-                                        <a href="#" class="list-group-item d-flex align-items-center justify-content-between">jQuery <span class="badge badge-primary badge-pill">15</span></a>
-                                        <a href="#" class="list-group-item d-flex align-items-center justify-content-between">Design <span class="badge badge-primary badge-pill">5</span></a>
-                                    </div>
-                                </div>
-                                <div class="card-box mb-30">
-                                    <h5 class="pd-20 h5 mb-0">Latest Post</h5>
+                                    <h5 class="pd-20 h5 mb-0">Event Details</h5>
                                     <div class="latest-post">
                                         <ul>
                                             <li>
-                                                <h4><a href="#">Ut enim ad minim veniam, quis nostrud exercitation ullamco</a></h4>
-                                                <span>HTML</span>
+                                                <h4>Host</h4>
+                                                <span id="host_display"></span>
                                             </li>
                                             <li>
-                                                <h4><a href="#">Lorem ipsum dolor sit amet, consectetur adipisicing elit</a></h4>
-                                                <span>Css</span>
+                                                <h4>Guests</h4>
+                                                <span id="guests_display"></span>
                                             </li>
                                             <li>
-                                                <h4><a href="#">Ut enim ad minim veniam, quis nostrud exercitation ullamco</a></h4>
-                                                <span>jQuery</span>
+                                                <h4>Start Time</h4>
+                                                <span id="start_time_display"></span>
                                             </li>
                                             <li>
-                                                <h4><a href="#">Lorem ipsum dolor sit amet, consectetur adipisicing elit</a></h4>
-                                                <span>Bootstrap</span>
+                                                <h4>End Time</h4>
+                                                <span id="end_time_display"></span>
                                             </li>
                                             <li>
-                                                <h4><a href="#">Lorem ipsum dolor sit amet, consectetur adipisicing elit</a></h4>
-                                                <span>Design</span>
+                                                <h4>Stage</h4>
+                                                <span id="stage_display"></span>
+                                            </li>
+                                            <li>
+                                                <h4>Event Spaces</h4>
+                                                <span id="spaces_display"></span>
+                                            </li>
+                                            <li>
+                                                <h4>Event Status</h4>
+                                                <span id="status_display"></span>
+                                            </li>
+                                            <li>
+                                                <h4>Attend</h4>
+                                                <span id="button_display"></span>
                                             </li>
                                         </ul>
                                     </div>
                                 </div>
-                                <div class="card-box overflow-hidden">
-                                    <h5 class="pd-20 h5 mb-0">Archives</h5>
-                                    <div class="list-group">
-                                        <a href="#" class="list-group-item d-flex align-items-center justify-content-between">January 2020</a>
-                                        <a href="#" class="list-group-item d-flex align-items-center justify-content-between">February 2020</a>
-                                        <a href="#" class="list-group-item d-flex align-items-center justify-content-between">March 2020</a>
-                                        <a href="#" class="list-group-item d-flex align-items-center justify-content-between">April 2020</a>
-                                        <a href="#" class="list-group-item d-flex align-items-center justify-content-between">May 2020</a>
+                                <div class="card-box mb-30">
+                                    <h5 class="pd-20 h5 mb-0">Categories</h5>
+                                    <div class="list-group" id="event_categories_display">
                                     </div>
                                 </div>
+                              
+                            
                             </div>
                         </div>
                     </div>
@@ -271,10 +267,419 @@
     <script src="../00_service_assets/main//scripts/process.js"></script>
     <script src="../00_service_assets/main/scripts/layout-settings.js"></script>
     	<!-- Web 3 ABI-->
-	<script src="../00_service_assets/abi/open_register/i_open_register_abi.js"></script>       
+	<script src="../00_service_assets/abi/open_register/i_open_register_abi.js"></script>  
+
+    <script src="../00_service_assets/abi/event/i_event_abi.js"></script>
+     
 
     <!-- Web 3 Edi -->
     <script src="../00_service_assets/main/js/web_3_edi.js"></script>
+    <script>
+        const eventTitleDisplay         = ge("event_title_display");
+        const eventCategoryDisplay      = ge("event_categories_display");
+        const eventPromotImageDisplay   = ge("event_promo_image_display");
+        const eventSummaryDisplay       = ge("event_summary_display");
+        const eventDetailDisplay        = ge("event_detail_display");
+
+        const eventHostDisplay          = ge("host_display");
+        const eventGuestsDisplay        = ge("guests_display");
+        const eventStartTimeDisplay     = ge("start_time_display");
+        const eventEndTimeDisplay       = ge("end_time_display");
+        const eventStageDisplay         = ge("stage_display");
+        const eventSpacesDisplay        = ge("spaces_display");
+        const eventStatusDisplay        = ge("status_display");
+    
+        const buttonDisplay      = ge("button_display"); // register / join    
+        
+        const ipfsRoot = "https://ipfs.io/ipfs/";
+        const networkURL = "https://rinkeby-explorer.arbitrum.io/block/";
+
+
+        var eventAddress;
+        var eventContract; 
+        var stage; 
+
+        async function configurePageContracts() { 
+
+        }
+
+        async function loadPageData() { 
+            eventAddress = getParam();
+            console.log(getParam());
+            loadEvent();
+        }
+
+        function getParam(){            
+            var query = window.location.search; 
+            var urlParams = new URLSearchParams(query);            
+            return urlParams.get('address');
+        }
+
+        function loadEvent() {
+            eventContract = getContract(iW3EEventAbi, eventAddress);
+            // title
+            eventContract.methods.getTitle().call({from : account})
+            .then(function(response){
+                console.log(response);
+                eventTitleDisplay.append(text(response));
+            })
+            .catch(function(err){
+                console.log(err);
+            })
+
+            // status 
+            eventContract.methods.getStatus().call({from : account})
+            .then(function(response){
+                console.log(response);
+                getButtons(response);
+                eventStatusDisplay.append(text(response));
+            })
+            .catch(function(err){
+                console.log(err);
+            })
+            // host
+            eventContract.methods.getFeatureSTR("HOST_KEY").call({
+                from: account
+            })
+            .then(function(response) {
+                console.log(response);
+                eventHostDisplay.append(text(response));
+            })
+            .catch(function(err) {
+                console.log(response);
+            })
+
+            // guest         
+            eventContract.methods.getFeatureSTRARRAY("GUESTS_KEY").call({from : account})
+            .then(function(response){
+                console.log(response);
+                eventGuestsDisplay.append(text(concatArray(response)));
+            })
+            .catch(function(err){
+                console.log(err);
+            })
+
+            // stage         
+            eventContract.methods.getFeatureSTR("DELIVERY_STAGE_KEY").call({
+                from: account
+            })
+            .then(function(response) {
+                console.log(response);
+                stage = response; 
+                eventStageDisplay.append(text(stage));
+            })
+            .catch(function(err) {
+                console.log(err);
+            })
+
+            // start time
+            eventContract.methods.getFeatureUINT("START_TIME_KEY").call({
+                from: account
+            })
+            .then(function(response) {
+                console.log(response);
+                eventStartTimeDisplay.append(text(getTime(response)));
+            })
+            .catch(function(err) {
+                console.log(err);
+            })
+
+            // end time
+            eventContract.methods.getFeatureUINT("END_TIME_KEY").call({
+                from: account
+            })
+            .then(function(response) {
+                console.log(response);
+                eventEndTimeDisplay.append(text(getTime(response)));
+            })
+            .catch(function(err) {
+                console.log(err);
+            })
+
+            // spaces
+            eventContract.methods.getFeatureUINT("SPACES_KEY").call({
+                from: account
+            })
+            .then(function(response) {
+                console.log(response);
+                eventSpacesDisplay.append(text(response));
+            })
+            .catch(function(err) {
+                console.log(response);
+            })
+
+            // categories
+            eventContract.methods.getFeatureSTRARRAY("CATEGORIES_KEY").call({
+                from: account
+            })
+            .then(function(response) {
+                console.log(response);
+                buildCategories(response);
+            })
+            .catch(function(err) {
+                console.log(response);
+            })
+
+            // promo image 
+            eventContract.methods.getFeatureSTR("PROMO_IMAGE_IPFS_KEY").call({
+                from: account
+            })
+            .then(function(response) {
+                console.log(response);
+                var image = response; 
+                eventContract.methods.getTitle().call({from : account})
+                .then(function(res){
+                    console.log(res);
+                    buildImage(image,res );
+                })
+                .catch(function(err){
+                    console.log(err);
+                })               
+            })
+            .catch(function(err) {
+                console.log(response);
+            })
+
+            //  event summary
+            eventContract.methods.getFeatureSTR("SUMMARY_IPFS_KEY").call({
+                from: account
+            })
+            .then(function(response) {
+                console.log(response)
+                buildContent(eventSummaryDisplay, response);
+            })
+            .catch(function(err){
+                console.log(err);
+            })
+
+            //  event details
+             eventContract.methods.getFeatureSTR("DETAILS_IPFS_KEY").call({
+                from: account
+            })
+            .then(function(response) {
+                console.log(response)
+                buildContent(eventDetailDisplay, response);
+            })
+            .catch(function(err){
+                console.log(err);
+            })
+        }
+
+        function concatArray(strs) {
+            var result = ""; 
+            for(var x = 0; x < strs.length; x++) {
+                result = result.concat(",", strs[x]);                
+            }
+            result = result.substring(1,result.length);
+            console.log("concat :: " + result);
+            return result; 
+        }
+
+        function buildContent(display, ipfsHash) {
+            display.innerHTML = ""; 
+            // fetch from IPFS
+            var url = ipfsRoot + ipfsHash; 
+            fetch(url)
+            .then(function(response) {
+                return response.text();
+            })
+            .then(function(text) {
+                display.innerHTML = text;
+            });        
+        }
+
+        function buildImage(src, alt) {
+            console.log("src:: " + src + " alt :: " + alt);
+            eventPromotImageDisplay.innerHTML = ""; 
+            var img = ce("img");
+            var url = ipfsRoot+src; 
+            console.log(url);
+            img.setAttribute("src", url);
+            img.setAttribute("alt", alt);
+            eventPromotImageDisplay.append(img);
+        }
+
+        function buildCategories(categories) {
+            // <a href="#" class="list-group-item d-flex align-items-center justify-content-between">HTML <span class="badge badge-primary badge-pill">7</span></a>
+            for(var x = 0; x < categories.length; x++) {
+                var category = categories[x];
+                var b = ce("a");
+                b.setAttribute("class", "list-group-item d-flex align-items-center justify-content-between");
+                b.append(text(category));
+                eventCategoryDisplay.append(b);
+            }
+        }
+
+        function getButtons(status) {
+            if(status === "PENDING") {
+                getRegisterButtons(); 
+            }
+
+            if(status === "STARTED") {
+                getJoinButtons(); 
+            }
+
+            if(status === "ENDED") {
+                buttonDisplay.innerHTML = "ENDED";
+            }
+
+            if(status === "CANCELLED") {
+                buttonDisplay.innerHTML = "CANCELLED";
+            }
+        }
+
+        function getRegisterButtons() { 
+            
+            eventContract.methods.isState("REGISTERED", account).call({from : account})
+            .then(function(response){
+                console.log(response);
+                var button; 
+                if(response === true) {
+                    button = getButton("btn btn-danger", "De-Register"); 
+                    button.addEventListener('click', deregister);
+                }
+                else { 
+                    button = getButton("btn btn-success", "Register"); 
+                    button.addEventListener('click', register);
+                }
+                buttonDisplay.append(button);
+            })
+            .catch(function(err){
+                console.log(err);
+            })
+
+        }
+
+        function getButton(format, title) {
+            var a = ce("a");
+            a.setAttribute("href", "#");
+            a.setAttribute("class", format);
+            a.append(text(title));
+            return a; 
+        }
+
+        function getJoinButtons() {
+
+            eventContract.methods.isState("JOINED", account).call({from : account})
+            .then(function(response){
+                console.log(response);
+                var button; 
+                if(response === true) {
+                    button = getButton("btn btn-danger", "Leave"); 
+                    button.addEventListener('click', leave);
+                }
+                else { 
+                    button = getButton("btn btn-success", "Join"); 
+                    button.addEventListener('click', join);
+                }
+                buttonDisplay.append(button);
+            })
+            .catch(function(err){
+                console.log(err);
+            })
+
+        }
+
+        function register() { 
+            eventContract.methods.register().send({from : account})
+            .then(function(response){
+                console.log(response);
+                buttonDisplay.innerHTML = "";           
+                buttonDisplay.append(getBlockLink(response.blockNumber));      
+                buttonDisplay.append(text(" REGISTERED"))
+
+            })
+            .catch(function(err){
+                console.log(err);
+            })
+        }
+
+        function deregister() { 
+            eventContract.methods.deregister().send({from : account})
+            .then(function(response){
+                console.log(response);
+                buttonDisplay.innerHTML = ""; 
+                buttonDisplay.append(getBlockLink(response.blockNumber));  
+                buttonDisplay.append(text("DE-REGISTERED"))
+                
+            })
+            .catch(function(err){
+                console.log(err);
+            })
+        }
+
+        function join() { 
+            eventContract.methods.join().send({from : account})
+            .then(function(response){
+                console.log(response);
+                buttonDisplay.innerHTML = ""; 
+                var a = ce("a");
+                a.setAttribute("href", resolveStage());
+                a.setAttribute("class", "btn btn-primary");
+                a.append(text("ENTER"));
+                buttonDisplay.append(a);
+            })
+            .catch(function(err){
+                console.log(err);
+            })
+
+        }
+
+        function resolveStage() {
+            if(stage === "CAMPUS") {
+                return "../01_campus/index.html";                 
+            }
+            if(stage === "CANDIDATE") {
+                return "../03_candidate/index.html"; 
+            }
+            if(stage === "EVENT") {
+                return "event_room.html?address="+eventAddress;
+            }
+        }
+
+        function leave() { 
+            eventContract.methods.leave().send({from : account})
+            .then(function(response){
+                console.log(response);
+                buttonDisplay.innerHTML = ""; 
+                buttonDisplay.append(text("LEFT"))
+            })
+            .catch(function(err){
+                console.log(err);
+            })
+            
+        }
+
+
+        async function buildMenu() {
+
+        }
+
+        function getBlockLink(blockNumber) {
+            var url = networkURL + blockNumber +"/transactions";            
+            return "<a href='"+url+"' target='_blank'>"+blockNumber+"</a>";
+        }
+
+        function getTime(numeric) {
+            var d = new Date(numeric*1000);
+            return formatDate(d);
+        }
+        function formatDate(date) {
+            return date.toLocaleString('en-UK', { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', hour12: false, minute: '2-digit', second: '2-digit' })
+        }
+        function ge(id) {
+            return document.getElementById(id);
+        }
+
+        function text(txt) {
+            return document.createTextNode(txt);
+        }
+
+        function ce(name) {
+            return document.createElement(name);
+        }
+
+    </script> 
 </body>
 
 </html>

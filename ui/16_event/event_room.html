@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<!-- Basic Page Info -->
+	<meta charset="utf-8">
+	<title>Web 3 Edi - Event Room </title>
+
+	<!-- Site favicon -->
+	<link rel="apple-touch-icon" sizes="180x180" href="../00_service_assets/main/images/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="../00_service_assets/main/images/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="../00_service_assets/main/images/images/favicon-16x16.png">
+
+	<!-- Mobile Specific Metas -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<!-- Google Font -->
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+	<!-- CSS -->
+	<link rel="stylesheet" type="text/css" href="../00_service_assets/main/styles/core.css">
+	<link rel="stylesheet" type="text/css" href="../00_service_assets/main/styles/icon-font.min.css">
+	<link rel="stylesheet" type="text/css" href="../00_service_assets/main/styles/style.css">
+
+	<!-- Web 3 -->
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+	<script src="https://cdn.ethers.io/lib/ethers-5.0.umd.min.js" type="text/javascript"></script>
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/ethjs@0.3.4/dist/ethjs.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
+
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-119386393-1"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag(){dataLayer.push(arguments);}
+		gtag('js', new Date());
+
+		gtag('config', 'UA-119386393-1');
+	</script>
+	<link rel="stylesheet" type="text/css" href="../00_service_assets/other/plugins/plyr/dist/plyr.css">
+</head>
+<body>
+	<div class="pre-loader">
+		<div class="pre-loader-box">
+			<div class="loader-logo"><img src="../00_service_assets/main/images/deskapp-logo.svg" alt="Web 3 Edi"></div>
+			<div class='loader-progress' id="progress_div">
+				<div class='bar' id='bar1'></div>
+			</div>
+			<div class='percent' id='percent1'>0%</div>
+			<div class="loading-text">
+				Loading...
+			</div>
+		</div>
+	</div>
+
+	<!-- NEW HEADER -->
+	<div class="header">
+		<div class="header-left">
+			<div class="menu-icon dw dw-menu"></div>
+			<div class="search-toggle-icon dw dw-search2" data-toggle="header_search"></div>
+			<div class="header-search">
+				<form>
+					<div class="form-group mb-0">
+						<i class="dw dw-search2 search-icon"></i>
+						<input type="text" class="form-control search-input" placeholder="Search Here">
+						<div class="dropdown">
+							<a class="dropdown-toggle no-arrow" href="#" role="button" data-toggle="dropdown">
+								<i class="ion-arrow-down-c"></i>
+							</a>
+							<div class="dropdown-menu dropdown-menu-right">
+								<div class="form-group row">
+									<label class="col-sm-12 col-md-2 col-form-label">From</label>
+									<div class="col-sm-12 col-md-10">
+										<input class="form-control form-control-sm form-control-line" type="text">
+									</div>
+								</div>
+								<div class="form-group row">
+									<label class="col-sm-12 col-md-2 col-form-label">To</label>
+									<div class="col-sm-12 col-md-10">
+										<input class="form-control form-control-sm form-control-line" type="text">
+									</div>
+								</div>
+								<div class="form-group row">
+									<label class="col-sm-12 col-md-2 col-form-label">Subject</label>
+									<div class="col-sm-12 col-md-10">
+										<input class="form-control form-control-sm form-control-line" type="text">
+									</div>
+								</div>
+								<div class="text-right">
+									<button class="btn btn-primary">Search</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+		<div class="header-right">
+		
+			<div class="user-info-dropdown">
+				<div class="dropdown">
+					<a class="dropdown-toggle" href="#" role="button" >
+						<span id="show_wallet" class="user-name"></span>
+						<span id="connect_web_3" class="user-name">Connect Web 3</span>
+						<span class="user-icon">
+							<img src="../00_service_assets/main/images/android-icon-192x192.png" alt="">
+						</span>
+						
+					</a>
+					
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- END NEW HEADER -->
+
+	<div class="left-side-bar">
+		<div class="brand-logo">
+			<a href="../01_campus/index.html">
+				<img src="../00_service_assets/main/images/deskapp-logo.svg" alt="" class="dark-logo">
+				<img src="../00_service_assets/main/images/deskapp-logo-white.svg" alt="" class="light-logo">
+			</a>
+			<div class="close-sidebar" data-toggle="left-sidebar-close">
+				<i class="ion-close-round"></i>
+			</div>
+		</div>
+		<div class="menu-block customscroll">
+			<div class="sidebar-menu">				
+				<ul id="accordion-menu">
+					<li class="dropdown">
+						<a href="javascript:;" class="dropdown-toggle">
+							<span class="micon dw dw-house-1"></span><span class="mtext">Campus</span>
+						</a>
+						<ul class="submenu">
+							<li><a href="../01_campus/index.html">To Campus</a></li>
+							<li><a href="../14_minting/index.html">Minting</a></li>
+							<li><a href="../07_marketplace/index.html">Marketplace</a></li>
+							<li><a href="../08_courtyard/index.html">Courtyard</a></li>
+							<li><a href="../11_gallery/index.html">Galleries</a></li>
+							<li><a href="../07_marketplace/course_directory.html">Course Directory</a></li>
+							<li><a href="../09_community/index.html">Communities</a></li>
+							
+						</ul>
+					</li>
+					<li class="dropdown">
+						<a href="javascript:;" class="dropdown-toggle">
+							<span class="micon dw dw-user"></span><span class="mtext">Home</span>
+						</a>
+						<ul class="submenu">
+							<li><a href="../12_personal/profile.html">Profile</a></li>
+							<li><a href="../12_personal/locker.html">Locker</a></li>
+							<li><a href="../12_personal/colleagues.html">Colleagues</a></li>
+							<li><a href="../12_personal/preferences.html">Preferences</a></li>
+							
+						</ul>
+					</li>
+					<li class="dropdown">
+						<a href="javascript:;" class="dropdown-toggle">
+							<span class="micon dw dw-calendar-1"></span><span class="mtext">Events</span>
+						</a>
+						<ul class="submenu">
+							<li><a href="../07_marketplace/event_listings.html">Event Listings</a></li>
+						</ul>
+					</li>
+
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div class="mobile-menu-overlay"></div>
+
+	<div class="main-container">
+		<div class="pd-ltr-20 customscroll-10-p height-100-p xs-pd-20-10">
+			<div class="min-height-200px">
+				<div class="page-header">
+					<div class="row">
+						<div class="col-md-6 col-sm-12">
+							<div class="title">
+								<h4>Web 3 Edi - Event Room - <span id="event_title"></span></h4>
+							</div>
+						
+						</div>
+					</div>
+				</div>
+
+				<div class="pd-20 card-box mb-30">
+					<div class="clearfix mb-20">
+						<div class="pull-left">
+							<h4 class="text-blue h4"><span id="event_title_heading"></span></h4>							
+						</div>
+					</div>
+					<div class="container">
+						<video poster="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-HD.jpg?v1" controls crossorigin>
+							<source src="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-HD.mp4" type="video/mp4">
+							<source src="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-HD.webm" type="video/webm">
+						</video>
+					</div>
+				</div>
+			</div>
+			<div class="card-box pd-20 mb-29">
+					<center><a id="join_button" href="#" class="btn btn-success">Join</a></center>
+					<center><a id="leave_button" href="#" class="btn btn-danger">Leave</a></center>
+			</div>
+			<br/>
+			<div class="footer-wrap pd-20 mb-20 card-box">
+				&copy; Web 3 Edi 2022 
+			</div>
+		</div>
+	</div>
+	<!-- js -->
+	<script src="../00_service_assets/main/scripts/core.js"></script>
+	<script src="../00_service_assets/main/scripts/script.min.js"></script>
+	<script src="../00_service_assets/main/scripts/process.js"></script>
+	<script src="../00_service_assets/main/scripts/layout-settings.js"></script>
+	<script src="../00_service_assets/other/plugins/plyr/dist/plyr.js"></script>
+	<script src="https://cdn.shr.one/1.0.1/shr.js"></script>
+	<script>
+		plyr.setup({
+			tooltips: {
+				controls: !0
+			},
+		});
+	</script>
+
+	<!-- Web 3 ABI-->
+	<script src="../00_service_assets/abi/open_register/i_open_register_abi.js"></script>  
+
+	<script src="../00_service_assets/abi/event/i_event_abi.js"></script>
+
+	<!-- Web 3 Edi -->
+	<script src="../00_service_assets/main/js/web_3_edi.js"></script>
+	<script> 
+	        var eventContract; 
+
+			async function configurePageContracts() { 
+
+			}
+
+			async function loadPageData() { 
+				var eventAddress = getParam();
+				console.log(getParam());
+				loadEvent(eventAddress);
+			}
+
+			function getParam(){            
+				var query = window.location.search; 
+				var urlParams = new URLSearchParams(query);            
+				return urlParams.get('address');
+			}
+
+			function loadEvent(eventAddress) {
+				eventContract = getContract(iW3EEventAbi, eventAddress);
+			}
+	
+	</script>
+</body>
+</html>

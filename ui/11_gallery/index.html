@@ -18,8 +18,14 @@
 	<!-- CSS -->
 	<link rel="stylesheet" type="text/css" href="../00_service_assets/main/styles/core.css">
 	<link rel="stylesheet" type="text/css" href="../00_service_assets/main/styles/icon-font.min.css">
-	<link rel="stylesheet" type="text/css" href=".../00_service_assets/other/plugins/fancybox/dist/jquery.fancybox.css">
+	<link rel="stylesheet" type="text/css" href="../00_service_assets/other/plugins/fancybox/dist/jquery.fancybox.css">
 	<link rel="stylesheet" type="text/css" href="../00_service_assets/main//styles/style.css">
+
+	<!-- Web 3 -->
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+	<script src="https://cdn.ethers.io/lib/ethers-5.0.umd.min.js" type="text/javascript"></script>
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/ethjs@0.3.4/dist/ethjs.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
 
 	<!-- Global site tag (gtag.js) - Google Analytics -->
 	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-119386393-1"></script>
@@ -46,6 +52,7 @@
 		</div>
 	</div>
 
+	<!-- NEW HEADER -->
 	<div class="header">
 		<div class="header-left">
 			<div class="menu-icon dw dw-menu"></div>
@@ -88,90 +95,23 @@
 			</div>
 		</div>
 		<div class="header-right">
-			<div class="dashboard-setting user-notification">
-				<div class="dropdown">
-					<a class="dropdown-toggle no-arrow" href="javascript:;" data-toggle="right-sidebar">
-						<i class="dw dw-settings2"></i>
-					</a>
-				</div>
-			</div>
-			<div class="user-notification">
-				<div class="dropdown">
-					<a class="dropdown-toggle no-arrow" href="#" role="button" data-toggle="dropdown">
-						<i class="icon-copy dw dw-notification"></i>
-						<span class="badge notification-active"></span>
-					</a>
-					<div class="dropdown-menu dropdown-menu-right">
-						<div class="notification-list mx-h-350 customscroll">
-							<ul>
-								<li>
-									<a href="#">
-										<img src="../00_service_assets/main/images/img.jpg" alt="">
-										<h3>John Doe</h3>
-										<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed...</p>
-									</a>
-								</li>
-								<li>
-									<a href="#">
-										<img src="../00_service_assets/main/images/photo1.jpg" alt="">
-										<h3>Lea R. Frith</h3>
-										<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed...</p>
-									</a>
-								</li>
-								<li>
-									<a href="#">
-										<img src="../00_service_assets/main/images/photo2.jpg" alt="">
-										<h3>Erik L. Richards</h3>
-										<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed...</p>
-									</a>
-								</li>
-								<li>
-									<a href="#">
-										<img src="../00_service_assets/main/images/photo3.jpg" alt="">
-										<h3>John Doe</h3>
-										<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed...</p>
-									</a>
-								</li>
-								<li>
-									<a href="#">
-										<img src="../00_service_assets/main/images/photo4.jpg" alt="">
-										<h3>Renee I. Hansen</h3>
-										<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed...</p>
-									</a>
-								</li>
-								<li>
-									<a href="#">
-										<img src="../00_service_assets/main/images/img.jpg" alt="">
-										<h3>Vicki M. Coleman</h3>
-										<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed...</p>
-									</a>
-								</li>
-							</ul>
-						</div>
-					</div>
-				</div>
-			</div>
+		
 			<div class="user-info-dropdown">
 				<div class="dropdown">
-					<a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown">
+					<a class="dropdown-toggle" href="#" role="button" >
+						<span id="show_wallet" class="user-name"></span>
+						<span id="connect_web_3" class="user-name">Connect Web 3</span>
 						<span class="user-icon">
-							<img src="../00_service_assets/main/images/photo1.jpg" alt="">
+							<img src="../00_service_assets/main/images/android-icon-192x192.png" alt="">
 						</span>
-						<span class="user-name">Ross C. Lopez</span>
+						
 					</a>
-					<div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
-						<a class="dropdown-item" href="profile.html"><i class="dw dw-user1"></i> Profile</a>
-						<a class="dropdown-item" href="profile.html"><i class="dw dw-settings2"></i> Setting</a>
-						<a class="dropdown-item" href="faq.html"><i class="dw dw-help"></i> Help</a>
-						<a class="dropdown-item" href="login.html"><i class="dw dw-logout"></i> Log Out</a>
-					</div>
+					
 				</div>
-			</div>
-			<div class="github-link">
-				<a href="https://github.com/dropways/deskapp" target="_blank"><img src="../00_service_assets/main/images/github.svg" alt=""></a>
 			</div>
 		</div>
 	</div>
+	<!-- END NEW HEADER -->
 
 	<div class="left-side-bar">
 		<div class="brand-logo">
@@ -214,163 +154,14 @@
 					<div class="row">
 						<div class="col-md-12 col-sm-12">
 							<div class="title">
-								<h4>Gallery</h4>
-							</div>
-							<nav aria-label="breadcrumb" role="navigation">
-								<ol class="breadcrumb">
-									<li class="breadcrumb-item"><a href="index.html">Home</a></li>
-									<li class="breadcrumb-item active" aria-current="page">Gallery</li>
-								</ol>
-							</nav>
+								<h4>NFT Gallery</h4>
+							</div>						
 						</div>
 					</div>
 				</div>
 				<div class="gallery-wrap">
-					<ul class="row">
-						<li class="col-lg-4 col-md-6 col-sm-12">
-							<div class="da-card box-shadow">
-								<div class="da-card-photo">
-									<img src="../00_service_assets/main/images/product-img1.jpg" alt="">
-									<div class="da-overlay">
-										<div class="da-social">
-										<h5 class="mb-10 color-white pd-20">Lorem ipsum dolor sit amet, consectetur adipisicing.</h5>
-											<ul class="clearfix">
-												<li><a href="../00_service_assets/main/images/product-img1.jpg" data-fancybox="images"><i class="fa fa-picture-o"></i></a></li>
-												<li><a href="#"><i class="fa fa-link"></i></a></li>
-											</ul>
-										</div>
-									</div>
-								</div>
-							</div>
-						</li>
-						<li class="col-lg-4 col-md-6 col-sm-12">
-							<div class="da-card box-shadow">
-								<div class="da-card-photo">
-									<img src="../00_service_assets/main/images/product-img2.jpg" alt="">
-									<div class="da-overlay">
-										<div class="da-social">
-										<h5 class="mb-10 color-white pd-20">Lorem ipsum dolor sit amet, consectetur adipisicing.</h5>
-											<ul class="clearfix">
-												<li><a href="../00_service_assets/main/images/product-img2.jpg" data-fancybox="images"><i class="fa fa-picture-o"></i></a></li>
-												<li><a href="#"><i class="fa fa-link"></i></a></li>
-											</ul>
-										</div>
-									</div>
-								</div>
-							</div>
-						</li>
-						<li class="col-lg-4 col-md-6 col-sm-12">
-							<div class="da-card box-shadow">
-								<div class="da-card-photo">
-									<img src="../00_service_assets/main/images/product-img3.jpg" alt="">
-									<div class="da-overlay">
-										<div class="da-social">
-										<h5 class="mb-10 color-white pd-20">Lorem ipsum dolor sit amet, consectetur adipisicing.</h5>
-											<ul class="clearfix">
-												<li><a href="../00_service_assets/main/images/product-img3.jpg" data-fancybox="images"><i class="fa fa-picture-o"></i></a></li>
-												<li><a href="#"><i class="fa fa-link"></i></a></li>
-											</ul>
-										</div>
-									</div>
-								</div>
-							</div>
-						</li>
-						<li class="col-lg-4 col-md-6 col-sm-12">
-							<div class="da-card box-shadow">
-								<div class="da-card-photo">
-									<img src="../00_service_assets/main/images/product-img4.jpg" alt="">
-									<div class="da-overlay">
-										<div class="da-social">
-										<h5 class="mb-10 color-white pd-20">Lorem ipsum dolor sit amet, consectetur adipisicing.</h5>
-											<ul class="clearfix">
-												<li><a href="../00_service_assets/main/images/product-img4.jpg" data-fancybox="images"><i class="fa fa-picture-o"></i></a></li>
-												<li><a href="#"><i class="fa fa-link"></i></a></li>
-											</ul>
-										</div>
-									</div>
-								</div>
-							</div>
-						</li>
-						<li class="col-lg-4 col-md-6 col-sm-12">
-							<div class="da-card box-shadow">
-								<div class="da-card-photo">
-									<img src="../00_service_assets/main/images/product-img1.jpg" alt="">
-									<div class="da-overlay">
-										<div class="da-social">
-										<h5 class="mb-10 color-white pd-20">Lorem ipsum dolor sit amet, consectetur adipisicing.</h5>
-											<ul class="clearfix">
-												<li><a href="../00_service_assets/main/images/product-img1.jpg" data-fancybox="images"><i class="fa fa-picture-o"></i></a></li>
-												<li><a href="#"><i class="fa fa-link"></i></a></li>
-											</ul>
-										</div>
-									</div>
-								</div>
-							</div>
-						</li>
-						<li class="col-lg-4 col-md-6 col-sm-12">
-							<div class="da-card box-shadow">
-								<div class="da-card-photo">
-									<img src="../00_service_assets/main/images/product-img2.jpg" alt="">
-									<div class="da-overlay">
-										<div class="da-social">
-										<h5 class="mb-10 color-white pd-20">Lorem ipsum dolor sit amet, consectetur adipisicing.</h5>
-											<ul class="clearfix">
-												<li><a href="../00_service_assets/main/images/product-img2.jpg" data-fancybox="images"><i class="fa fa-picture-o"></i></a></li>
-												<li><a href="#"><i class="fa fa-link"></i></a></li>
-											</ul>
-										</div>
-									</div>
-								</div>
-							</div>
-						</li>
-						<li class="col-lg-4 col-md-6 col-sm-12">
-							<div class="da-card box-shadow">
-								<div class="da-card-photo">
-									<img src="../00_service_assets/main/images/product-img3.jpg" alt="">
-									<div class="da-overlay">
-										<div class="da-social">
-										<h5 class="mb-10 color-white pd-20">Lorem ipsum dolor sit amet, consectetur adipisicing.</h5>
-											<ul class="clearfix">
-												<li><a href="../00_service_assets/main/images/product-img3.jpg" data-fancybox="images"><i class="fa fa-picture-o"></i></a></li>
-												<li><a href="#"><i class="fa fa-link"></i></a></li>
-											</ul>
-										</div>
-									</div>
-								</div>
-							</div>
-						</li>
-						<li class="col-lg-4 col-md-6 col-sm-12">
-							<div class="da-card box-shadow">
-								<div class="da-card-photo">
-									<img src="../00_service_assets/main/images/product-img4.jpg" alt="">
-									<div class="da-overlay">
-										<div class="da-social">
-										<h5 class="mb-10 color-white pd-20">Lorem ipsum dolor sit amet, consectetur adipisicing.</h5>
-											<ul class="clearfix">
-												<li><a href="../00_service_assets/main/images/product-img4.jpg" data-fancybox="images"><i class="fa fa-picture-o"></i></a></li>
-												<li><a href="#"><i class="fa fa-link"></i></a></li>
-											</ul>
-										</div>
-									</div>
-								</div>
-							</div>
-						</li>
-						<li class="col-lg-4 col-md-6 col-sm-12">
-							<div class="da-card box-shadow">
-								<div class="da-card-photo">
-									<img src="../00_service_assets/main/images/product-img1.jpg" alt="">
-									<div class="da-overlay">
-										<div class="da-social">
-										<h5 class="mb-10 color-white pd-20">Lorem ipsum dolor sit amet, consectetur adipisicing.</h5>
-											<ul class="clearfix">
-												<li><a href="../00_service_assets/main/images/product-img1.jpg" data-fancybox="images"><i class="fa fa-picture-o"></i></a></li>
-												<li><a href="#"><i class="fa fa-link"></i></a></li>
-											</ul>
-										</div>
-									</div>
-								</div>
-							</div>
-						</li>
+					<ul class="row" id="gallery_display">
+						
 					</ul>
 				</div>
 			</div>
@@ -392,5 +183,114 @@
 
 	<!-- Web 3 Edi -->
 	<script src="../00_service_assets/main/js/web_3_edi.js"></script>
+	<script src="../00_service_assets/test/js/test_nft.js"></script>
+	<script> 
+		const galleryDisplay = ge("gallery_display");
+
+		async function configurePageContracts() { 
+
+		}
+
+		async function loadPageData() { 
+			buildGallery(); 
+
+		}
+
+		function buildGallery()  { 
+			for(var x = 0; x < testNfts.length; x++) {
+				var nft = testNfts[x];
+				addImage(nft);
+			}
+		}
+	
+		function addImage(nft) { 
+			/*
+			<li class="col-lg-4 col-md-6 col-sm-12">
+				<div class="da-card box-shadow">
+					<div class="da-card-photo">
+						<img src="../00_service_assets/main/images/product-img1.jpg" alt="">
+						<div class="da-overlay">
+							<div class="da-social">
+							<h5 class="mb-10 color-white pd-20">Lorem ipsum dolor sit amet, consectetur adipisicing.</h5>
+								<ul class="clearfix">
+									<li><a href="../00_service_assets/main/images/product-img1.jpg" data-fancybox="images"><i class="fa fa-picture-o"></i></a></li>
+									<li><a href="#"><i class="fa fa-link"></i></a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</li>
+			*/
+
+			var li = ce("li"); 
+			li.setAttribute("class", "col-lg-4 col-md-6 col-sm-12");
+			galleryDisplay.append(li);
+			var card = ce("div");
+			card.setAttribute("class", "da-card box-shadow");
+			li.append(card);
+
+			var photo = ce("div");
+			photo.setAttribute("class", "da-card-photo");
+			card.append(photo);
+
+			var img = ce("img");
+			img.setAttribute("src", nft.image);
+			img.setAttribute("alt", nft.title);
+			photo.append(img);
+
+			var overlay = ce("div");
+			overlay.setAttribute("class", "da-overlay");
+			photo.append(overlay);
+
+			var social = ce("div"); 
+			social.setAttribute("class", "da-social"); 
+			overlay.append(social);
+
+			var h5 = ce("h5"); 
+			h5.setAttribute("class", "mb-10 color-white pd-20");
+			h5.append(text(nft.title));
+			social.append(h5);
+
+			var ul = ce("ul");
+			ul.setAttribute("class","clearfix");
+			social.append(ul);
+
+			var liImage = ce("li");
+			ul.append(liImage);
+
+			var a = ce("a");			
+			a.setAttribute("href", nft.image);
+			a.setAttribute("data-fancyBox", "images");
+			liImage.append(a);
+
+			var iImg = ce("i");
+			iImg.setAttribute("class","fa fa-picture-o");
+			a.append(iImg);
+
+			var liLink = ce("li");
+			ul.append(liLink);
+
+			var a2 = ce("a");
+			a2.setAttribute("href", nft.collectionLink);
+			liLink.append(a2);
+
+			var iImg2 = ce("i");
+			iImg2.setAttribute("class", "fa fa-link");
+			a2.append(iImg2);
+
+		}
+
+		function ge(id) {
+			return document.getElementById(id);
+		}
+		function text(txt) {
+			return document.createTextNode(txt);
+		}
+		function ce(element) {
+			return document.createElement(element);
+		}
+
+	</script>
 </body>
 </html>

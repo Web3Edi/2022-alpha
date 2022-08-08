@@ -18,11 +18,17 @@
 	<!-- CSS -->
 	<link rel="stylesheet" type="text/css" href="../00_service_assets/main/styles/core.css">
 	<link rel="stylesheet" type="text/css" href="../00_service_assets/main/styles/icon-font.min.css">
-	<link rel="stylesheet" type="text/css" href="../00_service_assets/main/other/plugins/jvectormap/jquery-jvectormap-2.0.3.css">
+	
 	<link rel="stylesheet" type="text/css" href="../00_service_assets/main/styles/style.css">
 
 	<!-- Broadcast -->
 	<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+
+	<!-- Web 3 -->
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://cdn.ethers.io/lib/ethers-5.0.umd.min.js" type="text/javascript"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/ethjs@0.3.4/dist/ethjs.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
 
 
 	<!-- Global site tag (gtag.js) - Google Analytics -->
@@ -49,6 +55,7 @@
 		</div>
 	</div>
 
+	<!-- NEW HEADER -->
 	<div class="header">
 		<div class="header-left">
 			<div class="menu-icon dw dw-menu"></div>
@@ -91,9 +98,23 @@
 			</div>
 		</div>
 		<div class="header-right">
-			<button class="btn-primary">Connect Web 3</button>		
+		
+			<div class="user-info-dropdown">
+				<div class="dropdown">
+					<a class="dropdown-toggle" href="#" role="button" >
+						<span id="show_wallet" class="user-name"></span>
+						<span id="connect_web_3" class="user-name">Connect Web 3</span>
+						<span class="user-icon">
+							<img src="../00_service_assets/main/images/android-icon-192x192.png" alt="">
+						</span>
+						
+					</a>
+					
+				</div>
+			</div>
 		</div>
 	</div>
+	<!-- END NEW HEADER -->
 
 	<div class="left-side-bar">
 		<div class="brand-logo">
@@ -192,67 +213,79 @@
 				</div>
 			</div>		
 			<div class="row">
-				<div class="col-lg-4 col-md-6 col-sm-12 mb-30">
-					<h4>Student View</h4>
-					<div class="card-box height-100-p pd-20">
-						
-						<video id="live-player" controls height="100%" width="100%" />						
+				<div class="col-lg-4 col-md-6 col-sm-12 mb-50">					
+					<div class="card-box height-130-p pd-20">
+						<h4>Delivery Stage View</h4>						
+						<video id="live_player" controls height="100%" width="100%" />						
+					</div>
+					&nbsp;
+					<div class="card-box height-130-p pd-20">
+					<div class="row"> 
+						<div class="alert alert-warning col-md-12" role="alert">
+							<small><b>Time NOW :</b> <span id="event_time_now_display"></span></small><br/>
+							<small><b>Start Time :</b> <span id="event_start_time_display"></span></small><br/>
+							<small><b>End Time :</b> <span id="event_end_time_display"></span></small><br/>
+						</div>
 					</div>
 				</div>
-				<div class="col-lg-4 col-md-6 col-sm-12 mb-30">
-					<h4>Stream Controls</h4>
-					<div class="card-box height-100-p pd-20">
-						<div> 
-							Select Scheduled Event: 
-							<select> 
-								<option>Workshop 1</option>
-								<option>Home Room Daily</option>
-								<option>Industry AMA</option>
-								<option>Adhoc</option>
-							</select>
-						</div>
-						<p></p>
-						<div>
-							Select Broadcast Destination: 
-							<select> 
-								<option>Home Room</option>
-								<option>Course Room</option>
-								<option>Event Room</option>
-								<option>Candidate Stage</option>
-								<option>Campus Main Stage</option>
-							</select>
-						</div>
-						<p></p>
-						<div>
-							
-							<button class="btn-danger rounded">Start Live</button>
-							<button class="btn-success rounded">End Live</button>
-							
-							
+				</div>
+				<div class="col-lg-4 col-md-6 col-sm-12 mb-50">
 					
-						</div>
-						<p></p>
-						<div> 
-							<table>
-								<tr>
-									<th>Registered Participants</th>
-									<th>Viewers</th>
-									<th>Broadcast Time</th>
-								</tr>
-								<tr> 
-									<td>50</td>
-									<td>30</td>
-									<td>32 mins</td>
-								</tr>
-							</table>
-						</div>
+					<div class="card-box height-130-p pd-30">
+						<h4>Live Broadcast Controls</h4>
+							<div class="row"> 																	
+									<select class="custom-select col-md-6" id="event_broadcast_select">								
+									</select>									
+									<a href="#" id="select_broadcast_event_button" class="btn btn-info col-md-6">Select Event</a>																	
+							</div>
+							&nbsp;
+							<div class="row"> 
+								<b>Event : <span id="selected_event_title_display"></span></b>
+							</div>
+							&nbsp;
+							 <!-- stream access (modal - stream key / playback id) -->	
+							<div class="row">								
+								<small><a href="#" class="btn btn-dark" id="stream_access_button" data-toggle="modal" data-target="#small-modal">stream access</a></small>								
+								&nbsp;						
+								<div class="alert alert-info col-md-3" role="alert">
+									<small>Delivery Stage: <span id="event_delivery_stage"></span></small>
+								</div>
+								&nbsp;						
+								<div class="alert alert-danger col-md-5" role="alert">
+									<small>Live Status: <span id="event_live_status"></span></small>
+								</div>
+							</div>
+							<div class="row"> 
+								<div class="alert alert-info col-md-12" role="alert">
+									<small>Promotions : <span id="event_promo_destinations"></span></small>
+								</div>
+							</div>
+						
+							<div class="row"> 
+								<div class="alert alert-info col-md-12" role="alert">
+									<a href="#" id="go_chain_live_button" class="btn btn-danger">Go Chain Live</a>
+									<a href="#" id="end_chain_broadcast_button" class="btn btn-success">End Chain Broadcast</a>
+									<a href="#" id="cancel_chain_broadcast_button" class="btn btn-warning">Cancel Chain Broadcast</a>
+								</div>
+							</div>
+					
+						
+						 
+						 <!-- recorded or not -->
+						 <!-- delivery stage -->
+						 <!-- promo destinations -->
+						 <!-- start / end / cancel -->
 					</div>
 				</div>
-				<div class="col-lg-4 col-md-6 col-sm-12 mb-30">
-					<h4>Time</h4>
-					<div class="card-box height-100-p pd-20">
-						<iframe src="https://free.timeanddate.com/clock/i8ezacwk/n136/szw210/szh210/hocff0/hbw0/hfc009/cf100/hncfff/fas30/fdi66/mqc000/mql15/mqw4/mqd98/mhc000/mhl15/mhw4/mhd98/mmc000/mml10/mmw1/mmd98/hhs2/hms2" frameborder="0" width="210" height="210"></iframe>
+				<div class="col-lg-4 col-md-6 col-sm-12 mb-30">					
+					<div class="card-box height-130-p pd-20">
+						<h4>Scheduled Events </h4>
+						<span id="scheduled_events_display"></span>
 
+					 <!-- event title -->
+						<!-- start time  -->
+						<!-- duration  -->
+						<!-- view / start / cancel -->
 					</div>
 				</div>
 			</div>
@@ -262,148 +295,134 @@
 			<div class="row">
 				<div class="col-lg-7 col-md-12 col-sm-12 mb-30">
 					<div class="card-box pd-30 height-100-p">
-						<h4 class="mb-30 h4">Audience Q & A</h4>
-						<div class="chat-box">
-							<div class="chat-footer">
-								<div class="file-upload"><a href="#"><i class="fa fa-paperclip"></i></a></div>
-								<div class="chat_text_area">
-									<textarea placeholder="Type your message…"></textarea>
+							<h4>Live Broadcast Statistics</h4>
+							<b>Event : <span id="event_title_display">Event</span></b>
+							<!-- components-->
+						<!-- session time remaining-->						 
+						 <!-- current participants -->
+						 <!-- current registrants--> 
+						 <!-- max spaces --> 
+							<div class="row">
+								<div class="alert alert-primary col-md-3" role="alert">
+									Session Time Remaining <span id="session_time_remaining"></span>
 								</div>
-								<div class="chat_send">
-									<button class="btn btn-link" type="submit"><i class="icon-copy ion-paper-airplane"></i></button>
+								&nbsp;
+								<div class="alert alert-secondary col-md-3" role="alert">
+									<small></small>Participants: <span id="current_participants_display"></span>
+								</div>
+								&nbsp;
+								<div class="alert alert-secondary col-md-3" role="alert">
+									Registrants: <span id="current_registrants_display"></span>
+								</div>
+								&nbsp;
+								<div class="alert alert-secondary col-md-2" role="alert">
+									Max Spaces: <span id="max_spaces_display"></span>
 								</div>
 							</div>
-							<div class="chat-desc customscroll">
-								<ul>
-									<li class="clearfix admin_chat">
-										<span class="chat-img">
-											<img src="../00_service_assets/main/images/chat-img2.jpg" alt="">
-										</span>
-										<div class="chat-body clearfix">
-											<p>Maybe you already have additional info?</p>
-											<div class="chat_time">09:40PM</div>
-										</div>
-									</li>
-									<li class="clearfix admin_chat">
-										<span class="chat-img">
-											<img src="../00_service_assets/main/images/chat-img2.jpg" alt="">
-										</span>
-										<div class="chat-body clearfix">
-											<p>It is to early to provide some kind of estimation here. We need user stories.</p>
-											<div class="chat_time">09:40PM</div>
-										</div>
-									</li>
-									<li class="clearfix">
-										<span class="chat-img">
-											<img src="../00_service_assets/main/images/chat-img1.jpg" alt="">
-										</span>
-										<div class="chat-body clearfix">
-											<p>We are just writing up the user stories now so will have requirements for you next week. We are just writing up the user stories now so will have requirements for you next week.</p>
-											<div class="chat_time">09:40PM</div>
-										</div>
-									</li>
-									<li class="clearfix">
-										<span class="chat-img">
-											<img src="../00_service_assets/main/images/chat-img1.jpg" alt="">
-										</span>
-										<div class="chat-body clearfix">
-											<p>Essentially the brief is for you guys to build an iOS and android app. We will do backend and web app. We have a version one mockup of the UI, please see it attached. As mentioned before, we would simply hand you all the assets for the UI and you guys code. If you have any early questions please do send them on to myself. Ill be in touch in coming days when we have requirements prepared. Essentially the brief is for you guys to build an iOS and android app. We will do backend and web app. We have a version one mockup of the UI, please see it attached. As mentioned before, we would simply hand you all the assets for the UI and you guys code. If you have any early questions please do send them on to myself. Ill be in touch in coming days when we have.</p>
-											<div class="chat_time">09:40PM</div>
-										</div>
-									</li>
-									<li class="clearfix admin_chat">
-										<span class="chat-img">
-											<img src="../00_service_assets/main/images/chat-img2.jpg" alt="">
-										</span>
-										<div class="chat-body clearfix">
-											<p>Maybe you already have additional info?</p>
-											<div class="chat_time">09:40PM</div>
-										</div>
-									</li>
-									<li class="clearfix admin_chat">
-										<span class="chat-img">
-											<img src="../00_service_assets/main/images/chat-img2.jpg" alt="">
-										</span>
-										<div class="chat-body clearfix">
-											<p>It is to early to provide some kind of estimation here. We need user stories.</p>
-											<div class="chat_time">09:40PM</div>
-										</div>
-									</li>
-									<li class="clearfix">
-										<span class="chat-img">
-											<img src="../00_service_assets/main/images/chat-img1.jpg" alt="">
-										</span>
-										<div class="chat-body clearfix">
-											<p>We are just writing up the user stories now so will have requirements for you next week. We are just writing up the user stories now so will have requirements for you next week.</p>
-											<div class="chat_time">09:40PM</div>
-										</div>
-									</li>
-									<li class="clearfix">
-										<span class="chat-img">
-											<img src="../00_service_assets/main/images/chat-img1.jpg" alt="">
-										</span>
-										<div class="chat-body clearfix">
-											<p>Essentially the brief is for you guys to build an iOS and android app. We will do backend and web app. We have a version one mockup of the UI, please see it attached. As mentioned before, we would simply hand you all the assets for the UI and you guys code. If you have any early questions please do send them on to myself. Ill be in touch in coming days when we have requirements prepared. Essentially the brief is for you guys to build an iOS and android app. We will do backend and web app. We have a version one mockup of the UI, please see it attached. As mentioned before, we would simply hand you all the assets for the UI and you guys code. If you have any early questions please do send them on to myself. Ill be in touch in coming days when we have.</p>
-											<div class="chat_time">09:40PM</div>
-										</div>
-									</li>
-									<li class="clearfix upload-file">
-										<span class="chat-img">
-											<img src="../00_service_assets/main/images/chat-img1.jpg" alt="">
-										</span>
-										<div class="chat-body clearfix">
-											<div class="upload-file-box clearfix">
-												<div class="left">
-													<img src="../00_service_assets/main/images/upload-file-img.jpg" alt="">
-													<div class="overlay">
-														<a href="#">
-															<span><i class="fa fa-angle-down"></i></span>
-														</a>
-													</div>
-												</div>
-												<div class="right">
-													<h3>Big room.jpg</h3>
-													<a href="#">Download</a>
-												</div>
-											</div>
-											<div class="chat_time">09:40PM</div>
-										</div>
-									</li>
-									<li class="clearfix upload-file admin_chat">
-										<span class="chat-img">
-											<img src="../00_service_assets/main/images/chat-img2.jpg" alt="">
-										</span>
-										<div class="chat-body clearfix">
-											<div class="upload-file-box clearfix">
-												<div class="left">
-													<img src="../00_service_assets/main/images/upload-file-img.jpg" alt="">
-													<div class="overlay">
-														<a href="#">
-															<span><i class="fa fa-angle-down"></i></span>
-														</a>
-													</div>
-												</div>
-												<div class="right">
-													<h3>Big room.jpg</h3>
-													<a href="#">Download</a>
-												</div>
-											</div>
-											<div class="chat_time">09:40PM</div>
-										</div>
-									</li>
-								</ul>
-							</div>
-					
-						</div>
 					</div>
 				</div>
 				<div class="col-lg-5 col-md-12 col-sm-12 mb-30">
 					<div class="card-box pd-30 height-100-p">
-						<h4 class="mb-30 h4">Session Notes</h4>
-						<div class="html-editor pd-20 card-box mb-30"></div>
-							<textarea class="textarea_editor form-control border-radius-0" placeholder="Enter text ..."></textarea>
-							<a href="#" class="btn btn-primary">Post To Stage</a>
+						<!-- components -->
+						<h4>Create Quick Event</h4>
+						Note: This operation triggers three separate metamask transactions.
+						<span id="quick_live_message_span"></span> 
+						<div class="row">
+							<div class="col-md-6 col-sm-12">
+								<div class="form-group">
+									<label for="quick_event_title">Title</label>
+									<input type="text" class="form-control" id="quick_event_title">
+								</div>							
+							</div>
+							<div class="col-md-6 col-sm-12">
+								<div class="form-group">
+									<label for="quick_event_headline">Headline</label>
+									<input type="text" class="form-control" id="quick_event_headline">
+								</div>
+							</div>
 						</div>
+						<div class="row">
+							<div class="col-md-6 col-sm-12">
+								<div class="form-group">
+									<label for="quick_event_categories">Categories</label>
+									<input type="text" class="form-control" id="quick_event_categories">
+								</div>							
+							</div>
+							<div class="col-md-6 col-sm-12">
+								<div class="form-group">
+									<label for="quick_event_duration">Duration</label>
+									<select id="quick_event_duration" class="custom-select col-12">
+											<option value="15">15 mins</option>
+											<option value="30">30 mins</option>
+											<option value="45">45 mins</option>
+											<option value="60">60 mins</option>
+									</select>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-6 col-sm-12">
+								<div class="form-group">
+									<label for="quick_event_spaces">Spaces</label>
+									<input type="number" class="form-control" id="quick_event_spaces">
+								</div>							
+							</div>
+							<div class="col-md-6 col-sm-12">
+								<div class="form-group">
+									<label for="quick_event_stage">Delivery Stage</label>
+									<select class="form-control" id="quick_event_stage"></select>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-6 col-sm-12">
+								<div class="form-group">
+									<label for="quick_event_promo_destination">Promo Destinations</label>
+									<div class="custom-control custom-checkbox mb-5">
+										<input type="checkbox" class="custom-control-input" id="promotion_campus" value="CAMPUS">
+										<label class="custom-control-label" for="promotion_campus">Campus</label>
+									</div>
+									<div class="custom-control custom-checkbox mb-5">
+										<input type="checkbox" class="custom-control-input" id="promotion_candidate" value="CANDIDATE">
+										<label class="custom-control-label" for="promotion_candidate">Candidate</label>
+									</div>
+								</div>							
+							</div>
+							<div class="col-md-6 col-sm-12">
+								<label class="weight-600">Event Recorded</label>
+									<div class="custom-control custom-radio mb-5">
+										<input type="radio" id="customRadio1" name="quickEventRecorded" value="YES" class="custom-control-input">
+										<label class="custom-control-label" for="customRadio1">YES</label>
+									</div>
+									<div class="custom-control custom-radio mb-5">
+										<input type="radio" id="customRadio2" name="quickEventRecorded" value="NO" class="custom-control-input">
+										<label class="custom-control-label" for="customRadio2">NO</label>
+									</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-6 col-sm-12">
+								<div class="form-group">
+									<a type="text" class="btn btn-warning" id="clear_quick_live_button">Clear Quick Live</a>
+								</div>							
+							</div>
+							<div class="col-md-6 col-sm-12">
+								<div class="form-group">									
+									<a type="text" class="btn btn-danger" id="post_to_live_button">Post To Live</a>
+								</div>
+							</div>
+						</div>
+							<!-- quick event controls -->
+						<!-- title -->
+						<!-- headline -->
+						<!-- categories -->
+						<!-- duration-->
+						<!-- spaces -->
+						<!-- stage -->
+						<!-- recorded -->
+						<!-- promo destinations -->
+						<!-- post now / -->
+
 						
 					</div>
 				</div>
@@ -413,36 +432,805 @@
 			</div>
 		</div>
 	</div>
+
+	<!-- modal -->
+	<div class="modal fade" id="small-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-sm modal-dialog-centered">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title" id="myLargeModalLabel">Web 3 Edi Educator Stream Access Details</h4>
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+				</div>
+				<div class="modal-body">
+					Stream Key : <span id="modal_stream_key_display"></span>
+					<br/>
+					Playback Id : <span id="modal_playback_id_display"></span>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+
 	<!-- js -->
-	<script>
-		var playbackId = "4366hsybwrui6040";
-		const videoEl = document.querySelector("#live-player");
-		const src = "https://livepeercdn.com/hls/"+playbackId+"/index.m3u8";
-		if (videoEl.canPlayType("application/vnd.apple.mpegurl")) {
-		  // Some browers (safari and ie edge) support HLS natively
-		  videoEl.src = src;
-		} else if (Hls.isSupported()) {
-		  const hls = new Hls();
-		  hls.loadSource(src);
-		  hls.attachMedia(videoEl);
-		} else {
-		  console.error("This is a legacy browser that doesn't support MSE");
-		}
-	  </script>
+
 	<script src="../00_service_assets/main/scripts/core.js"></script>
 	<script src="../00_service_assets/main/scripts/script.min.js"></script>
 	<script src="../00_service_assets/main/scripts/process.js"></script>
 	<script src="../00_service_assets/main/scripts/layout-settings.js"></script>
-	<script src="../00_service_assets/main/other/plugins/jQuery-Knob-master/jquery.knob.min.js"></script>
-	<script src="../00_service_assets/other/plugins/highcharts-6.0.7/code/highcharts.js"></script>
-	<script src="../00_service_assets/other/plugins/highcharts-6.0.7/code/highcharts-more.js"></script>
-	<script src="../00_service_assets/other/plugins/jvectormap/jquery-jvectormap-2.0.3.min.js"></script>
-	<script src="../00_service_assets/other/plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
-	<script src="../00_service_assets/main/scripts/dashboard2.js"></script>
+
 	<!-- Web 3 ABI-->
-	<script src="../00_service_assets/abi/open_register/i_open_register_abi.js"></script>       
+	<script src="../00_service_assets/abi/open_register/i_open_register_abi.js"></script>   
+
+	<script src="../00_service_assets/abi/event/i_event_abi.js"></script>       
+    <script src="../00_service_assets/abi/event/i_write_event_abi.js"></script>       
+    <script src="../00_service_assets/abi/event/i_event_manager_abi.js"></script>
+    <script src="../00_service_assets/abi/broadcast/i_broadcast_scheduler_abi.js"></script>
+    <script src="../00_service_assets/abi/broadcast/i_broadcast_stream_manager_abi.js"></script>    
 
 	<!-- Web 3 Edi -->
 	<script src="../00_service_assets/main/js/web_3_edi.js"></script>
+	
+	<script> 
+	 	const networkURL 					= "https://rinkeby-explorer.arbitrum.io/block/";
+		const livePlayer 					= ge("live_player");
+		const videoEl 						= document.querySelector("#live_player");
+		const eventBroadcastSelect 			= ge("event_broadcast_select"); 
+		const selectBroadcastEventButton 	= ge("select_broadcast_event_button");
+		selectBroadcastEventButton.addEventListener('click', selectEventToBroadcast);
+
+		const selectedEventTitleDisplay 	= ge("selected_event_title_display");
+		const streamAccessButton 			= ge("stream_access_button");
+
+		const eventDeliveryStageDisplay		= ge("event_delivery_stage");
+		const eventLiveStatusDisplay		= ge("event_live_status");
+		const eventPromoDestinationsDisplay = ge("event_promo_destinations");
+		const eventStartTimeDisplay			= ge("event_start_time_display");
+		const eventEndTimeDisplay			= ge("event_end_time_display");
+		const timeNowDisplay				= ge("event_time_now_display");
+
+		const goChainLiveButton				= ge("go_chain_live_button");
+		goChainLiveButton.addEventListener('click', goChainLive);
+
+		const endChainBroadcastButton		= ge("end_chain_broadcast_button");
+		endChainBroadcastButton.addEventListener('click', endChainBroadcast);
+
+		const cancelChainBroadcastButton	= ge("cancel_chain_broadcast_button");		
+		cancelChainBroadcastButton.addEventListener('click', cancelChainBroadCast);
+
+		const modalStreamKeyDisplay			= ge("modal_stream_key_display");
+		const modalPlaybackIdDisplay		= ge("modal_playback_id_display");
+
+		const scheduledEventsDisplay		= ge("scheduled_events_display");
+		const sessionTimeRemaining			= ge("session_time_remaining"); 
+		const currentParticipantsDisplay 	= ge("current_participants_display");
+		const currentRegistrantsDisplay		= ge("current_registrants_display"); 
+		const maxSpacesDisplay				= ge("max_spaces_display");	
+		
+		const quickEventTitleField				= ge("quick_event_title");
+		const quickEventHeadlineField			= ge("quick_event_headline");
+		const quickEventCategoriesField			= ge("quick_event_categories");
+		const quickEventDurationField			= ge("quick_event_duration");
+
+		const quickEventSpacesField				= ge("quick_event_spaces");
+		const quickEventStageField				= ge("quick_event_stage");
+
+		const promotionCampusField				= ge("promotion_campus");
+		const promotionCandidateField			= ge("promotion_candidate");
+		
+		const postToLiveButton					= ge("post_to_live_button");
+		postToLiveButton.addEventListener('click',postToLive);
+
+		const clearQuickLiveButton				= ge("clear_quick_live_button");
+		clearQuickLiveButton.addEventListener('click', clearQuickLive);
+
+		const quickLiveMessageSpan				= ge("quick_live_message_span");
+
+		var streamKey; 
+		var playbackId; 
+
+		var selectedEventAddress; 
+		var selectedEventContract; 
+
+		var broadcastSchedulerContract; 		
+		var selectedStage; 
+		var isLive; 
+
+		var quickLiveAddress; 
+		var quickLiveContract;
+
+		async function configurePageContracts(){
+            openRegistryContract.methods.getAddress("RESERVED_WEB_3_EDI_EVENT_MANAGER_CORE").call({
+                from: account
+            })
+            .then(function(response) {
+                console.log(response);
+                eventManagerContract = getContract(iW3EEventManagerAbi, response);
+            })
+            .catch(function(err) {
+                console.log(err);
+            });
+            openRegistryContract.methods.getAddress("RESERVED_WEB_3_EDI_STREAMING_MANAGER_CORE").call({
+                from: account
+            })
+            .then(function(response) {
+                console.log(response);
+                streamingManagerContract = getContract(iW3EBroadcastStreamManagerAbi, response);
+            })
+            .catch(function(err) {
+                console.log(err);
+            });
+			openRegistryContract.methods.getAddress("RESERVED_WEB_3_EDI_BROADCAST_SCHEDULER_CORE").call({
+                from: account
+            })
+            .then(function(response) {
+                console.log(response);
+                broadcastSchedulerContract = getContract(iBroadcastScheduler, response);
+            })
+            .catch(function(err) {
+                console.log(err);
+            });
+		}
+	
+		async function loadPageData() { 
+			loadStreamDetails(); 
+			getEventsWithStatus(eventBroadcastSelect, "PENDING", selectBroadcastEventButton);
+			buildEventSchedule();
+			buildQuickLiveStages();
+			
+		}
+		async function loadStreamDetails()  { 
+
+			streamingManagerContract.methods.hasStreamDetails().call({from : account})
+			.then(function(response){
+				console.log(response);
+				modalStreamKeyDisplay.innerHTML = ""; 
+				modalPlaybackIdDisplay.innerHTML = ""; 
+				if(response === false) {
+					// display get streaming details button 
+					modalStreamKeyDisplay.innerHTML = "No stream details"; 
+					modalPlaybackIdDisplay.innerHTML = "No stream details";                     
+				}
+				else { 
+					streamingManagerContract.methods.getStreamDetails().call({from : account})
+					.then(function(response){
+						console.log(response);
+						streamKey = response.streamKey;
+						playbackId = response.playbackId;
+						modalStreamKeyDisplay.innerHTML = streamKey;
+						modalPlaybackIdDisplay.innerHTML = playbackId;
+						runVideo(playbackId);
+					})
+					.catch(function(err){
+						console.log(err);
+					})
+				}
+			})
+			.catch(function(err){
+				console.log(err);
+			})
+		}
+
+		async function activateStageVideo() {
+			
+			broadcastSchedulerContract.methods.getBroadcast(selectedStage).call({from : account})
+			.then(function(response){
+				console.log(response);
+				runVideo(response.playbackId);
+			})
+			.catch(function(err){
+				console.log(err);
+			})
+		}
+
+		async function runVideo(pbid) { 
+			var src = "https://livepeercdn.com/hls/"+pbid+"/index.m3u8";
+			if (videoEl.canPlayType("application/vnd.apple.mpegurl")) {
+				// Some browers (safari and ie edge) support HLS natively
+				videoEl.src = src;
+			} 
+			else if (Hls.isSupported()) {
+				const hls = new Hls();
+				hls.loadSource(src);
+				hls.attachMedia(videoEl);
+			} 
+			else {
+				console.error("This is a legacy browser that doesn't support MSE");
+			}
+		}
+
+		async function getEventsWithStatus(eventSelect, status, eventButton) { 
+            eventManagerContract.methods.getEvents(status).call({
+			    from: account
+            })
+            .then(function(response) {
+                console.log(response);
+				var filtered = filter(response);
+				console.log(filtered);
+                buildEventSelect(eventSelect, status, eventButton, filtered);
+            })            
+            .catch(function(err) {
+                console.log(err);
+                noStatusFound(eventSelect, status, eventButton); 
+
+            })
+        }
+
+		function filter(addresses) {
+			var filtered = []; 
+			for(var x = 0; x < addresses.length; x++) {
+				var eventAddress = addresses[x];
+				if(eventAddress != '0x0000000000000000000000000000000000000000'){
+					filtered.push(eventAddress);
+				}
+			}
+			return filtered;
+		}
+
+		async function selectEventToBroadcast() {
+			primeEventForBroadCast(eventBroadcastSelect.value);
+		}
+
+		async function buildEventSchedule() {
+			eventManagerContract.methods.getEvents("PENDING").call({
+			    from: account
+            })
+            .then(function(response) {
+                console.log(response);
+				var eventAddresses = response; 
+				var filtered = filter(response);
+				console.log(filtered);
+                buildEventListing(filtered);
+            })            
+            .catch(function(err) {
+                console.log(err);
+
+
+            })
+		}
+
+		async function buildEventListing(eventAddresses) {
+			scheduledEventsDisplay.innerHTML = ""; 
+			for(var x = 0; x < eventAddresses.length; x++) {
+				var eventAddress = eventAddresses[x];
+				buildListing(eventAddress);
+			}
+		}
+
+		function buildListing(eventAddress) {
+			/*
+			<div class="row"> 
+				<div class="alert alert-info col-md-12" role="alert">
+					<small>Event Title</small> 
+					<small>Start Time: </small> 
+					<small>End Time: </small> 
+					
+					<div class="dropdown">
+						<a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown">
+							<i class="dw dw-more"></i>
+						</a>
+						<div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
+							<a class="dropdown-item" href="event_detail.html"><i class="dw dw-eye"></i> View</a>
+							<a class="dropdown-item" href="event_creator.html"><i class="dw dw-edit2"></i> Edit</a>
+							<a class="dropdown-item" href="#"><i class="dw dw-delete-3"></i> Delete</a>
+						</div>
+					</div>
+				</div>
+			</div>
+			*/
+			var eContract = getContract(iW3EEventAbi, eventAddress);
+
+			var row = ce("div");
+			row.setAttribute("class", "row");
+			scheduledEventsDisplay.append(row);
+
+			var alert = ce("div");
+			row.append(alert);
+			alert.setAttribute("class", "alert alert-info col-md-12");
+			alert.setAttribute("role", "alert");
+			
+			var title = ce("small");
+			alert.append(title);
+			var b = ce("b");
+			title.append(b);
+			getTitle(b, eventAddress);
+			
+			alert.append(text(" "));
+			
+			var startTime = ce("small");
+			alert.append(startTime);			
+			setTimeDisplayValue(eContract, startTime, "START_TIME_KEY");
+
+			alert.append(" >> ");
+
+			var endTime = ce("small");
+			alert.append(endTime);
+			setTimeDisplayValue(eContract, endTime, "END_TIME_KEY");
+
+
+			var dropdown = ce("div");
+			dropdown.setAttribute("class", "dropdown");
+			alert.append(dropdown);
+			var a = ce("a"); 
+			dropdown.append(a);
+			a.setAttribute("class", "btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle");
+			a.setAttribute("href", "#");
+			a.setAttribute("role","button");
+			a.setAttribute("data-toggle","dropdown");
+			
+			a.append(getIcon("dw dw-more"));
+			var menu = ce("div");
+			dropdown.append(menu);
+			menu.setAttribute("class", "dropdown-menu dropdown-menu-right dropdown-menu-icon-list");
+			var view = ce("a");
+			menu.append(view);
+			view.setAttribute("class","dropdown-item");
+			view.setAttribute("href", "../16_event/event_detail?address="+eventAddress);
+			view.append(getIcon("dw dw-eye"));
+			view.append(text(" View"));
+
+			var edit = ce("a");
+			menu.append(edit);
+			edit.setAttribute("class","dropdown-item");
+			edit.setAttribute("href", "../16_event/event_creator?address="+eventAddress);
+			edit.append(getIcon("dw dw-edit2"));
+			edit.append(text(" Edit"));
+
+			var del = ce("a");
+			menu.append(del);
+			del.setAttribute("class","dropdown-item");
+			del.setAttribute("href", "#");
+			del.append(getIcon("dw dw-delete-3")); 
+			del.append(text(" Delete"));
+		}
+
+	
+		async function goChainLive() {
+			if(!isLive) {
+				selectedEventContract.methods.execute("START").send({from : account})
+				.then(function(response){
+					console.log(response);
+					eventLiveStatusDisplay.innerHTML = ""; 
+					eventLiveStatusDisplay.append(text("ON CHAIN / ON AIR"));
+					isLive = true; 
+					buildEventStatistics(); 
+
+				})
+				.catch(function(err){
+                	console.log(err);
+            	})
+			}			
+		}
+
+		async function endChainBroadcast() {
+			
+			selectedEventContract.methods.execute("END").send({from : account})
+			.then(function(response){
+				console.log(response);
+				eventLiveStatusDisplay.innerHTML = ""; 
+				eventLiveStatusDisplay.append(text("OFF CHAIN / OFF AIR"));
+				isLive = false; 
+				buildEndEventStatistics(); 
+
+			})
+			.catch(function(err){
+				console.log(err);
+			})			
+		}
+
+		async function cancelChainBroadCast() {
+			
+			selectedEventContract.methods.execute("CANCEL").send({from : account})
+			.then(function(response){
+				console.log(response);
+				eventLiveStatusDisplay.innerHTML = ""; 
+				eventLiveStatusDisplay.append(text("CANCELLED"));
+				isLive = false; 
+				buildEndEventStatistics(); 
+			})
+			.catch(function(err){
+				console.log(err);
+			})
+			
+		}
+
+		async function clearQuickLive() { 
+
+		}
+
+		async function postToLive() { 			
+			// create event 
+			createEvent(quickLiveMessageSpan);					
+		}
+
+
+       // creat event
+        async function createEvent(span) {
+            eventManagerContract.methods.createEvent(quickEventTitleField.value,  streamKey, playbackId).send({from : account}) // switch back after next deploy
+            .then(function(response){
+                console.log(response);
+                span.innerHTML = ""; 
+                var blockNumber = response.blockNumber;                 
+                span.append(getBlockLink(blockNumber));
+				span.append(text(" Event Created. "));  
+				// read address 
+				getEvent(); 
+            })
+            .catch(function(err){
+                console.log(err);
+            })
+        }
+
+		async function getEvent() { 
+ 			eventManagerContract.methods.getEvents().call({from : account})
+			.then(function(response){
+				console.log(response);
+				quickLiveAddress = response[response.length-1]; 
+				quickLiveContract = getContract(iW3EWriteEventAbi, quickLiveAddress); // get the last one 
+				console.log("event secured :: " + quickLiveAddress);
+				// populate event 
+				populateQuickEvent(quickLiveMessageSpan);				
+			})
+			.catch(function(err){
+				console.log(err);
+			})
+		}
+
+		const zero = ethers.constants.AddressZero;
+		const noGuests = [];
+
+		async function populateQuickEvent(span) { 
+			var txtFieldNames    = [    
+                                    "TITLE_KEY",
+                                    "HEADLINE_KEY",
+                                    "HOST_KEY", 
+                                    "DELIVERY_STAGE_KEY", 
+                                    "SUMMARY_IPFS_KEY",   // stock
+                                    "DETAILS_IPFS_KEY",   // stock
+                                    "PROMO_IMAGE_IPFS_KEY", // stock
+                                    "PREVIEW_VIDEO_IPFS_KEY", // stock                           
+                                    "RECORDED_KEY"                               
+                                ];
+
+        	var numericFieldNames = [
+                                    "START_TIME_KEY",  // calculated + 2 mins
+                                    "END_TIME_KEY",    // calculated + duration 
+                                    "SPACES_KEY"
+                                ];
+
+			var txtFieldValues     =  [
+                                        quickEventTitleField.value, 
+                                        quickEventHeadlineField.value, 
+                                        account, 
+                                        quickEventStageField.value,
+                                        "QmP99ZXXjgtisXdSmpieAcse4uKMym93XuqGbYg6sxEMyr", // event summary
+                                        "QmP99ZXXjgtisXdSmpieAcse4uKMym93XuqGbYg6sxEMyr", // detailed event description 
+										"QmYBJUvbfq1VjN7DK4Fe2dUWWqK1xqH4FXjhbijekwrZPo", // promo image
+                                        "Qmd5pEJekZmmrZBVndH9wrfQkoN5WFYE2nF8qxHGRWnsEg", // promo video                                        
+                                        document.querySelector('input[name="quickEventRecorded"]:checked').value                                      
+                                      ];
+
+
+									  var startTime = Date.now() + 120000;
+									  var endTime = startTime + (quickEventDurationField.value * 60 * 1000);
+									  console.log(startTime);
+									  console.log(endTime);
+            var numericFieldValues  = [
+                                        Math.round(startTime / 1000), 
+                                        Math.round(endTime / 1000),
+                                        quickEventSpacesField.value
+                                      ];
+									  console.log(numericFieldValues);
+									  console.log(getPromotionDestinations());
+			quickLiveContract.methods.populate(txtFieldNames, txtFieldValues, 
+                                                numericFieldNames, numericFieldValues,   
+                                                getArray(quickEventCategoriesField.value), 
+                                                noGuests,
+                                                getPromotionDestinations(), 
+                                                zero).send({from : account})
+            .then(function(response){
+                console.log(response);
+				span.innerHTML = ""; 
+                var blockNumber = response.blockNumber; 
+                span.append(getBlockLink(blockNumber));
+				span.append(text(" Event saved. "));
+				
+				// post event 
+				postQuickEvent(quickLiveMessageSpan);
+			})
+            .catch(function(err){
+                console.log(err);
+            })
+		}
+
+		function postQuickEvent(span){
+			quickLiveContract.methods.execute("POST").send({ from : account})
+			.then(function(response){
+				console.log(response);
+				// display transaction 
+				var blockNumber = response.blockNumber;
+				span.append(getBlockLink(blockNumber));
+				span.append(text(" Event Posted. ")); 
+
+				// assign to Live 
+				primeEventForBroadCast(quickLiveAddress); 
+			})
+			.catch(function(err){
+				console.log(err);
+			})
+		}		
+
+		function getArray(values) {
+            return values.split(",");
+        }
+
+		async function buildQuickLiveStages() {
+			broadcastSchedulerContract.methods.getAvailableStages().call({from : account})
+			.then(function(response){
+				console.log(response);
+				quickEventStageField.innerHTML = ""; 
+				for(var x = 0; x < response.length; x++) {
+					var stage = response[x];
+					var option = ce("option");
+					option.setAttribute("value", stage );
+					option.append(text(stage));
+					quickEventStageField.append(option);
+				}
+			})
+			.catch(function(err){
+				console.log(err);
+			})
+		}
+
+		function getPromotionDestinations() { 
+            
+            var destinations = []; 
+            pushIfChecked(destinations, ge("promotion_campus"));
+            pushIfChecked(destinations, ge("promotion_candidate"));
+			/*
+            pushIfChecked(destinations, ge("promotion_student"));
+            pushIfChecked(destinations, ge("promotion_school"));
+            pushIfChecked(destinations, ge("promotion_communities"));
+            pushIfChecked(destinations, ge("promotion_courtyard"));
+            pushIfChecked(destinations, ge("promotion_galleries"));
+            pushIfChecked(destinations, ge("promotion_market_place"));
+			*/
+            return destinations; 
+        }
+
+        function pushIfChecked(d, f) {
+            if(f.checked == true) {
+               d.push(f.value);
+            }
+        }
+
+		async function buildEndEventStatistics() { 
+			setTimeRemaining(selectedEventContract, sessionTimeRemaining); 
+			setNumericDisplayValue(selectedEventContract, currentParticipantsDisplay, "ALL_PARTICIPANTS_KEY");
+			setNumericDisplayValue(selectedEventContract, currentRegistrantsDisplay, "ALL_REGISTRANTS_KEY");
+		}
+
+		async function buildEventStatistics() { 
+			setTimeRemaining(selectedEventContract, sessionTimeRemaining); 
+			setNumericDisplayValue(selectedEventContract, currentParticipantsDisplay, "CURRENT_PARTICIPANTS_KEY");
+			setNumericDisplayValue(selectedEventContract, currentRegistrantsDisplay, "CURRENT_REGISTRANTS_KEY");
+			setNumericDisplayValue(selectedEventContract, maxSpacesDisplay, "SPACES_KEY");
+		}
+
+		async function setNumericDisplayValue(eContract, component, fieldName){
+            eContract.methods.getFeatureUINT(fieldName).call({from : account})
+            .then(function(response){
+                console.log(response);
+                component.value = response; 
+            })
+            .catch(function(err){
+                console.log(err);
+            })
+        }
+
+		async function setTimeRemaining(eContract, sessionTimeRemaining) {
+			sessionTimeRemaining.innerHTML = ""; 
+			eContract.methods.getFeatureUINT("END_TIME_KEY").call({from : account})
+			.then(function(response){
+				console.log(response);
+				var time = response * 1000; 
+				var timeRemaining = time - Date.now(); 
+				if(timeRemaining > 60000) {
+					sessionTimeRemaining.append(text((timeRemaining / 60000) + " mins"));
+				}
+				else { 
+					sessionTimeRemaining.append(text((timeRemaining / 1000) + " secs"));
+				}
+			})
+			.catch(function(err){
+				console.log(err);
+			})
+		}
+
+        function getBlockLink(blockNumber) {
+            var url = networkURL + blockNumber +"/transactions";  
+			var a = ce("a");
+			a.setAttribute("href", url);
+			a.setAttribute("target", "_blank");
+			a.append(text(blockNumber));
+            return a;
+        }
+
+		function getIcon(cls) {
+			var ic = ce("i");
+			ic.setAttribute("class",cls);
+			return ic; 
+		}
+
+		async function buildEventSelect(eventSelect, eventStatus, button, eventAddresses) {
+            eventSelect.innerHTML = ""; 
+            if(eventAddresses.length > 0) {            
+                for(var x = 0; x < eventAddresses.length; x++) {
+                    var eventAddress = eventAddresses[x];
+                    var option = ce("option");
+                    option.setAttribute("value", eventAddress);
+                    var span = ce("span");
+                    option.append(span);
+                    option.append(text( " :: " + eventAddress ));                
+                    getTitle(span, eventAddress);
+                    eventSelect.append(option);                    
+                }
+                button.disabled = false; 
+                button.setAttribute("class", "btn btn-primary");
+            }
+            else { 
+                noStatusFound(eventSelect, eventStatus, button);
+            }
+
+        }
+
+		function noStatusFound(eventSelect, eventStatus, button) { 
+            var option = ce("option");
+                option.setAttribute("default", "true");
+                option.append(text("No "+eventStatus+" Events Found"));
+                eventSelect.append(option);
+                eventSelect.disabled = true; 
+                button.setAttribute("class", "btn btn-light");
+                button.disabled = true; 
+        }
+		
+		async function getTitle(span, eAddress) {
+            eContract = getContract(iW3EEventAbi, eAddress);
+            eContract.methods.getTitle().call({from : account})
+            .then(function(response){
+                console.log(response);
+                span.append(text(response));
+            })
+            .catch(function(err){
+                console.log(err);
+            })
+        }
+
+		function clear(c) {
+			c.innerHTML = ""; 
+		}
+
+		async function primeEventForBroadCast(sea) {			
+			selectedEventAddress = sea; 
+			selectedEventContract= getContract(iW3EEventAbi, selectedEventAddress);
+			// set event 
+			selectedEventTitleDisplay.innerHTML = ""; 
+			getTitle(selectedEventTitleDisplay, selectedEventAddress);
+
+			// display stage 
+			clear(eventDeliveryStageDisplay); 
+			setTextDisplayValue(selectedEventContract, eventDeliveryStageDisplay, "DELIVERY_STAGE_KEY" );
+
+			// live status 
+			setLiveStatus(selectedEventContract);
+
+			// prmotion destinations 
+			clear(eventPromoDestinationsDisplay);
+			setArrayDisplayValues(selectedEventContract,eventPromoDestinationsDisplay, "PROMOTION_DESTINATIONS_KEY" );
+
+			clear(eventStartTimeDisplay);
+			setTimeDisplayValue(selectedEventContract, eventStartTimeDisplay, "START_TIME_KEY");
+
+			clear(eventEndTimeDisplay);
+			setTimeDisplayValue(selectedEventContract, eventEndTimeDisplay, "END_TIME_KEY");
+			
+			clear(timeNowDisplay);
+			timeNowDisplay.append(text(new Date(Date.now())));
+		}
+
+		async function setLiveStatus(selectedEventContract) { 			
+            // status 
+            eContract.methods.getStatus().call({from : account})
+            .then(function(response){
+                console.log(response); 
+				clear(eventLiveStatusDisplay);               
+                eventLiveStatusDisplay.append(text(resolveOnAirStatus(response)));
+            })
+            .catch(function(err){
+                console.log(err);
+            })
+		}
+
+		async function setTimeDisplayValue(eContract, component, fieldName){
+            eContract.methods.getFeatureUINT(fieldName).call({from : account})
+            .then(function(response){
+                console.log(response);
+                component.append(text(getTime(response))); 
+            })
+            .catch(function(err){
+                console.log(err);
+            })
+        }
+
+		function resolveOnAirStatus( status ) {
+			if(status === "PENDING"){ 
+				return "NOT STARTED "; 
+			}
+			if(status === "STARTED"){ 
+				return "ON AIR - ON CHAIN "; 
+			}
+			if(status === "ENDED"){ 
+				return "OFF AIR - OFF CHAIN "; 
+			}
+
+			if(status === "CANCELLED"){ 
+				return "ABORTED "; 
+			}
+		}
+
+		
+        function concatArray(strs) {
+            var result = ""; 
+            for(var x = 0; x < strs.length; x++) {
+                result = result.concat(",", strs[x]);                
+            }
+            result = result.substring(1,result.length);
+            console.log("concat :: ");
+            return result; 
+        }
+
+        async function setTextDisplayValue(eContract, component, fieldName){
+            eContract.methods.getFeatureSTR(fieldName).call({from : account})
+            .then(function(response){
+                console.log(response);
+                component.append(text(response)); 
+            })
+            .catch(function(err){
+                console.log(err);
+            })
+        }
+
+		async function setArrayDisplayValues(eContract, component, fieldName) {
+            eContract.methods.getFeatureSTRARRAY(fieldName).call({from : account})
+            .then(function(response){
+                console.log(response);
+                component.append(text(concatArray(response)));
+            })
+            .catch(function(err){
+                console.log(err);
+            })
+        }
+
+		function getTime(numeric) {
+            var d = new Date(numeric*1000);
+            return formatDate(d);
+        }
+        function formatDate(date) {
+            return date.toLocaleString('en-UK', { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', hour12: false, minute: '2-digit', second: '2-digit' })
+        }
+        function ge(id) {
+            return document.getElementById(id);
+        }
+
+        function text(txt) {
+            return document.createTextNode(txt);
+        }
+
+        function ce(name) {
+            return document.createElement(name);
+        }
+	</script>
 </body>
 </html>

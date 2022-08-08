@@ -20,6 +20,13 @@
 	<link rel="stylesheet" type="text/css" href="../00_service_assets/main/styles/icon-font.min.css">
 	<link rel="stylesheet" type="text/css" href="../00_service_assets/main/styles/style.css">
 
+	<!-- Web 3 -->
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+	<script src="https://cdn.ethers.io/lib/ethers-5.0.umd.min.js" type="text/javascript"></script>
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/ethjs@0.3.4/dist/ethjs.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
+	
+
 	<!-- Global site tag (gtag.js) - Google Analytics -->
 	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-119386393-1"></script>
 	<script>
@@ -44,6 +51,7 @@
 		</div>
 	</div>
 
+	<!-- NEW HEADER -->
 	<div class="header">
 		<div class="header-left">
 			<div class="menu-icon dw dw-menu"></div>
@@ -86,90 +94,23 @@
 			</div>
 		</div>
 		<div class="header-right">
-			<div class="dashboard-setting user-notification">
-				<div class="dropdown">
-					<a class="dropdown-toggle no-arrow" href="javascript:;" data-toggle="right-sidebar">
-						<i class="dw dw-settings2"></i>
-					</a>
-				</div>
-			</div>
-			<div class="user-notification">
-				<div class="dropdown">
-					<a class="dropdown-toggle no-arrow" href="#" role="button" data-toggle="dropdown">
-						<i class="icon-copy dw dw-notification"></i>
-						<span class="badge notification-active"></span>
-					</a>
-					<div class="dropdown-menu dropdown-menu-right">
-						<div class="notification-list mx-h-350 customscroll">
-							<ul>
-								<li>
-									<a href="#">
-										<img src="../00_service_assets/main/images/img.jpg" alt="">
-										<h3>John Doe</h3>
-										<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed...</p>
-									</a>
-								</li>
-								<li>
-									<a href="#">
-										<img src="../00_service_assets/main/images/photo1.jpg" alt="">
-										<h3>Lea R. Frith</h3>
-										<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed...</p>
-									</a>
-								</li>
-								<li>
-									<a href="#">
-										<img src="../00_service_assets/main/images/photo2.jpg" alt="">
-										<h3>Erik L. Richards</h3>
-										<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed...</p>
-									</a>
-								</li>
-								<li>
-									<a href="#">
-										<img src="../00_service_assets/main/images/photo3.jpg" alt="">
-										<h3>John Doe</h3>
-										<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed...</p>
-									</a>
-								</li>
-								<li>
-									<a href="#">
-										<img src="../00_service_assets/main/images/photo4.jpg" alt="">
-										<h3>Renee I. Hansen</h3>
-										<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed...</p>
-									</a>
-								</li>
-								<li>
-									<a href="#">
-										<img src="../00_service_assets/main/images/img.jpg" alt="">
-										<h3>Vicki M. Coleman</h3>
-										<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed...</p>
-									</a>
-								</li>
-							</ul>
-						</div>
-					</div>
-				</div>
-			</div>
+		
 			<div class="user-info-dropdown">
 				<div class="dropdown">
-					<a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown">
+					<a class="dropdown-toggle" href="#" role="button" >
+						<span id="show_wallet" class="user-name"></span>
+						<span id="connect_web_3" class="user-name">Connect Web 3</span>
 						<span class="user-icon">
-							<img src="../00_service_assets/main/images/photo1.jpg" alt="">
+							<img src="../00_service_assets/main/images/android-icon-192x192.png" alt="">
 						</span>
-						<span class="user-name">Ross C. Lopez</span>
+						
 					</a>
-					<div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
-						<a class="dropdown-item" href="profile.html"><i class="dw dw-user1"></i> Profile</a>
-						<a class="dropdown-item" href="profile.html"><i class="dw dw-settings2"></i> Setting</a>
-						<a class="dropdown-item" href="faq.html"><i class="dw dw-help"></i> Help</a>
-						<a class="dropdown-item" href="login.html"><i class="dw dw-logout"></i> Log Out</a>
-					</div>
+					
 				</div>
-			</div>
-			<div class="github-link">
-				<a href="https://github.com/dropways/deskapp" target="_blank"><img src="../00_service_assets/main/images/github.svg" alt=""></a>
 			</div>
 		</div>
 	</div>
+	<!-- END NEW HEADER -->
 
 	<div class="left-side-bar">
 		<div class="brand-logo">
@@ -207,7 +148,7 @@
 
 	<div class="main-container">
 		<div class="pd-ltr-20 xs-pd-20-10">
-			<div class="min-height-200px">
+			<div class="min-height-200px" id="community_display">
 				<div class="page-header">
 					<div class="row">
 						<div class="col-md-12 col-sm-12">
@@ -217,436 +158,9 @@
 						</div>
 					</div>
 				</div>
-				<!-- Fade-in effect -->
-				<h5 class="h4 text-blue mb-10">Fade-in effect</h5>
-				<p class="mb-30">You can use by default <code>.da-overlay</code></p>
 				<div class="row clearfix">
-					<div class="col-lg-3 col-md-6 col-sm-12 mb-30">
-						<div class="da-card">
-							<div class="da-card-photo">
-								<img src="../00_service_assets/main/images/photo1.jpg" alt="">
-								<div class="da-overlay">
-									<div class="da-social">
-										<ul class="clearfix">
-											<li><a href="#"><i class="fa fa-facebook"></i></a></li>
-											<li><a href="#"><i class="fa fa-twitter"></i></a></li>
-											<li><a href="#"><i class="fa fa-envelope-o"></i></a></li>
-										</ul>
-									</div>
-								</div>
-							</div>
-							<div class="da-card-content">
-								<h5 class="h5 mb-10">Don H. Rabon</h5>
-								<p class="mb-0">Lorem ipsum dolor sit amet</p>
-							</div>
-						</div>
-					</div>
-					<div class="col-lg-3 col-md-6 col-sm-12 mb-30">
-						<div class="da-card">
-							<div class="da-card-photo">
-								<img src="../00_service_assets/main/images/photo2.jpg" alt="">
-								<div class="da-overlay">
-									<div class="da-social">
-										<ul class="clearfix">
-											<li><a href="#"><i class="fa fa-facebook"></i></a></li>
-											<li><a href="#"><i class="fa fa-twitter"></i></a></li>
-											<li><a href="#"><i class="fa fa-envelope-o"></i></a></li>
-										</ul>
-									</div>
-								</div>
-							</div>
-							<div class="da-card-content">
-								<h5 class="h5 mb-10">Don H. Rabon</h5>
-								<p class="mb-0">Lorem ipsum dolor sit amet</p>
-							</div>
-						</div>
-					</div>
-					<div class="col-lg-3 col-md-6 col-sm-12 mb-30">
-						<div class="da-card">
-							<div class="da-card-photo">
-								<img src="../00_service_assets/main/images/photo3.jpg" alt="">
-								<div class="da-overlay">
-									<div class="da-social">
-										<ul class="clearfix">
-											<li><a href="#"><i class="fa fa-facebook"></i></a></li>
-											<li><a href="#"><i class="fa fa-twitter"></i></a></li>
-											<li><a href="#"><i class="fa fa-envelope-o"></i></a></li>
-										</ul>
-									</div>
-								</div>
-							</div>
-							<div class="da-card-content">
-								<h5 class="h5 mb-10">Don H. Rabon</h5>
-								<p class="mb-0">Lorem ipsum dolor sit amet</p>
-							</div>
-						</div>
-					</div>
-					<div class="col-lg-3 col-md-6 col-sm-12 mb-30">
-						<div class="da-card">
-							<div class="da-card-photo">
-								<img src="../00_service_assets/main/images/photo4.jpg" alt="">
-								<div class="da-overlay">
-									<div class="da-social">
-										<ul class="clearfix">
-											<li><a href="#"><i class="fa fa-facebook"></i></a></li>
-											<li><a href="#"><i class="fa fa-twitter"></i></a></li>
-											<li><a href="#"><i class="fa fa-envelope-o"></i></a></li>
-										</ul>
-									</div>
-								</div>
-							</div>
-							<div class="da-card-content">
-								<h5 class="h5 mb-10">Don H. Rabon</h5>
-								<p class="mb-0">Lorem ipsum dolor sit amet</p>
-							</div>
-						</div>
-					</div>
+	
 				</div>
-
-				<!-- Slide Left effect -->
-				<h5 class="h4 text-blue mb-10">Slide Left effect</h5>
-				<p class="mb-30">You can use by default <code>.da-overlay .da-slide-left</code></p>
-				<div class="row clearfix">
-					<div class="col-lg-3 col-md-6 col-sm-12 mb-30">
-						<div class="da-card">
-							<div class="da-card-photo">
-								<img src="../00_service_assets/main/images/photo1.jpg" alt="">
-								<div class="da-overlay da-slide-left">
-									<div class="da-social">
-										<ul class="clearfix">
-											<li><a href="#"><i class="fa fa-facebook"></i></a></li>
-											<li><a href="#"><i class="fa fa-twitter"></i></a></li>
-											<li><a href="#"><i class="fa fa-envelope-o"></i></a></li>
-										</ul>
-									</div>
-								</div>
-							</div>
-							<div class="da-card-content">
-								<h5 class="h5 mb-10">Don H. Rabon</h5>
-								<p class="mb-0">Lorem ipsum dolor sit amet</p>
-							</div>
-						</div>
-					</div>
-					<div class="col-lg-3 col-md-6 col-sm-12 mb-30">
-						<div class="da-card">
-							<div class="da-card-photo">
-								<img src="../00_service_assets/main/images/photo2.jpg" alt="">
-								<div class="da-overlay da-slide-left">
-									<div class="da-social">
-										<ul class="clearfix">
-											<li><a href="#"><i class="fa fa-facebook"></i></a></li>
-											<li><a href="#"><i class="fa fa-twitter"></i></a></li>
-											<li><a href="#"><i class="fa fa-envelope-o"></i></a></li>
-										</ul>
-									</div>
-								</div>
-							</div>
-							<div class="da-card-content">
-								<h5 class="h5 mb-10">Don H. Rabon</h5>
-								<p class="mb-0">Lorem ipsum dolor sit amet</p>
-							</div>
-						</div>
-					</div>
-					<div class="col-lg-3 col-md-6 col-sm-12 mb-30">
-						<div class="da-card">
-							<div class="da-card-photo">
-								<img src="../00_service_assets/main/images/photo3.jpg" alt="">
-								<div class="da-overlay da-slide-left">
-									<div class="da-social">
-										<ul class="clearfix">
-											<li><a href="#"><i class="fa fa-facebook"></i></a></li>
-											<li><a href="#"><i class="fa fa-twitter"></i></a></li>
-											<li><a href="#"><i class="fa fa-envelope-o"></i></a></li>
-										</ul>
-									</div>
-								</div>
-							</div>
-							<div class="da-card-content">
-								<h5 class="h5 mb-10">Don H. Rabon</h5>
-								<p class="mb-0">Lorem ipsum dolor sit amet</p>
-							</div>
-						</div>
-					</div>
-					<div class="col-lg-3 col-md-6 col-sm-12 mb-30">
-						<div class="da-card">
-							<div class="da-card-photo">
-								<img src="../00_service_assets/main/images/photo4.jpg" alt="">
-								<div class="da-overlay da-slide-left">
-									<div class="da-social">
-										<ul class="clearfix">
-											<li><a href="#"><i class="fa fa-facebook"></i></a></li>
-											<li><a href="#"><i class="fa fa-twitter"></i></a></li>
-											<li><a href="#"><i class="fa fa-envelope-o"></i></a></li>
-										</ul>
-									</div>
-								</div>
-							</div>
-							<div class="da-card-content">
-								<h5 class="h5 mb-10">Don H. Rabon</h5>
-								<p class="mb-0">Lorem ipsum dolor sit amet</p>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<!-- Slide Right effect -->
-				<h5 class="h4 text-blue mb-10">Slide Right effect</h5>
-				<p class="mb-30">You can use by default <code>.da-overlay .da-slide-right</code></p>
-				<div class="row clearfix">
-					<div class="col-lg-3 col-md-6 col-sm-12 mb-30">
-						<div class="da-card">
-							<div class="da-card-photo">
-								<img src="../00_service_assets/main/images/photo1.jpg" alt="">
-								<div class="da-overlay da-slide-right">
-									<div class="da-social">
-										<ul class="clearfix">
-											<li><a href="#"><i class="fa fa-facebook"></i></a></li>
-											<li><a href="#"><i class="fa fa-twitter"></i></a></li>
-											<li><a href="#"><i class="fa fa-envelope-o"></i></a></li>
-										</ul>
-									</div>
-								</div>
-							</div>
-							<div class="da-card-content">
-								<h5 class="h5 mb-10">Don H. Rabon</h5>
-								<p class="mb-0">Lorem ipsum dolor sit amet</p>
-							</div>
-						</div>
-					</div>
-					<div class="col-lg-3 col-md-6 col-sm-12 mb-30">
-						<div class="da-card">
-							<div class="da-card-photo">
-								<img src="../00_service_assets/main/images/photo2.jpg" alt="">
-								<div class="da-overlay da-slide-right">
-									<div class="da-social">
-										<ul class="clearfix">
-											<li><a href="#"><i class="fa fa-facebook"></i></a></li>
-											<li><a href="#"><i class="fa fa-twitter"></i></a></li>
-											<li><a href="#"><i class="fa fa-envelope-o"></i></a></li>
-										</ul>
-									</div>
-								</div>
-							</div>
-							<div class="da-card-content">
-								<h5 class="h5 mb-10">Don H. Rabon</h5>
-								<p class="mb-0">Lorem ipsum dolor sit amet</p>
-							</div>
-						</div>
-					</div>
-					<div class="col-lg-3 col-md-6 col-sm-12 mb-30">
-						<div class="da-card">
-							<div class="da-card-photo">
-								<img src="../00_service_assets/main/images/photo3.jpg" alt="">
-								<div class="da-overlay da-slide-right">
-									<div class="da-social">
-										<ul class="clearfix">
-											<li><a href="#"><i class="fa fa-facebook"></i></a></li>
-											<li><a href="#"><i class="fa fa-twitter"></i></a></li>
-											<li><a href="#"><i class="fa fa-envelope-o"></i></a></li>
-										</ul>
-									</div>
-								</div>
-							</div>
-							<div class="da-card-content">
-								<h5 class="h5 mb-10">Don H. Rabon</h5>
-								<p class="mb-0">Lorem ipsum dolor sit amet</p>
-							</div>
-						</div>
-					</div>
-					<div class="col-lg-3 col-md-6 col-sm-12 mb-30">
-						<div class="da-card">
-							<div class="da-card-photo">
-								<img src="../00_service_assets/main/images/photo4.jpg" alt="">
-								<div class="da-overlay da-slide-right">
-									<div class="da-social">
-										<ul class="clearfix">
-											<li><a href="#"><i class="fa fa-facebook"></i></a></li>
-											<li><a href="#"><i class="fa fa-twitter"></i></a></li>
-											<li><a href="#"><i class="fa fa-envelope-o"></i></a></li>
-										</ul>
-									</div>
-								</div>
-							</div>
-							<div class="da-card-content">
-								<h5 class="h5 mb-10">Don H. Rabon</h5>
-								<p class="mb-0">Lorem ipsum dolor sit amet</p>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<!-- Slide Top effect -->
-				<h5 class="h4 text-blue mb-10">Slide Top effect</h5>
-				<p class="mb-30">You can use by default <code>.da-overlay .da-slide-top</code></p>
-				<div class="row clearfix">
-					<div class="col-lg-3 col-md-6 col-sm-12 mb-30">
-						<div class="da-card">
-							<div class="da-card-photo">
-								<img src="../00_service_assets/main/images/photo1.jpg" alt="">
-								<div class="da-overlay da-slide-top">
-									<div class="da-social">
-										<ul class="clearfix">
-											<li><a href="#"><i class="fa fa-facebook"></i></a></li>
-											<li><a href="#"><i class="fa fa-twitter"></i></a></li>
-											<li><a href="#"><i class="fa fa-envelope-o"></i></a></li>
-										</ul>
-									</div>
-								</div>
-							</div>
-							<div class="da-card-content">
-								<h5 class="h5 mb-10">Don H. Rabon</h5>
-								<p class="mb-0">Lorem ipsum dolor sit amet</p>
-							</div>
-						</div>
-					</div>
-					<div class="col-lg-3 col-md-6 col-sm-12 mb-30">
-						<div class="da-card">
-							<div class="da-card-photo">
-								<img src="../00_service_assets/main/images/photo2.jpg" alt="">
-								<div class="da-overlay da-slide-top">
-									<div class="da-social">
-										<ul class="clearfix">
-											<li><a href="#"><i class="fa fa-facebook"></i></a></li>
-											<li><a href="#"><i class="fa fa-twitter"></i></a></li>
-											<li><a href="#"><i class="fa fa-envelope-o"></i></a></li>
-										</ul>
-									</div>
-								</div>
-							</div>
-							<div class="da-card-content">
-								<h5 class="h5 mb-10">Don H. Rabon</h5>
-								<p class="mb-0">Lorem ipsum dolor sit amet</p>
-							</div>
-						</div>
-					</div>
-					<div class="col-lg-3 col-md-6 col-sm-12 mb-30">
-						<div class="da-card">
-							<div class="da-card-photo">
-								<img src="../00_service_assets/main/images/photo3.jpg" alt="">
-								<div class="da-overlay da-slide-top">
-									<div class="da-social">
-										<ul class="clearfix">
-											<li><a href="#"><i class="fa fa-facebook"></i></a></li>
-											<li><a href="#"><i class="fa fa-twitter"></i></a></li>
-											<li><a href="#"><i class="fa fa-envelope-o"></i></a></li>
-										</ul>
-									</div>
-								</div>
-							</div>
-							<div class="da-card-content">
-								<h5 class="h5 mb-10">Don H. Rabon</h5>
-								<p class="mb-0">Lorem ipsum dolor sit amet</p>
-							</div>
-						</div>
-					</div>
-					<div class="col-lg-3 col-md-6 col-sm-12 mb-30">
-						<div class="da-card">
-							<div class="da-card-photo">
-								<img src="../00_service_assets/main/images/photo4.jpg" alt="">
-								<div class="da-overlay da-slide-top">
-									<div class="da-social">
-										<ul class="clearfix">
-											<li><a href="#"><i class="fa fa-facebook"></i></a></li>
-											<li><a href="#"><i class="fa fa-twitter"></i></a></li>
-											<li><a href="#"><i class="fa fa-envelope-o"></i></a></li>
-										</ul>
-									</div>
-								</div>
-							</div>
-							<div class="da-card-content">
-								<h5 class="h5 mb-10">Don H. Rabon</h5>
-								<p class="mb-0">Lorem ipsum dolor sit amet</p>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<!-- Slide Bottom effect -->
-				<h5 class="h4 text-blue mb-10">Slide Bottom effect</h5>
-				<p class="mb-30">You can use by default <code>.da-overlay .da-slide-bottom</code></p>
-				<div class="row clearfix">
-					<div class="col-lg-3 col-md-6 col-sm-12 mb-30">
-						<div class="da-card">
-							<div class="da-card-photo">
-								<img src="../00_service_assets/main/images/photo1.jpg" alt="">
-								<div class="da-overlay da-slide-bottom">
-									<div class="da-social">
-										<ul class="clearfix">
-											<li><a href="#"><i class="fa fa-facebook"></i></a></li>
-											<li><a href="#"><i class="fa fa-twitter"></i></a></li>
-											<li><a href="#"><i class="fa fa-envelope-o"></i></a></li>
-										</ul>
-									</div>
-								</div>
-							</div>
-							<div class="da-card-content">
-								<h5 class="h5 mb-10">Don H. Rabon</h5>
-								<p class="mb-0">Lorem ipsum dolor sit amet</p>
-							</div>
-						</div>
-					</div>
-					<div class="col-lg-3 col-md-6 col-sm-12 mb-30">
-						<div class="da-card">
-							<div class="da-card-photo">
-								<img src="../00_service_assets/main/images/photo2.jpg" alt="">
-								<div class="da-overlay da-slide-bottom">
-									<div class="da-social">
-										<ul class="clearfix">
-											<li><a href="#"><i class="fa fa-facebook"></i></a></li>
-											<li><a href="#"><i class="fa fa-twitter"></i></a></li>
-											<li><a href="#"><i class="fa fa-envelope-o"></i></a></li>
-										</ul>
-									</div>
-								</div>
-							</div>
-							<div class="da-card-content">
-								<h5 class="h5 mb-10">Don H. Rabon</h5>
-								<p class="mb-0">Lorem ipsum dolor sit amet</p>
-							</div>
-						</div>
-					</div>
-					<div class="col-lg-3 col-md-6 col-sm-12 mb-30">
-						<div class="da-card">
-							<div class="da-card-photo">
-								<img src="../00_service_assets/main/images/photo3.jpg" alt="">
-								<div class="da-overlay da-slide-bottom">
-									<div class="da-social">
-										<ul class="clearfix">
-											<li><a href="#"><i class="fa fa-facebook"></i></a></li>
-											<li><a href="#"><i class="fa fa-twitter"></i></a></li>
-											<li><a href="#"><i class="fa fa-envelope-o"></i></a></li>
-										</ul>
-									</div>
-								</div>
-							</div>
-							<div class="da-card-content">
-								<h5 class="h5 mb-10">Don H. Rabon</h5>
-								<p class="mb-0">Lorem ipsum dolor sit amet</p>
-							</div>
-						</div>
-					</div>
-					<div class="col-lg-3 col-md-6 col-sm-12 mb-30">
-						<div class="da-card">
-							<div class="da-card-photo">
-								<img src="../00_service_assets/main/images/photo4.jpg" alt="">
-								<div class="da-overlay da-slide-bottom">
-									<div class="da-social">
-										<ul class="clearfix">
-											<li><a href="#"><i class="fa fa-facebook"></i></a></li>
-											<li><a href="#"><i class="fa fa-twitter"></i></a></li>
-											<li><a href="#"><i class="fa fa-envelope-o"></i></a></li>
-										</ul>
-									</div>
-								</div>
-							</div>
-							<div class="da-card-content">
-								<h5 class="h5 mb-10">Don H. Rabon</h5>
-								<p class="mb-0">Lorem ipsum dolor sit amet</p>
-							</div>
-						</div>
-					</div>
-				</div>
-
 			</div>
 			<div class="footer-wrap pd-20 mb-20 card-box">
 				&copy; Web 3 Edi 2022
@@ -663,5 +177,175 @@
 
 	<!-- Web 3 Edi -->
 	<script src="../00_service_assets/main/js/web_3_edi.js"></script>
+	<script src="../00_service_assets/test/js/test_communities.js"></script>
+	<script> 
+
+		var communityDisplay = ge("community_display")
+;
+		async function configurePageContracts(){
+
+
+		}
+
+		async function loadPageData() { 
+			createRow(); 
+			buildCommunities(); 
+
+		}
+
+		function buildCommunities() { 
+			for(var x = 0; x < allCommunities.length; x++) {
+				var community = allCommunities[x];
+				buildCommunity(community);
+			}
+		}
+
+		var rowLimit = 3; 		
+		var rowCount = -1; 
+		var row;
+		 var rows 
+		
+
+		function getRow() { 
+			console.log("count:" + rowCount);
+			if(rowCount < rowLimit) {				
+				rowCount++;				
+			}
+			else { 
+				createRow(); 
+				rowCount = 0; 
+			}
+			console.log("count:" + rowCount);
+			return row; 
+		}
+
+		function createRow() {			
+			console.log("create");
+			row = ce("div");
+			row.setAttribute("class", "row clearfix");
+			communityDisplay.append(row);
+			return row; 
+		}
+
+		function buildCommunity(community) {
+			var communityRow = getRow(); 
+			console.log(community.title);
+			/*
+			<div class="col-lg-3 col-md-6 col-sm-12 mb-30">
+						<div class="da-card">
+							<div class="da-card-photo">
+								<img src="../00_service_assets/main/images/photo1.jpg" alt="">
+								<div class="da-overlay">
+									<div class="da-social">
+										<ul class="clearfix">
+											<li><a href="#"><i class="fa fa-facebook"></i></a></li>
+											<li><a href="#"><i class="fa fa-twitter"></i></a></li>
+											<li><a href="#"><i class="fa fa-envelope-o"></i></a></li>
+										</ul>
+									</div>
+								</div>
+							</div>
+							<div class="da-card-content">
+								<h5 class="h5 mb-10">Don H. Rabon</h5>
+								<p class="mb-0">Lorem ipsum dolor sit amet</p>
+							</div>
+						</div>
+					</div>
+			*/
+			var holder = ce("div");
+			holder.setAttribute("class","col-lg-3 col-md-6 col-sm-12 mb-30");
+			communityRow.append(holder);
+			
+			var card = ce("div");
+			card.setAttribute("class", "da-card");
+			holder.append(card);
+
+
+			var photo = ce("div"); 
+			photo.setAttribute("class", "da-card-photo");
+			card.append(photo);
+
+			var img = ce("img"); 
+			img.setAttribute("src", community.image);
+			img.setAttribute("alt", community.title);
+			photo.append(img);
+
+			var overlay = ce("div");
+			overlay.setAttribute("class", "da-overlay");
+			photo.append(overlay);
+
+			var social = ce("div");
+			social.setAttribute("class", "da-social");
+			overlay.append(social);
+			
+			var ul = ce("ul");
+			social.append(ul);
+			ul.setAttribute("class", "clearfix");
+
+			var fb = ce("li");
+			ul.append(fb);
+			
+			var fba = ce("a");
+			fb.append(fba);
+			fba.setAttribute("href", community.fbLink);
+			
+			var ix = ce("i");
+			ix.setAttribute("class", "fa fa-facebook");
+			fba.append(ix);
+
+			var tw = ce("li");
+			ul.append(tw);
+
+			var twa = ce("a");
+			tw.append(twa);
+			twa.setAttribute("href", community.twLink);
+
+			var it = ce("i");
+			it.setAttribute("class", "fa fa-twitter");
+			twa.append(it);
+
+			var content = ce("div");
+			content.setAttribute("class","da-card-content");
+			card.append(content);
+			var h6 = ce("h6");
+			h6.setAttribute("class", "h6 mb-9");
+			content.append(h6);
+			h6.append(text(community.title));
+
+			var p = ce("p");
+			p.setAttribute("class","mb-0");
+			content.append(p);
+
+			p.append(text(community.summary));
+			
+			var span = ce("span");
+			content.append(span);
+
+			var joinButton = ce("a");
+			joinButton.setAttribute("href", community.joinlink);
+			joinButton.setAttribute("class", "btn btn-outline-success");
+			joinButton.append(text("Join"));
+			span.append(joinButton);
+			span.append(text("  "));
+			
+
+			var moreButton = ce("a");
+		    moreButton.setAttribute("href", community.link);
+			moreButton.setAttribute("class", "btn btn-outline-secondary");
+			moreButton.append(text("More ..."));
+			span.append(moreButton);
+
+		}
+
+		function ge(id) {
+			return document.getElementById(id);
+		}
+		function text(txt) {
+			return document.createTextNode(txt);
+		}
+		function ce(element) {
+			return document.createElement(element);
+		}
+	</script>
 </body>
 </html>

@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<!-- Basic Page Info -->
+	<meta charset="utf-8">
+	<title>Web 3 Edi - Schools Offers</title>
+
+	<!-- Site favicon -->
+	<link rel="apple-touch-icon" sizes="180x180" href="../00_service_assets/main/images/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="../00_service_assets/main/vendors/images/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="../00_service_assets/main/vendors/images/favicon-16x16.png">
+
+	<!-- Mobile Specific Metas -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<!-- Google Font -->
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+	<!-- CSS -->
+	<link rel="stylesheet" type="text/css" href="../00_service_assets/main/styles/core.css">
+	<link rel="stylesheet" type="text/css" href="../00_service_assets/main/styles/icon-font.min.css">
+	<link rel="stylesheet" type="text/css" href="../00_service_assets/main/styles/style.css">
+
+	<!-- Web 3 -->
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+	<script src="https://cdn.ethers.io/lib/ethers-5.0.umd.min.js" type="text/javascript"></script>
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/ethjs@0.3.4/dist/ethjs.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
+
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-119386393-1"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag(){dataLayer.push(arguments);}
+		gtag('js', new Date());
+
+		gtag('config', 'UA-119386393-1');
+	</script>
+</head>
+<body>
+	<div class="pre-loader">
+		<div class="pre-loader-box">
+			<div class="loader-logo"><img  src="../00_service_assets/main/images/deskapp-logo.svg" alt="Web 3 Edi"></div>
+			<div class='loader-progress' id="progress_div">
+				<div class='bar' id='bar1'></div>
+			</div>
+			<div class='percent' id='percent1'>0%</div>
+			<div class="loading-text">
+				Loading...
+			</div>
+		</div>
+	</div>
+
+	<!-- NEW HEADER -->
+	<div class="header">
+		<div class="header-left">
+			<div class="menu-icon dw dw-menu"></div>
+			<div class="search-toggle-icon dw dw-search2" data-toggle="header_search"></div>
+			<div class="header-search">
+				<form>
+					<div class="form-group mb-0">
+						<i class="dw dw-search2 search-icon"></i>
+						<input type="text" class="form-control search-input" placeholder="Search Here">
+						<div class="dropdown">
+							<a class="dropdown-toggle no-arrow" href="#" role="button" data-toggle="dropdown">
+								<i class="ion-arrow-down-c"></i>
+							</a>
+							<div class="dropdown-menu dropdown-menu-right">
+								<div class="form-group row">
+									<label class="col-sm-12 col-md-2 col-form-label">From</label>
+									<div class="col-sm-12 col-md-10">
+										<input class="form-control form-control-sm form-control-line" type="text">
+									</div>
+								</div>
+								<div class="form-group row">
+									<label class="col-sm-12 col-md-2 col-form-label">To</label>
+									<div class="col-sm-12 col-md-10">
+										<input class="form-control form-control-sm form-control-line" type="text">
+									</div>
+								</div>
+								<div class="form-group row">
+									<label class="col-sm-12 col-md-2 col-form-label">Subject</label>
+									<div class="col-sm-12 col-md-10">
+										<input class="form-control form-control-sm form-control-line" type="text">
+									</div>
+								</div>
+								<div class="text-right">
+									<button class="btn btn-primary">Search</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+		<div class="header-right">
+		
+			<div class="user-info-dropdown">
+				<div class="dropdown">
+					<a class="dropdown-toggle" href="#" role="button" >
+						<span id="show_wallet" class="user-name"></span>
+						<span id="connect_web_3" class="user-name">Connect Web 3</span>
+						<span class="user-icon">
+							<img src="../00_service_assets/main/images/android-icon-192x192.png" alt="">
+						</span>
+						
+					</a>
+					
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- END NEW HEADER -->
+
+	<div class="left-side-bar">
+		<div class="brand-logo">
+			<a href="../01_campus/index.html">
+				<img src="../00_service_assets/main/images/deskapp-logo.svg" alt="" class="dark-logo">
+				<img src="../00_service_assets/main/images/deskapp-logo-white.svg" alt="" class="light-logo">
+			</a>
+			<div class="close-sidebar" data-toggle="left-sidebar-close">
+				<i class="ion-close-round"></i>
+			</div>
+		</div>
+		<div class="menu-block customscroll">
+			<div class="sidebar-menu">				
+				<ul id="accordion-menu">
+					<li class="dropdown">
+						<a href="javascript:;" class="dropdown-toggle">
+							<span class="micon dw dw-house-1"></span><span class="mtext">Campus</span>
+						</a>
+						<ul class="submenu">
+							<li><a href="../01_campus/index.html">To Campus</a></li>
+							<li><a href="../14_minting/index.html">Minting</a></li>
+							<li><a href="../07_marketplace/index.html">Marketplace</a></li>
+							<li><a href="../08_courtyard/index.html">Courtyard</a></li>
+							<li><a href="../11_gallery/index.html">Galleries</a></li>
+							<li><a href="../07_marketplace/course_directory.html">Course Directory</a></li>
+							<li><a href="../09_community/index.html">Communities</a></li>
+							
+						</ul>
+					</li>	
+					<li class="dropdown">
+						<a href="javascript:;" class="dropdown-toggle">
+							<span class="micon dw dw-money"></span><span class="mtext">Market Place</span>
+						</a>
+						<ul class="submenu">
+							<li><a href="../07_marketplace/index.html">Market Place</a></li>
+							<li><a href="../07_marketplace/course_directory.html">Courses</a></li>						
+							<li><a href="../07_marketplace/event_listings.html">Events</a></li>							
+							<li><a href="../07_marketplace/happening_now_event_listings.html">Happening Now Events</a></li>							
+						</ul>
+					</li>		
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div class="mobile-menu-overlay"></div>
+
+	<div class="main-container">
+		<div class="pd-ltr-20 xs-pd-20-10">
+			<div class="min-height-200px">
+				<div class="page-header">
+					<div class="row">
+						<div class="col-md-12 col-sm-12">
+							<div class="title">
+								<h4>School Offers</h4>
+							</div>			
+						</div>
+					</div>
+				</div>
+				<div class="product-wrap">
+					<div class="product-list">
+						<ul class="row" id="school_offers">
+
+						</ul>
+					</div>
+					<div class="blog-pagination mb-30">
+						<div class="btn-toolbar justify-content-center mb-15">
+							<div class="btn-group">
+								<a href="#" class="btn btn-outline-primary prev"><i class="fa fa-angle-double-left"></i></a>
+								<span class="btn btn-primary current">1</span>
+								<a href="#" class="btn btn-outline-primary">2</a>
+								<a href="#" class="btn btn-outline-primary">3</a>								
+								<a href="#" class="btn btn-outline-primary">4</a>
+								<a href="#" class="btn btn-outline-primary">5</a>
+								<a href="#" class="btn btn-outline-primary next"><i class="fa fa-angle-double-right"></i></a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="footer-wrap pd-20 mb-20 card-box">
+				&copy; Web 3 Edi 2022
+			</div>
+		</div>
+	</div>
+	<!-- js -->
+	<script src="../00_service_assets/main/scripts/core.js"></script>
+	<script src="../00_service_assets/main/scripts/script.min.js"></script>
+	<script src="../00_service_assets/main/scripts/process.js"></script>
+	<script src="../00_service_assets/main/scripts/layout-settings.js"></script>
+
+	<!-- Web 3 ABI-->
+	<script src="../00_service_assets/abi/open_register/i_open_register_abi.js"></script>       
+
+	<!-- Web 3 Edi -->
+	<script src="../00_service_assets/main/js/web_3_edi.js"></script>
+	<script src="../00_service_assets/test/js/test_offers.js"></script>
+	<script>
+
+		async function configurePageContracts(){ 
+
+		}
+
+		async function loadPageData() { 
+			buildSchoolOffers();
+		}
+
+		function buildSchoolOffers() { 
+			for(var x = 0; x < testOffers.length; x++) {
+				var offer = testOffers[x];
+				buildSchoolOffer(offer);
+			}
+		}
+		/*
+		<li class="col-lg-4 col-md-6 col-sm-12">
+			<div class="product-box">
+				<div class="producct-img"><img src="vendors/images/product-img1.jpg" alt=""></div>
+				<div class="product-caption">
+					<h4><a href="#">Gufram Bounce Black</a></h4>
+					<div class="price">
+						Monthly Fees: <del>$55.5</del><ins>$49.5</ins>&nbsp;<a href="#" class="btn btn-outline-secondary">Join Now!</a>
+					</div>
+					<a href="#" class="btn btn-outline-primary">Events</a> &nbsp; <a href="#" class="btn btn-outline-warning">Courses</a> &nbsp; <a href="#" class="btn btn-outline-success">Communities</a>
+				</div>
+			</div>
+		</li>
+						*/
+		const schoolOffers = ge("school_offers");
+		function buildSchoolOffer(offer) {
+			
+			var li = ce("li"); 
+			li.setAttribute("class","col-lg-4 col-md-6 col-sm-12");
+			schoolOffers.append(li);
+
+			var productBox = ce("div");
+			productBox.setAttribute("class", "product-box"); 
+			li.append(productBox);
+			
+			
+			var productImage = ce("div");
+			productImage.setAttribute("class", "producct-img"); 
+			var image = ce("img"); 
+			image.setAttribute("src", offer.image); 
+			image.setAttribute("alt", offer.title); 
+			image.setAttribute("width", 144);
+			image.setAttribute("height", 144);
+			productImage.append(image); 
+			productBox.append(productImage);
+
+			var caption = ce("div"); 				
+			caption.setAttribute("class","product-caption");
+			productBox.append(caption);
+			var h4 = ce("h4");
+			var a = ce("a"); 
+			a.setAttribute("href", offer.link);
+			a.append(text(offer.title));
+			h4.append(a); 
+			caption.append(h4);
+			var b = ce("b");
+			b.append(text("School : " + offer.school));
+			caption.append(b);
+
+			var price = ce("div"); 
+			price.setAttribute("class", "price");
+			caption.append(price);
+
+			price.append(offer.feeTitle + " :  ");
+			var del = ce("del");
+			del.append(text( offer.standardPrice +" ")); 
+			price.append(del);
+			var ins = ce("ins");
+			ins.append(text(" " +offer.discountPrice +" "));
+			price.append(ins);
+			price.append("  ");
+
+			var joinNowButton = ce("a");
+			joinNowButton.setAttribute("href",offer.buyLink);
+			joinNowButton.setAttribute("class","btn btn-outline-secondary");
+			joinNowButton.append(text("Join Now!"));
+			price.append(joinNowButton);
+
+			var eventsButton = ce("a")
+			eventsButton.setAttribute("href",offer.eventsLink);
+			eventsButton.setAttribute("class","btn btn-outline-primary");
+			eventsButton.append(text("Events"));			
+			caption.append(eventsButton);
+			caption.append("  ");
+
+			var coursesButton = ce("a")
+			coursesButton.setAttribute("href",offer.coursesLink);
+			coursesButton.setAttribute("class","btn btn-outline-warning");
+			coursesButton.append(text("Courses"));
+			caption.append(coursesButton);
+			caption.append("  ");
+
+			var communitiesButton = ce("a")
+			communitiesButton.setAttribute("href",offer.communitiesLink);
+			communitiesButton.setAttribute("class","btn btn-outline-success");
+			communitiesButton.append(text("Communities"));
+			caption.append(communitiesButton);
+			caption.append("  ");
+
+		}
+
+		function ge(id) {
+			return document.getElementById(id);
+		}
+		function text(txt) {
+			return document.createTextNode(txt);
+		}
+		function ce(element) {
+			return document.createElement(element);
+		}
+	</script> 
+</body>
+</html>
