@@ -1062,11 +1062,11 @@
         }
 
         async function postDetail() { 
-             // detail store
-             detailHash = response;   
+             // detail store             
              postToIPFS(eventDetailField.value)
             .then(function(response){
                 console.log(response);
+                detailHash = response; 
                 postPromoImage();
             })
             .catch(function(err){
@@ -1074,13 +1074,13 @@
             })                                       
         }
 
-        async function postPromoImage() { 
+        async function postPromoImage(response) { 
             if(eventPromoImageUpload.files[0] != null) {
                 postToFileIPFS(eventPromoImageUpload.files[0])
                 .then(function(response){                                    
                     // promo image store
                     promoImageHash = response;
-                    postPreviewVideo();
+                    postPreviewVideo(response);
                 })                    
                 .catch(function(err){
                     console.log(err);
@@ -1091,7 +1091,7 @@
             }
         }
 
-        async function postPreviewVideo() { 
+        async function postPreviewVideo(response) { 
             if(eventPreviewVideoUpload.files[0] != null){
                 postToFileIPFS(eventPreviewVideoUpload.files[0])
                 .then(function(response){
