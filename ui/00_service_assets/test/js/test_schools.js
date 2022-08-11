@@ -25,7 +25,7 @@ yogaSchool.studentCount = 170000;
 
 var salesSchool = {};
 salesSchool.name = "N 21 Sales"; 
-salesSchool.crest = schoolsRoot + "n21sales/crest.png"; 
+salesSchool.crest = schoolsRoot + "n21Sales/crest.png"; 
 salesSchool.logo = schoolsRoot + "n21sales/logo.png"; 
 salesSchool.summary = "N 21 Sales is the best place to learn how to secure high ticket sales fast"; 
 salesSchool.motto = "21 sales in 21 days"; 
