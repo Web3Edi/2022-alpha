@@ -62,6 +62,7 @@ const initialize = () => {
     }
     else { 
         getAccount(); 
+        onboardButton.innerText = "Web 3 Connected";
     }
 };
 
