@@ -6,8 +6,17 @@ const showWallet = document.getElementById("show_wallet");
 const jcstorage = window.sessionStorage;
 
 var account;
+web3 = new Web3(window.ethereum);
+var connected = false; 
+console.log(web3);
+if(web3 === 'undefined' || web3 == null){
+    jcstorage.setItem("WEB_3_KEY", web3); 
+}
+else { 
+    connected = true;
+}
 
-const web3 = new Web3(window.ethereum);
+ 
 
 console.log("web 3 " + web3.currentProvider);
 
@@ -48,7 +57,12 @@ const MetaMaskClientCheck = () => {
     }
 };
 const initialize = () => {
-    MetaMaskClientCheck();
+    if(!connected){ 
+        MetaMaskClientCheck();
+    }
+    else { 
+        getAccount(); 
+    }
 };
 
 window.addEventListener('DOMContentLoaded', initialize);
