@@ -7,8 +7,8 @@
 
 	<!-- Site favicon -->
 	<link rel="apple-touch-icon" sizes="180x180" href="../00_service_assets/main/images/apple-icon-180x180.png">
-	<link rel="icon" type="image/png" sizes="32x32" href="../vendors/images/favicon-32x32.png">
-	<link rel="icon" type="image/png" sizes="16x16" href="../vendors/images/favicon-16x16.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="../00_service_assets/main/images/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="../00_service_assets/main/images/favicon-16x16.png">
 
 	<!-- Mobile Specific Metas -->
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -29,6 +29,12 @@
 
 		gtag('config', 'UA-119386393-1');
 	</script>
+	<!-- Web3 -->
+	<script src="https://unpkg.com/ipfs-http-client-lite/dist/index.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+	<script src="https://cdn.ethers.io/lib/ethers-5.0.umd.min.js" type="text/javascript"></script>
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/ethjs@0.3.4/dist/ethjs.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
 </head>
 <body>
 	<div class="pre-loader">
@@ -139,9 +145,9 @@
 						</a>
 						<ul class="submenu">
 							<li><a href="../12_personal/profile.html">Profile</a></li>
-							<li><a href="../12_personal/locker.html">Locker</a></li>
+							<!--<li><a href="../12_personal/locker.html">Locker</a></li>
 							<li><a href="../12_personal/colleagues.html">Colleagues</a></li>
-							<li><a href="../12_personal/preferences.html">Preferences</a></li>
+							<li><a href="../12_personal/preferences.html">Preferences</a></li>-->
 							
 						</ul>
 					</li>
@@ -154,15 +160,15 @@
 							<li><a href="live_studio.html">Live Studio</a></li>
 						</ul>
 					</li>
-					<li class="dropdown">
+				<!--	<li class="dropdown">
 						<a href="javascript:;" class="dropdown-toggle">
 							<span class="micon dw dw-school"></span><span class="mtext">School</span>
 						</a>
 						<ul class="submenu">
 							<li><a href="../17_school/school_manager.html">School Manager</a></li>
 						</ul>
-					</li>
-					<li class="dropdown">
+					</li> -->
+				<!--	<li class="dropdown">
 						<a href="javascript:;" class="dropdown-toggle">
 							<span class="micon dw dw-book-1"></span><span class="mtext">Courses</span>
 						</a>
@@ -170,7 +176,7 @@
 							<li><a href="../15_course/index.html">Course Manager</a></li>
 							<li><a href="../15_course/course_creator.html">Create Course</a></li>							
 						</ul>
-					</li>
+					</li> -->
 					<li class="dropdown">
 						<a href="javascript:;" class="dropdown-toggle">
 							<span class="micon dw dw-calendar-1"></span><span class="mtext">Events</span>
@@ -271,16 +277,7 @@
 									<div class="browser-name">ML using Python</div>
 									<div class="visit"><span class="badge badge-pill badge-success">40%</span></div>
 								</li>
-								<li class="d-flex flex-wrap align-items-center">
-									<div class="icon"><img src="../00_service_assets/main/images/apple-touch-icon.png" alt=""></div>
-									<div class="browser-name">AI & Python</div>
-									<div class="visit"><span class="badge badge-pill badge-warning">20%</span></div>
-								</li>
-								<li class="d-flex flex-wrap align-items-center">
-									<div class="icon"><img src="../00_service_assets/main/images/apple-touch-icon.png" alt=""></div> <!-- course logo -->
-									<div class="browser-name">Blockchain Beginners</div>
-									<div class="visit"><span class="badge badge-pill badge-info">20%</span></div>
-								</li>
+	
 							</ul>
 						</div>
 					</div>
@@ -294,10 +291,10 @@
 						<div class="user-list">
 							<p class="pb-20">Select a task to begin</p>
 							<ul>
-								<li class="d-flex align-items-center justify-content-between">
+								<!-- <li class="d-flex align-items-center justify-content-between">
 									<div class="name-avatar d-flex align-items-center pr-2">
 										<div class="avatar mr-2 flex-shrink-0">
-											<img src="../00_service_assets/main/images/apple-touch-icon.png" class="border-radius-100 box-shadow" width="50" height="50" alt=""> <!-- course logo -->
+											<img src="../00_service_assets/main/images/apple-touch-icon.png" class="border-radius-100 box-shadow" width="50" height="50" alt=""> 
 										</div>
 										<div class="txt">											
 											<div class="font-14 weight-600">Create a Course</div>											
@@ -306,7 +303,7 @@
 									<div class="cta flex-shrink-0">
 										<a href="../15_course/course_creator.html" class="btn btn-sm btn-outline-primary rounded" onclick="window.location.href='course_creator.html';">Create</a>
 									</div>
-								</li>
+								</li> -->
 								<li class="d-flex align-items-center justify-content-between">
 									<div class="name-avatar d-flex align-items-center pr-2">
 										<div class="avatar mr-2 flex-shrink-0">
@@ -333,10 +330,10 @@
 										<a href="../16_event/event_creator.html" class="btn btn-sm btn-outline-primary">Schedule</a>
 									</div>
 								</li>
-								<li class="d-flex align-items-center justify-content-between">
+							<!-- <li class="d-flex align-items-center justify-content-between">
 									<div class="name-avatar d-flex align-items-center pr-2">
 										<div class="avatar mr-2 flex-shrink-0">
-											<img src="../00_service_assets/main/images/apple-touch-icon.png" class="border-radius-100 box-shadow" width="50" height="50" alt=""> <!-- course logo -->
+											<img src="../00_service_assets/main/images/apple-touch-icon.png" class="border-radius-100 box-shadow" width="50" height="50" alt="">
 										</div>
 										<div class="txt">											
 											<div class="font-14 weight-600">Manage your School</div>											
@@ -345,7 +342,7 @@
 									<div class="cta flex-shrink-0">
 										<a href="../17_school/school_manager.html" class="btn btn-sm btn-outline-primary">Manage</a>
 									</div>
-								</li>
+								</li> -->
 							</ul>
 						</div>
 					</div>
@@ -354,43 +351,7 @@
 					<div class="card-box pd-30 pt-10 height-100-p">
 						
 							<h4 class="h4">Notifications</h4>
-							<p class="pb-20">You can see this in action with a live demo:</p>
-							<div class="alert alert-success alert-dismissible fade show" role="alert">
-								<strong>Holy guacamole!</strong> You should check in on some of those fields below.
-								<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-									<span aria-hidden="true">&times;</span>
-								</button>
-							</div>
-							<div class="alert alert-warning alert-dismissible fade show" role="alert">
-								<strong>Holy guacamole!</strong> You should check in on some of those fields below.
-								<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-									<span aria-hidden="true">&times;</span>
-								</button>
-							</div>
-							<div class="alert alert-primary alert-dismissible fade show" role="alert">
-								<strong>Holy guacamole!</strong> You should check in on some of those fields below.
-								<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-									<span aria-hidden="true">&times;</span>
-								</button>
-							</div>
-							<div class="alert alert-secondary alert-dismissible fade show" role="alert">
-								<strong>Holy guacamole!</strong> You should check in on some of those fields below.
-								<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-									<span aria-hidden="true">&times;</span>
-								</button>
-							</div>
-							<div class="alert alert-info alert-dismissible fade show" role="alert">
-								<strong>Holy guacamole!</strong> You should check in on some of those fields below.
-								<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-									<span aria-hidden="true">&times;</span>
-								</button>
-							</div>
-							<div class="alert alert-dark alert-dismissible fade show" role="alert">
-								<strong>Holy guacamole!</strong> You should check in on some of those fields below.
-								<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-									<span aria-hidden="true">&times;</span>
-								</button>
-							</div>
+							<span id="upcoming_events"></span>	
 						
 					</div>
 				</div>
@@ -406,12 +367,168 @@
 	<script src="../00_service_assets/main/scripts/script.min.js"></script>
 	<script src="../00_service_assets/main/scripts/process.js"></script>
 	<script src="../00_service_assets/main/scripts/layout-settings.js"></script>
-	<script src="../00_service_assets/main/scripts/dashboard3.js"></script>
 
 	<!-- Web 3 ABI-->
-	<script src="../00_service_assets/abi/open_register/i_open_register_abi.js"></script>       
+	<script src="../00_service_assets/abi/open_register/i_open_register_abi.js"></script>  
+	
+	<script src="../00_service_assets/abi/event/i_event_abi.js"></script>              
+    <script src="../00_service_assets/abi/event/i_event_manager_abi.js"></script>
 
     <!-- Web 3 Edi -->
     <script src="../00_service_assets/main/js/web_3_edi.js"></script>
+	
+	
+	<script>
+		const upcomingEventDisplay = ge("upcoming_events");
+		var eventManagerContract;
+		var eventManagerContractAddress; 
+
+		function configurePageContracts() { 
+			openRegistryContract.methods.getAddress("RESERVED_WEB_3_EDI_EVENT_MANAGER_CORE").call({ from: account })
+			.then(function(response) {
+				console.log(response);
+				eventManagerContractAddress = response;
+				eventManagerContract = getContract(iW3EEventManagerAbi, eventManagerContractAddress);
+			})
+			.catch(function(err) {
+				console.log(err);
+			});
+		}
+
+		function loadPageData() {
+			buildUpcomingEvents();
+		}
+
+		function buildUpcomingEvents() {
+			upcomingEventDisplay.innerHTML = "";
+			eventManagerContract.methods.getEvents().call({from : account})
+			.then(function(response){
+				console.log(response);
+				var uEvents = response; 
+				for(var x = 0; x < uEvents.length; x++){
+					var uEvent = uEvents[x];        
+					buildUpcomingEvent( uEvent);    
+				}
+			})
+			.catch(function(err){
+				console.log(err);
+			});
+		}
+
+		function bue(eventContract, eventContractAddress,  startTimeActual, endtimeActual) {
+		/*	<div class="alert alert-success alert-dismissible fade show" role="alert">
+								<strong>Holy guacamole!</strong> You should check in on some of those fields below.
+								<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+							</div> */
+
+			var holder = ce("div");
+			holder.setAttribute("class", "alert alert-success alert-dismissible fade show"); 
+			holder.setAttribute("role", "alert");
+			
+		
+
+			var startTime = ce("span");
+			var endTime = ce("span");
+
+			var uedisplay = ce("div");
+			uedisplay.setAttribute("style", "justify-content:center;")
+			var small = ce("small");
+			small.append(startTime);
+			small.append(text(" - "));
+			small.append(endTime);
+			uedisplay.append(small);
+
+			startTime.append(text(getTime(startTimeActual)));
+			endTime.append(text(getTime(endtimeActual)));
+
+			var title = ce("span");
+			uedisplay.append(text(" > "));
+			uedisplay.append(title);
+
+			eventContract.methods.getTitle().call({from : account})
+			.then(function(response){
+				console.log(response);
+				title.append(text(response));        
+			})
+			.catch(function(err){
+				console.log(err);
+			});        
+			
+			uedisplay.append(text(" > "));
+			var a = ce("a");
+			a.setAttribute("href", "../16_event/event_detail.html?address="+eventContractAddress);
+			a.setAttribute("class", "btn btn-outline-light btn-sm");
+			a.append(text("view"));
+
+			uedisplay.append(a);
+			holder.append(uedisplay);
+
+			
+			var button = ce("button");
+			holder.append(button);
+			button.setAttribute("type","button");
+			button.setAttribute("class","close");
+			button.setAttribute("data-dismiss","alert");
+			button.setAttribute("aria-label", "Close");
+			var span = ce("span");
+			span.setAttribute("aria-hidden","true");
+			span.append(text("X"));
+			button.append(span);
+
+			upcomingEventDisplay.append(holder);
+		}
+
+
+		function buildUpcomingEvent(upcomingEvent){
+			
+			var eventContract = getContract(iW3EEventAbi, upcomingEvent);
+
+			var startTimeActual; 
+			var endTimeActual; 
+
+			eventContract.methods.getFeatureUINT("START_TIME_KEY").call({from : account})
+			.then(function(response){
+				console.log(response);
+				startTimeActual = response; 
+				eventContract.methods.getFeatureUINT("END_TIME_KEY").call({from : account})
+				.then(function(response){
+					console.log(response);
+					endTimeActual = response; 
+					var rightNow = Date.now();
+					if(!(startTimeActual*1000 < rightNow && endTimeActual < rightNow)){
+						bue( eventContract, upcomingEvent, startTimeActual, endTimeActual);
+					}
+				})
+				.catch(function(err){
+					console.log(err);
+				});
+
+			})
+			.catch(function(err){
+				console.log(err);
+			});
+		}
+
+		function getTime(numeric) {
+            var d = new Date(numeric*1000);
+            return formatDate(d);
+        }
+        function formatDate(date) {
+            return date.toLocaleString('en-UK', { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', hour12: false, minute: '2-digit', second: '2-digit' })
+        }
+        function ge(id) {
+            return document.getElementById(id);
+        }
+
+        function text(txt) {
+            return document.createTextNode(txt);
+        }
+
+        function ce(name) {
+            return document.createElement(name);
+        }
+	</script>
 </body>
 </html>

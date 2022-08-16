@@ -160,9 +160,7 @@ function buildUpcomingEvents() {
     });
 }
 
-function buildUpcomingEvent(upcomingEvent){
-    
-    var eventContract = getContract(iW3EEventAbi, upcomingEvent);
+function bue(eventContract, upcomingEvent, startTimeActual, endtimeActual) {
 
     var startTime = ce("span");
     var endTime = ce("span");
@@ -175,24 +173,8 @@ function buildUpcomingEvent(upcomingEvent){
     small.append(endTime);
     uedisplay.append(small);
 
-    eventContract.methods.getFeatureUINT("START_TIME_KEY").call({from : account})
-    .then(function(response){
-        console.log(response);
-        startTime.append(text(getTime(response)));
-    })
-    .catch(function(err){
-        console.log(err);
-    });
-
-
-    eventContract.methods.getFeatureUINT("END_TIME_KEY").call({from : account})
-    .then(function(response){
-        console.log(response);
-        endTime.append(text(getTime(response)));
-    })
-    .catch(function(err){
-        console.log(err);
-    });
+    startTime.append(text(getTime(startTimeActual)));
+    endTime.append(text(getTime(endtimeActual)));
 
     var title = ce("span");
     uedisplay.append(text(" > "));
@@ -216,6 +198,36 @@ function buildUpcomingEvent(upcomingEvent){
     uedisplay.append(a);
 
     upcomingEventsDisplay.append(uedisplay);
+}
+
+function buildUpcomingEvent(upcomingEvent){
+    
+    var eventContract = getContract(iW3EEventAbi, upcomingEvent);
+
+    var startTimeActual; 
+    var endTimeActual; 
+
+    eventContract.methods.getFeatureUINT("START_TIME_KEY").call({from : account})
+    .then(function(response){
+        console.log(response);
+        startTimeActual = response; 
+        eventContract.methods.getFeatureUINT("END_TIME_KEY").call({from : account})
+        .then(function(response){
+            console.log(response);
+            endTimeActual = response; 
+            var rightNow = Date.now();
+            if(!(startTimeActual*1000 < rightNow && endTimeActual < rightNow)){
+                bue( eventContract, upcomingEvent, startTimeActual, endTimeActual);
+            }
+        })
+        .catch(function(err){
+            console.log(err);
+        });
+
+    })
+    .catch(function(err){
+        console.log(err);
+    });
 }
 
 
