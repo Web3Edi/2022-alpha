@@ -576,10 +576,14 @@
 	
 		async function loadPageData() { 
 			loadStreamDetails(); 
-			getEventsWithStatus(eventBroadcastSelect, "PENDING", selectBroadcastEventButton);
-			buildEventSchedule();
+			loadEvents(); 
 			buildQuickLiveStages();
 			
+		}
+
+		async function loadEvents() { 
+			getEventsWithStatus(eventBroadcastSelect, "PENDING", selectBroadcastEventButton);
+			buildEventSchedule();
 		}
 		async function loadStreamDetails()  { 
 
@@ -955,6 +959,7 @@
 				span.append(text(" Event Posted. ")); 
 
 				// assign to Live 
+				loadEvents(); 
 				primeEventForBroadCast(quickLiveAddress); 
 			})
 			.catch(function(err){
@@ -1069,13 +1074,8 @@
             if(eventAddresses.length > 0) {            
                 for(var x = 0; x < eventAddresses.length; x++) {
                     var eventAddress = eventAddresses[x];
-                    var option = ce("option");
-                    option.setAttribute("value", eventAddress);
-                    var span = ce("span");
-                    option.append(span);
-                    option.append(text( " :: " + eventAddress ));                
-                    getTitle(span, eventAddress);
-                    eventSelect.append(option);                    
+
+					buildOption(eventSelect, eventAddress);   
                 }
                 button.disabled = false; 
                 button.setAttribute("class", "btn btn-primary");
@@ -1085,6 +1085,16 @@
             }
 
         }
+
+		function buildOption(eventSelect, eventAddress) {
+			var option = ce("option");
+			option.setAttribute("value", eventAddress);
+			var span = ce("span");
+			option.append(span);
+			option.append(text( " :: " + eventAddress ));                
+			getTitle(span, eventAddress);
+			eventSelect.append(option);  
+		}
 
 		function noStatusFound(eventSelect, eventStatus, button) { 
             var option = ce("option");

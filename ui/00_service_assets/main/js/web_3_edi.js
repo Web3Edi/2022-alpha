@@ -125,10 +125,7 @@ async function configureCoreContracts()  {
 
 
 function loadWait() { 
-    
     setTimeout(loadPageData, 3000);
-    
-  
 }   
 
 function ge(element){
@@ -160,7 +157,7 @@ function encryptJSON(data) {
 function decryptJSON(data) {
     // Decrypt
     var bytes = CryptoJS.AES.decrypt(data, 'secret key 123');
-    var decrypted = SON.parse(bytes.toString(CryptoJS.enc.Utf8));
+    var decrypted = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
     return decrypted;
 }
 
